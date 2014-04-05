@@ -15,12 +15,17 @@
 			$absPath = $this->getPathForFile($path);
 			
 			$parent = dirname($absPath);
-			if (!is_dir($parent)){
-				mkdir($parent, 0777, true);
-			}
+				$this->prepareDirectory($parent);
 			
 			$fileHandle = fopen($absPath, "w");
 			fwrite($fileHandle, $content);
+		}
+		
+		public function prepareDirectory($path){
+			if (!is_dir($path)){
+				// recursive mkdir
+				mkdir($path, 0777, true);
+			}
 		}
 		
 		public function getPathForFile($file){

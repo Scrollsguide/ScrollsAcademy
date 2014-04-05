@@ -46,9 +46,31 @@
 			// retrieve matching route, if any
 			$this->matchRoute();
 			
-			$this->setupController();
+			// check cache here, load controller if cache cannot be used
+			if ($this->checkCache()){
+				// done
+			} else {
+				$this->setupTemplateEngine();
+				$this->setupController();
+				
+				$response = $this->runAction();
+				
+				echo $response;
+			}
+		}
+		
+		private function setupTemplateEngine(){
+			$this->getClassloader()->tryRequire($this->getBaseDir() . "/libs/Twig/lib/Twig/Autoloader.php");
+			Twig_Autoloader::register();
 			
-			$this->runAction();
+			$loader = new Twig_Loader_Filesystem($this->getBaseDir() . "/views");
+			
+			// set up cache for twig
+			$this->cache->prepareDirectory($this->cache->getPathForFile("views"));
+			$this->put("twig", new Twig_Environment($loader, array(
+				"cache" => $this->cache->getPathForFile("views"),
+				"auto_reload" => true
+			)));
 		}
 		
 		private function setupController(){
@@ -56,7 +78,11 @@
 		}
 		
 		private function runAction(){
-			call_user_func_array(array($this->controller, $this->route->getActionName()), $this->route->getUrlParameters());
+			return call_user_func_array(array($this->controller, $this->route->getActionName()), $this->route->getUrlParameters());
+		}
+		
+		private function checkCache(){
+			return false;
 		}
 		
 		private function matchRoute(){
@@ -74,7 +100,7 @@
 			// the classloader checks whether the class exists or not
 			$fullControllerName = $route->getControllerName();
 			$this->classloader->loadClass($fullControllerName);
-			$controller = new $fullControllerName();
+			$controller = new $fullControllerName($this);
 			
 			// now check whether the action is available in the controller
 			$fullActionName = $route->getActionname();
@@ -86,7 +112,27 @@
 			return $controller;
 		}
 		
+		public function getBaseDir(){
+			return $this->baseDir;
+		}
+		
+		public function getClassloader(){
+			return $this->classloader;
+		}
+		
+		public function getTwig(){
+			return $this->twig;
+		}
+		
 		public function getCache(){
 			return $this->cache;
+		}
+		
+		public function put($key, $obj){
+			$this->optObjects[$key] = $obj;
+		}
+		
+		public function get($obj){
+			return $this->optObjects[$obj];
 		}
 	}

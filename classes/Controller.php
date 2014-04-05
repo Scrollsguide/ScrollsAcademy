@@ -1,8 +1,17 @@
 <?php
 	class Controller {
 		
-		public function render($template, $parameters){
-			
+		private $app;
+		
+		public function __construct(App $app){
+			$this->app = $app;
 		}
 		
+		public function render($templatePath, array $parameters){		
+			$twig = $this->app->get("twig");
+			$template = $twig->loadTemplate($templatePath);
+			
+			return $template->render($parameters);
+		}
+	
 	}

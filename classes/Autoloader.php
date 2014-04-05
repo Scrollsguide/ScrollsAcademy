@@ -27,22 +27,25 @@
 		}
 		
 		public function loadClass($class){
-			if ($class[0] === '\\'){
-				$class = substr($class, 1);
-			}
-
 			$found = false;
 			for ($i = 0; $i < count($this->dirs) && !$found; $i++){		
 				$file = sprintf('%s/%s.php', $this->dirs[$i], $class);
 				
-				if (is_file($file)){
-					require $file;
-					$found = true;
-				}
+				$found = $this->tryRequire($file);
 			}
 			
 			if (!$found){
-				throw new Exception(sprintf("Class '%s' could not be loaded.", $class));
+				// this won't find classes from the /libs dir, so don't throw an exception
+				// just yet, other autoloaders might find something
+				// throw new Exception(sprintf("Class '%s' could not be loaded.", $class));
 			}
+		}
+		
+		public function tryRequire($file){
+			if (is_file($file)){
+				require $file;
+				return true;
+			}
+			return false;
 		}
 	}
