@@ -1,0 +1,27 @@
+{
+	"routes": {
+		"index": {
+			"path": "/",
+			"action": "Index::index"
+		},
+		"categories": {
+			"path": "/category/{categoryType}",
+			"requirements": {
+				"categoryType": "beginner|intermediate|master|video|strategy|decks|judgement|ui"
+			},
+			"action": "Category::viewCategoryType"
+		},
+		"view_guide": {
+			"path": "/guide/{title}",
+			"requirements": {
+				"title": "[a-z-]+"
+			},
+			"action": "Guide::viewGuide"
+		},
+		"404": {
+			"path": "/404",
+			"action": "Index::p404"
+		}
+	}
+}
+	
