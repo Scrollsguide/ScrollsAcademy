@@ -18,8 +18,11 @@
 		// array of objects not used for every request, for example the database object
 		private $optObjects;
 		
-		public function __construct($baseDir, Autoloader $autoloader){
+		public function __construct($baseDir){
 			$this->baseDir = $baseDir;
+		}
+		
+		public function setClassloader(Autoloader $autoloader){
 			$this->classloader = $autoloader;
 		}
 		

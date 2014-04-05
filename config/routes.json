@@ -4,6 +4,10 @@
 			"path": "/",
 			"action": "Index::index"
 		},
+		"featured": {
+			"path": "/category/featured",
+			"action": "Category::viewFeatured"
+		},
 		"categories": {
 			"path": "/category/{categoryType}",
 			"requirements": {
