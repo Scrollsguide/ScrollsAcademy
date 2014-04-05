@@ -22,7 +22,7 @@
 			$this->baseDir = $baseDir;
 		}
 		
-		public function add($dir){
+		public function addDirectory($dir){
 			$this->dirs[] = $this->baseDir . "/" . $dir;
 		}
 		

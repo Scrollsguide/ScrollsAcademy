@@ -28,7 +28,7 @@
 		
 		public function init(){
 			// add user controller directory to classloader
-			$this->classloader->add("controllers");
+			$this->classloader->addDirectory("controllers");
 			
 			// set up cache
 			$this->cache = new Cache($this->baseDir . "/cache");
