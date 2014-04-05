@@ -1,4 +1,8 @@
 <?php
-	class IndexController extends BaseController {
+	class IndexController extends Controller {
+		
+		public function indexAction(){
+			
+		}
 		
 	}

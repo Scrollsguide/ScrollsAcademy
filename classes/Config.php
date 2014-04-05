@@ -32,7 +32,7 @@
 		}
 		
 		public function get($key){
-			if (!exists($key)){
+			if (!$this->exists($key)){
 				throw new Exception(sprintf("'%s' not set in config.", $key));
 			}
 			return $this->c[$key];

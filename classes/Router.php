@@ -11,9 +11,16 @@
 		
 		public function match($relUrl){
 			foreach ($this->routes as $key => $route){
-				if (preg_match($route['match'], $relUrl)){
-					echo "Matched with " . $route['match'];
-					return new Route($key, $route);
+				if (preg_match($route['match'], $relUrl, $match)){
+					$r = new Route($key, $route);
+					
+					// since we are only interested in the url parts and
+					// not the complete regex result,
+					// shift the complete match out of the array
+					array_shift($match);
+					$r->set("urlMatch", $match);
+					
+					return $r;
 				}
 			}
 			
@@ -58,12 +65,16 @@
 		private function parseRouteFile($path){
 			require_once $path;
 			
+			// add routes from the route file to this router
 			foreach ($routes as $key => $route){
 				$this->addRoute($key, $route);
 			}
 		}
 		
 		public function addRoute($key, $route){
+			if (isset($this->routes[$key])){
+				throw new Exception(sprintf("Route '%s' already defined.", $key));
+			}
 			$this->routes[$key] = $route;
 		}
 		
@@ -84,9 +95,20 @@
 		
 		private $data;
 		
+		private $controllerName;
+		private $actionName;
+		
 		public function __construct($id, $data){
 			$this->id = $id;
 			$this->data = $data;
+			
+			// we can assume a controller + action is already defined
+			// since we have checked for that while compiling the route
+			list($this->controllerName, $this->actionName) = explode("::", $this->data['action']);
+		}
+		
+		public function hasKey($key){
+			return isset($this->data[$key]);
 		}
 		
 		public function set($key, $d){
@@ -95,6 +117,19 @@
 		
 		public function get($key){
 			return $this->data[$key];
+		}
+		
+		public function getControllerName(){
+			return $this->controllerName . "Controller";
+		}
+		
+		public function getActionName(){
+			return $this->actionName . "Action";
+		}
+		
+		public function getUrlParameters(){
+			// is always set for matching routes, no need to check
+			return $this->get("urlMatch");
 		}
 		
 		public function getId(){
@@ -107,6 +142,8 @@
 		private $router;
 	
 		private $filePath;
+		
+		private $requiredFields = array("path", "action");
 	
 		public function __construct($path, Router $router){
 			$this->router = $router;
@@ -123,6 +160,8 @@
 			$routes = $json['routes'];
 			
 			foreach ($routes as $key => $route){
+				// no need to check for duplicate routes since json_decode 
+				// will auto-remove duplicates
 				$r = $this->compileIndividual($key, $route);
 				$routes[$key] = $r;
 				
@@ -173,16 +212,64 @@
 		 * Rewrites JSON to include regex patterns in route
 		 */
 		private function compileIndividual($id, $route){
-			if (isset($route['requirements'])){
-				foreach ($route['requirements'] as $whichKey => $requirement){
-					$match = str_replace($this->wrap($whichKey), "(" . $requirement . ")", $route['path']);
-					$route['match'] = $this->wrapRegexDelimiter($match);
+			$this->simpleValidityCheck($id, $route);
+			
+			$hasRequirements = isset($route['requirements']);
+		
+			$route['paramMap'] = array();
+			if (preg_match_all("#{([a-z0-9]+)}#i", $route['path'], $matches, PREG_SET_ORDER)){
+				$matchWith = $route['path'];
+				
+				foreach ($matches as $m){
+					$paramName = $m[1];
+					
+					$route['paramMap'][] = $paramName;
+					
+					if ($hasRequirements && isset($route['requirements'][$paramName])){
+						$requirement = $route['requirements'][$paramName];
+					} else {
+						$requirement = "[a-zA-Z0-9-]*?";
+					}
+					$matchWith = str_replace($this->wrap($paramName), "(" . $requirement . ")", $matchWith);
 				}
+				
+				$route['match'] = $this->wrapRegexDelimiter($matchWith);
 			} else {
 				$route['match'] = $this->wrapRegexDelimiter($route['path']);
 			}
 			
 			return $route;
+		}
+		
+		private function simpleValidityCheck($id, $route){
+			foreach ($this->requiredFields as $r){
+				if (!isset($route[$r])){
+					throw new Exception(sprintf("Field '%s' not set for route '%s'.", $r, $id));
+				}
+			}
+			
+			if (strpos($route['action'], "::") === false){
+				throw new Exception(sprintf("No action defined for route '%s'.", $id));
+			}
+			// passed all simple checks
+		}
+		
+		/**
+		 * Maps parameters to their positions in the url
+		 * so we can later pass them as arguments to controllers
+		 */
+		private function mapParameters(&$route){
+			$route['paramMap'] = array();
+			if (preg_match_all("#{([a-z0-9]+)}#i", $route['path'], $matches, PREG_SET_ORDER)){
+				$paramCount = 0;
+				
+				print_r($matches);
+				foreach ($matches as $m){
+					$paramName = $m[1];
+					
+					$route['paramMap'][] = $paramName;
+				}
+			}
 		}
 		
 		private function wrap($str){

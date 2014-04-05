@@ -5,7 +5,7 @@
 	$autoloader = Autoloader::register($root);
 	$autoloader->add("classes");
 	
-	$a = new App($root);
+	$a = new App($root, $autoloader);
 	
 	$a->init();
 	$a->run();

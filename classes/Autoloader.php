@@ -8,7 +8,8 @@
 		
 		public static function register($baseDir = null){
 			$loader = new self($baseDir);
-			spl_autoload_register(array($loader, 'autoload'));
+			// register the autoloader
+			spl_autoload_register(array($loader, 'loadClass'));
 
 			return $loader;
 		}
@@ -25,7 +26,7 @@
 			$this->dirs[] = $this->baseDir . "/" . $dir;
 		}
 		
-		public function autoload($class){
+		public function loadClass($class){
 			if ($class[0] === '\\'){
 				$class = substr($class, 1);
 			}
@@ -38,6 +39,10 @@
 					require $file;
 					$found = true;
 				}
+			}
+			
+			if (!$found){
+				throw new Exception(sprintf("Class '%s' could not be loaded.", $class));
 			}
 		}
 	}
