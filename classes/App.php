@@ -52,8 +52,8 @@
 			$cacheKey = "Pages/" . RouteHelper::getCacheKey($this->getRoute());
 			$usedCache = false;
 			if ($this->getCache()->exists($cacheKey)){
-				$contentFromCache = $this->getCache()->load($cacheKey);
-				if ($contentFromCache !== false){ // successfully loaded from cache
+				if (($contentFromCache = $this->getCache()->load($cacheKey)) !== false){ 
+					// successfully loaded from cache
 					$usedCache = true;
 					
 					echo $contentFromCache;

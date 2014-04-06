@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
 
-	Content
+	{% set desc = "fdagfdsgfdsgfdsgf dsgfds gfdsgfds" %}
+	
+	{{ desc|cut(10) }}
 
 	
 	{{ path("categories", { categoryType: "beginner" }) }}

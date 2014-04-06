@@ -10,12 +10,12 @@
 		public static function registerHelpers(App $app, Twig_Environment $twig){
 			$t = new self($app);
 			
-			$twig->addFunction($t->getPathFunction());
-			$twig->addFunction($t->getCurrentRouteFunction());
-		}
-		
-		public function getPathFunction(){
-			return new Twig_SimpleFunction("path", array($this, "path"));
+			// functions
+			$twig->addFunction(new Twig_SimpleFunction("path", array($t, "path")));
+			$twig->addFunction(new Twig_SimpleFunction("currentRoute", array($t, "currentRoute")));
+			
+			// filters
+			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
 		}
 		
 		/**
@@ -27,12 +27,22 @@
 			return $this->app->getRouter()->generateUrl($routeId, $routeParams);
 		}
 		
-		public function getCurrentRouteFunction(){
-			return new Twig_SimpleFunction("currentRoute", array($this, "currentRoute"));
-		}
-		
 		public function currentRoute(){
 			return $this->app->getRoute();
+		}
+		
+		public function cut($str, $length = 30, $toSpace = true, $last = "..."){
+			if (strlen($str) <= $length){
+				return $str;
+			}
+			
+			if ($toSpace){
+				if (($break = strpos($str, " ", $length)) !== false){
+					$length = $break;
+				}
+			}
+			
+			return rtrim(substr($str, 0, $length)) . $last;
 		}
 		
 	}
