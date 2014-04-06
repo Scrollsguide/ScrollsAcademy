@@ -11,14 +11,14 @@
 		"categories": {
 			"path": "/category/{categoryType}",
 			"requirements": {
-				"categoryType": "video|stragegy|decks|judgement|ui"
+				"categoryType": "video|strategy|decks|judgement|ui"
 			},
 			"action": "Category::viewCategoryType"
 		},
 		"levels": {
 			"path": "/category/{level}",
 			"requirements": {
-				"level": "beginner|intermediate|expert"
+				"level": "beginner|intermediate|master"
 			},
 			"action": "Category::viewGuidesByLevel"
 		},

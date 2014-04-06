@@ -10,7 +10,8 @@
 			$guides = $guideRepository->findAllByCategory($category);
 			
 			return $this->render("guidelist.html", array(
-				"guides" => $guides
+				"guides" => $guides,
+				"category" => $category
 			));
 		}
 	

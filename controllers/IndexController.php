@@ -16,4 +16,8 @@
 		public function p404Action(){
 			return $this->render("404.html");
 		}
+
+		public function aboutAction() {
+			return $this->render("about.html");
+		}
 	}

@@ -13,6 +13,7 @@
 			// functions
 			$twig->addFunction(new Twig_SimpleFunction("path", array($t, "path")));
 			$twig->addFunction(new Twig_SimpleFunction("currentRoute", array($t, "currentRoute")));
+			$twig->addFunction(new Twig_SimpleFunction("categoryIcon", array($t, "categoryIcon")));
 			
 			// filters
 			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
@@ -43,6 +44,45 @@
 			}
 			
 			return rtrim(substr($str, 0, $length)) . $last;
+		}
+
+		/*
+			Generates the font-awesome icon for a corresponding category
+		*/
+		public function categoryIcon($category) {
+			switch ($category) {
+				case 'about':
+					return 'exclamation';
+				break;
+
+				case 'beginner':
+					return 'cogs';
+				break;
+				case 'intermediate':
+					return 'star';
+				break;
+				case 'master':
+					return 'trophy';
+				break;
+
+				case 'video':
+					return 'video-camera';
+				break;
+				case 'strategy':
+					return 'puzzle-piece';
+				break;
+				case 'decks':
+					return 'inbox';
+				break;
+				case 'judgement':
+					return 'flag';
+				break;
+				case 'ui':
+					return 'laptop';
+				break;
+			}
+
+			return ''; //no icon found
 		}
 		
 	}
