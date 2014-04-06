@@ -1,0 +1,16 @@
+@media (min-width: 992px) {
+	.content-item .content-container h4 {
+		height: 2.3em;
+		vertical-align: middle;
+		display: table-cell;
+	}
+	.content-item .content-container {
+		bottom: -4.5em;
+		height: 10em;
+	}
+
+	a.video-container:hover .content-container {
+	    bottom: -4.5em;
+	}
+
+}

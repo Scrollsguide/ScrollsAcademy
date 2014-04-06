@@ -1,0 +1,472 @@
+body {
+    background: #f6f6f6;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 40px;
+    font-family: 'PT Sans', sans-serif;
+}
+h4 {
+    font-family: 'Libre Baskerville', serif;
+    letter-spacing: .1em;
+    font-size: 2em;
+    text-shadow: 2px 2px 3px #000;
+
+}
+h3 {
+    color: #3d3d3d;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: bold;
+    margin: 0px 15px 0 15px;
+    border-bottom: 2px solid #3d3d3d;
+}
+
+.navbar-default button.navbar-toggle,
+.navbar-default button.navbar-toggle:hover,
+.navbar-default button.navbar-toggle:active {
+    background: rgba(0,0,0,.5);
+}
+
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-brand:focus {
+    color: #f6f6f6;
+    text-decoration: underline;
+}
+
+.row {
+    margin: 0; /* so we dont get horizontal scrollbars */
+}
+
+a:hover {
+    text-decoration: none;
+}
+.content-well a:hover {
+    text-decoration: underline;
+}
+
+/* pad most of the content, so we can do full width stuff */
+.container-fluid .row,
+.container-fluid .header,
+.container-fluid .footer {
+    padding: 0 10px;
+}
+
+.navbar {
+    border-bottom: 3px solid #3d3d3d;
+    background-image: url('/assets/images/header-bg.png');
+    background-size: cover;
+    box-shadow: 0 6px 12px rgba(0,0,0,.175);
+}
+
+.navbar-default .navbar-brand {
+    font-family: 'Playfair Display SC', serif;
+    letter-spacing: .05em;
+    color: #fdfdfd;
+    font-size: 20px;
+    font-weight: bold;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+.navbar-default .navbar-collapse {
+    background: #fff;
+    color: #3d3d3d;
+}
+.navbar-default .navbar-nav {
+    font-size: 15px;
+    border-top: 0;
+}
+
+.content-block {
+    display: block;
+}
+
+.content-block > div {
+    margin-bottom: 30px; /* give all content equal bottom spacing*/
+}
+
+.jumbotron {
+    position: relative;
+    min-height: 300px;
+    width: 100%;
+    background-size: cover;
+    border-bottom: 3px solid #3d3d3d;
+    border-top: 3px solid #3d3d3d;
+    overflow: hidden;
+    margin: 10px 0 20px 0;
+}
+
+.content {
+    border: 0;
+    min-height: 400px;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+.content-container, .content-item, .bottom-info {
+    display: block;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.content-item {
+    position: relative;
+    border: 1px solid black;
+    border-bottom: 0;
+    height: 200px;
+    background-size: cover;
+    margin: 0 0 0 0;
+    overflow: hidden;
+    box-shadow: 0px 0px 2px #000;
+}
+
+
+
+/* A box inside of a jumbotron or a content-item*/
+.content-container {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 10px;
+    color: #fff;
+    background: rgba(0,0,0,.5);
+    width: 100%;
+
+    transition: all .25s ease-in-out;
+}
+a:hover .content-container {
+    background: rgba(0,0,0,.8);
+    bottom: 0;
+}
+/* content container text*/
+a:hover .content-container,
+a:hover .bottom-info {
+    color: #428bca;
+    text-decoration: none;
+}
+
+/*jumbotron-specific content-container*/
+.jumbotron .content-container {
+    padding: 10px 25px; /* to line up the text with the first column */
+    background: none;
+}
+a:hover .jumbotron .content-container {
+    background: none;
+}
+.jumbotron .content-container p {
+    text-shadow: 0 0 20px #000;
+    background: rgba(0,0,0,.6);
+    padding: 5px;
+}
+.jumbotron .content-container h4 {
+    height: auto;
+    text-shadow: 0 0 10px #000;
+}
+
+/*tout style jumbotron*/
+.jumbotron.content h4 {
+    margin: 0;
+}
+
+.jumbotron.content .content-container {
+    padding: 10px 10px;
+}
+
+.jumbotron.content .content-container p {
+    padding: 5px 0;
+    text-shadow: none;
+}
+
+
+
+/* TAGS */
+.type-tag {
+    color: #fff;
+    position: absolute;
+    top: 20px;
+    right: 0;
+    padding: 2px 5px;
+    box-shadow: -1px 1px 2px #000;
+    border-radius: 2px 0 0 2px;
+    z-index: 5;
+}
+.type-tag.tier1 {
+    background: #30c333;
+}
+.navbar-default .navbar-nav>.tier1>a {
+    color: #30c333;
+}
+.type-tag.tier2 {
+    background: #0B5FA5;
+}
+.navbar-default .navbar-nav>.tier2>a {
+    color: #0B5FA5;
+}
+.type-tag.tier3 {
+    background: #502982;
+}
+.navbar-default .navbar-nav>.tier3>a {
+    color: #502982;
+}
+.content-item:hover .type-tag {
+    box-shadow: -3px 3px 5px #000; /* add more dropdshadow when hovering over the content box */
+}
+.tag2 {
+    top: 50px;
+}
+
+.tag3 {
+    top: 80px;
+}
+
+.jumbotron .type-tag {
+    box-shadow: -2px 2px 5px #000;
+    padding-right: 10px;
+}
+a:hover .jumbotron .type-tag {
+    box-shadow: -5px 5px 8px #000;
+}
+
+
+.bottom-info {
+    background: #000000; /* Old browsers */
+    background: -moz-linear-gradient(top,  #000000 1%, #2b2b2b 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(1%,#000000), color-stop(100%,#2b2b2b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top,  #000000 1%,#2b2b2b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top,  #000000 1%,#2b2b2b 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top,  #000000 1%,#2b2b2b 100%); /* IE10+ */
+    background: linear-gradient(to bottom,  #000000 1%,#2b2b2b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#000000', endColorstr='#2b2b2b',GradientType=0 ); /* IE6-9 */
+
+
+    text-align: right;
+    margin: 0;
+    padding: 3px 5px;
+    color: #fff;
+    border-radius: 0 0 3px 3px;
+    box-shadow: 0 0 2px #000;
+    font-size: .9em;
+}
+
+.bottom-info img {
+    max-height: 1em;
+}
+
+.divider {
+    color: #fff !important;
+    text-shadow: 2px 2px 3px #000;
+}
+
+.video-container .content-item {
+    border-bottom: 1px solid #000;
+    height: 315px;
+}
+.video-container.playing .content-item {
+    background-image: none !important;
+    background: #000;
+}
+.video-container iframe {
+    margin: 0 auto;
+    width: 100%;
+    height: 315px;
+}
+.col-sm-12.col-md-6 .content-item {
+    min-height: 290px;
+}
+.video-container .content-container, a.video-container:hover .content-container {
+    text-shadow: 0px 0px 6px #000;
+}
+.video-container .content-item .content-container h4 {
+    width: 100%;
+    text-align: center;
+    display: table;
+}
+.video-container .play-container {
+    margin: 0px auto;
+    width: 1em;
+    color: #000;
+    opacity: .5;
+    text-shadow: 0px 0px 20px #fff;
+    font-size: 12em;
+}
+a.video-container:hover .play-container {
+    opacity: .8;
+}
+
+.playing .play-container, .playing .content-container, .playing .type-tag {
+    display: none;
+}
+
+
+.footer {
+    margin-top: 30px;
+}
+
+
+.guide-header {
+    background-size: cover;
+    border-top: 3px solid #3d3d3d;
+    border-bottom: 3px solid #3d3d3d;
+    min-height: 150px;
+    position: relative;
+}
+.guide-header h2 {
+    font-family: 'Libre Baskerville', serif;
+    line-height: 150px;
+    text-shadow: 0 0 10px #000;
+    font-size: 40px;
+    color: #fdfdfd;
+}
+.byline {
+    float: right;
+    color: #000;
+    font-size: 20px;
+    line-height: 40px;
+}
+.byline .divider {
+    color: #000 !important;
+}
+.byline img {
+    max-height: 40px;
+    box-shadow: 0 0 3px #000;
+}
+
+.content-well {
+    max-width: 950px;
+    margin: 10px auto;
+    font-size: 20px;
+    line-height: 1.5em;
+}
+
+.content-well>p:first-child:first-letter {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 45px;
+}
+
+.content-well p {
+    margin-bottom: 30px;
+}
+
+.content-well h5 {
+    font-size: 30px;
+    line-height: 1.4em;
+    font-family: 'Libre Baskerville', serif;
+    width: 100%;
+    border-bottom: 1px solid #3d3d3d;
+    margin: 0;
+}
+
+.content-well blockquote {
+    margin: 0 0 30px 0;
+    font-style: italic;
+    font-weight: bold;
+    border-left: 0;
+    padding: 0 20px;
+}
+
+.content-well.primary-content img { 
+    width: 100%;
+    margin-bottom: 30px;
+}
+
+.content-well h5 + blockquote { /*header followed by a blockquote*/
+    margin-top: 30px;
+}
+.content-well h5 + p { /*header followed by a paragraph*/
+    margin-top: 30px;
+}
+
+.content-well p > img { /*image inside a paragraph*/
+    margin-top: 30px;
+}
+.content-well.primary-content > a {
+    margin-bottom: 30px;
+    display: block;
+}
+
+.content-well ul, .content-well ol {
+    margin: 0 0 30px 0;
+}
+
+.content-well hr {
+    margin: 0 0 30px 0;
+}
+
+
+.sharing {
+    margin: 0 0 30px 0px;
+}
+
+
+.row.more-block {
+    padding: 0;
+}
+.more-block h4 {
+    border-bottom: 1px solid #3d3d3d;
+    margin-bottom: 0;
+    margin-top: 0;
+}
+.more-block > div {
+    margin-top: 0;
+}
+
+
+i.faction-decay, i.faction-energy, i.faction-growth, i.faction-order {
+    display: inline-block;
+    background-size: cover;
+}
+i.faction-decay {
+    background-image: url(/assets/images/card-icons/decay.png);
+    height: 49px;
+    width: 64px;
+}
+i.faction-energy {
+    background-image: url(/assets/images/card-icons/energy.png);
+    width: 54px;
+    height: 54px;
+}
+i.faction-growth {
+    background-image: url(/assets/images/card-icons/growth.png);
+    height: 60px;
+    width: 54px;
+}
+i.faction-order {
+    background-image: url(/assets/images/card-icons/order.png);
+    height: 64px;
+    width: 64px;
+}
+
+h5 > i {
+    max-height: 28px;
+}
+h5 > i.faction-decay {
+    max-width: 36px;
+}
+h5 > i.faction-energy,
+h5 > i.faction-order {
+    max-width: 28px;
+}
+h5 > i.faction-growth {
+    max-width: 25px;
+}
+
+p > i {
+    max-height: 14px;
+}
+p > i.faction-decay {
+    max-width: 18px;
+}
+p > i.faction-energy,
+p > i.faction-order {
+    max-width: 14px;
+}
+p > i.faction-growth {
+    max-width: 13px;
+}
+
+.category-hdr {
+    margin: 30px 0;
+    border-bottom: 1px solid #3d3d3d;
+}
+.category-hdr h4,
+.more-block h4 {
+    text-shadow: none;
+}
