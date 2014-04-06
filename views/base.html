@@ -50,27 +50,27 @@
                 </div>
                 <div class="navbar-collapse collapse">
                   <ul class="nav navbar-nav">
-                    <li class="tier1"><a href="/category/beginner">Beginner</a></li>
-                    <li class="tier2"><a href="/category/intermediate">Intermediate</a></li>
-                    <li class="tier3"><a href="/category/master">Master</a></li>
+                    <li class="tier1"><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}">Beginner</a></li>
+                    <li class="tier2"><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}">Intermediate</a></li>
+                    <li class="tier3"><a href="{{ path('categories', { 'categoryType': 'master' }) }}">Master</a></li>
                   </ul>
                   <ul class="nav navbar-nav navbar-right">
-                     <li><a href="/about">About</a></li>
+                     <li><a href="{{ path('about') }}">About</a></li>
                     <li class="dropdown">
                       <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
                       <ul class="dropdown-menu">
-                        <li><a href="/category/video"><i class="fa fa-{{categoryIcon('video')}}"></i> Video</a></li>
+                        <li><a href="{{ path('categories', { 'categoryType': 'video' }) }}"><i class="fa fa-{{ categoryIcon('video') }}"></i> Video</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Complexity</li>
-                        <li><a href="/category/beginner"><i class="fa fa-{{categoryIcon('beginner')}}"></i> Beginner</a></li>
-                        <li><a href="/category/intermediate"><i class="fa fa-{{categoryIcon('intermediate')}}"></i> Intermediate</a></li>
-                        <li><a href="/category/master"><i class="fa fa-{{categoryIcon('master')}}"></i> Master</a></li>
+                        <li><a href="{{ path('levels', { 'level': 'beginner' }) }}"><i class="fa fa-{{ categoryIcon('beginner') }}"></i> Beginner</a></li>
+                        <li><a href="{{ path('levels', { 'level': 'intermediate' }) }}"><i class="fa fa-{{ categoryIcon('intermediate') }}"></i> Intermediate</a></li>
+                        <li><a href="{{ path('levels', { 'level': 'master' }) }}"><i class="fa fa-{{ categoryIcon('master') }}"></i> Master</a></li>
                         <li class="divider"></li>
                         <li class="dropdown-header">Topic</li>
-                        <li><a href="/category/decks"><i class="fa fa-{{categoryIcon('decks')}}"></i> Decks</a></li>
-                        <li><a href="/category/strategy"><i class="fa fa-{{categoryIcon('strategy')}}"></i> Strategy</a></li>
-                        <li><a href="/category/judgement"><i class="fa fa-{{categoryIcon('judgement')}}"></i> Judgement</a></li>
-                        <li><a href="/category/ui"><i class="fa fa-{{categoryIcon('ui')}}"></i> UI</a></li>
+                        <li><a href="{{ path('categories', { 'categoryType': 'decks' }) }}"><i class="fa fa-{{ categoryIcon('decks') }}"></i> Decks</a></li>
+                        <li><a href="{{ path('categories', { 'categoryType': 'strategy' }) }}"><i class="fa fa-{{ categoryIcon('strategy') }}"></i> Strategy</a></li>
+                        <li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}"><i class="fa fa-{{ categoryIcon('judgement') }}"></i> Judgement</a></li>
+                        <li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}"><i class="fa fa-{{ categoryIcon('ui') }}"></i> UI</a></li>
                       </ul>
                     </li>
                   </ul>
