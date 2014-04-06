@@ -7,6 +7,13 @@
 			$this->app = $app;
 		}
 		
+		public static function registerHelpers(App $app, Twig_Environment $twig){
+			$t = new self($app);
+			
+			$twig->addFunction($t->getPathFunction());
+			$twig->addFunction($t->getCurrentRouteFunction());
+		}
+		
 		public function getPathFunction(){
 			return new Twig_SimpleFunction("path", array($this, "path"));
 		}
@@ -17,9 +24,15 @@
 		 * routeParams is optional
 		 */
 		public function path($routeId, $routeParams = array()){
-			$router = $this->app->getRouter();
-			
-			return $router->generateUrl($routeId, $routeParams);
+			return $this->app->getRouter()->generateUrl($routeId, $routeParams);
+		}
+		
+		public function getCurrentRouteFunction(){
+			return new Twig_SimpleFunction("currentRoute", array($this, "currentRoute"));
+		}
+		
+		public function currentRoute(){
+			return $this->app->getRoute();
 		}
 		
 	}

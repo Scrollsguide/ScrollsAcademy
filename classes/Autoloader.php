@@ -22,8 +22,22 @@
 			$this->baseDir = $baseDir;
 		}
 		
-		public function addDirectory($dir){
-			$this->dirs[] = $this->baseDir . "/" . $dir;
+		/**
+		 * Add directory for autoloading.
+		 * Set recursive to true to add subdirectories as well.
+		 */
+		public function addDirectory($dir, $recursive = false){
+			$absPath = $this->baseDir . "/" . $dir;
+			$this->dirs[] = $absPath;
+			
+			if ($recursive){
+				$children = array_filter(glob($absPath . "/*"), 'is_dir');
+				
+				foreach ($children as $c){
+					// recursively add every subdirectory
+					$this->addDirectory($dir . "/" . pathinfo($c, PATHINFO_BASENAME), true);
+				}
+			}
 		}
 		
 		public function loadClass($class){

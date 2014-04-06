@@ -54,8 +54,13 @@
 				$this->setupTemplateEngine();
 				$this->setupController();
 				
+				// returns instance of Response class
 				$response = $this->runAction();
 				
+				// check response type and process
+				if (!($response instanceof Response)){
+					throw new Exception(sprintf("Action '%s' should return Response.", $this->route->getActionName()));
+				}
 				echo $response;
 			}
 		}
@@ -67,15 +72,14 @@
 			$loader = new Twig_Loader_Filesystem($this->getBaseDir() . "/views");
 			
 			// set up cache for twig
-			$this->cache->prepareDirectory($this->cache->getPathForFile("views"));
+			$this->getCache()->prepareDirectory($this->cache->getPathForFile("views"));
 			$twig = new Twig_Environment($loader, array(
 				"cache" => $this->cache->getPathForFile("views"),
 				"auto_reload" => true
 			));
 			
 			// add extensions
-			$twigHelper = new TwigHelper($this);
-			$twig->addFunction($twigHelper->getPathFunction());
+			TwigHelper::registerHelpers($this, $twig);
 			
 			$this->put("twig", $twig);
 		}
@@ -125,6 +129,10 @@
 		
 		public function getRouter(){
 			return $this->router;
+		}
+		
+		public function getRoute(){
+			return $this->route;
 		}
 		
 		public function getClassloader(){

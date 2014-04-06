@@ -22,6 +22,10 @@
 			},
 			"action": "Guide::viewGuide"
 		},
+		"about": {
+			"path": "/about",
+			"action": "Index::about"
+		},
 		"404": {
 			"path": "/404",
 			"action": "Index::p404"

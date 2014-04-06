@@ -19,7 +19,10 @@
 		}
 		
 		protected function redirect($toUrl, $statusCode = 302){
-			header("Location: " . $toUrl);
+			$redirectRequest = new RedirectRequest($toUrl);
+			$redirectRequest->setStatusCode($statusCode);
+			
+			return $redirectRequest;
 		}
 	
 	}

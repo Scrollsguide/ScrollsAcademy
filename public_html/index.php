@@ -3,7 +3,8 @@
 	
 	require_once $root . "/classes/Autoloader.php";
 	$autoloader = Autoloader::register($root);
-	$autoloader->addDirectory("classes");
+	// recursively add every directory in "classes"
+	$autoloader->addDirectory("classes", true);
 	
 	$a = new App($root);
 	$a->setClassloader($autoloader);
