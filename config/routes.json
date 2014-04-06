@@ -11,7 +11,7 @@
 		"categories": {
 			"path": "/category/{categoryType}",
 			"requirements": {
-				"categoryType": "beginner|intermediate|master|video|strategy|decks|judgement|ui"
+				"categoryType": "video|stragegy|decks|judgement|ui"
 			},
 			"action": "Category::viewCategoryType"
 		},

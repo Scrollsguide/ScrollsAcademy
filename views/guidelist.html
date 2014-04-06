@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+	{% if guides|length %}
+		{% for guide in guides %}
+			{{ guide.title }}
+		{% endfor %}
+	{% else %}
+		No guides in this category
+	{% endif %}
+{% endblock %}
+

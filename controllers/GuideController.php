@@ -14,6 +14,7 @@
 				$r = new HtmlResponse();
 				$r->setContent("Guide not found");
 			}
+			
 			return $r;
 		}
 	}
