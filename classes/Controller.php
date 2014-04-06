@@ -13,7 +13,7 @@
 			$this->app = $app;
 		}
 		
-		protected function render($templatePath, array $parameters){		
+		protected function render($templatePath, array $parameters = array()){		
 			$twig = $this->app->get("twig");
 			$template = $twig->loadTemplate($templatePath);
 			

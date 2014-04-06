@@ -13,4 +13,7 @@
 			return $this->redirect($toUrl);
 		}
 		
+		public function p404Action(){
+			return $this->render("404.html");
+		}
 	}

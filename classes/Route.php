@@ -47,8 +47,11 @@
 		}
 		
 		public function getUrlParameters(){
-			// is always set for matching routes, no need to check
-			return $this->get("urlMatch");
+			if ($this->hasKey("urlMatch")){
+				return $this->get("urlMatch");
+			} else {
+				return array(); // since urlMatch is an array
+			}
 		}
 		
 		public function insertParameters(array $params){
