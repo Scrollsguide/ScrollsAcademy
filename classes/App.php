@@ -29,6 +29,7 @@
 		public function init(){
 			// add user controller directory to classloader
 			$this->classloader->addDirectory("controllers");
+			$this->classloader->addDirectory("extensions");
 			
 			// set up cache
 			$this->cache = new Cache($this->baseDir . "/cache");
@@ -67,10 +68,16 @@
 			
 			// set up cache for twig
 			$this->cache->prepareDirectory($this->cache->getPathForFile("views"));
-			$this->put("twig", new Twig_Environment($loader, array(
+			$twig = new Twig_Environment($loader, array(
 				"cache" => $this->cache->getPathForFile("views"),
 				"auto_reload" => true
-			)));
+			));
+			
+			// add extensions
+			$twigHelper = new TwigHelper($this);
+			$twig->addFunction($twigHelper->getPathFunction());
+			
+			$this->put("twig", $twig);
 		}
 		
 		private function setupController(){
@@ -114,6 +121,10 @@
 		
 		public function getBaseDir(){
 			return $this->baseDir;
+		}
+		
+		public function getRouter(){
+			return $this->router;
 		}
 		
 		public function getClassloader(){

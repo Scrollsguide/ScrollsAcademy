@@ -29,7 +29,7 @@
 		
 		public function getRoute($id){
 			foreach ($this->routes as $key => $route){
-				if ($key == $id){
+				if ($key == $id){ // not === for json_decode can return ints
 					return new Route($key, $route);
 				}
 			}
@@ -87,54 +87,6 @@
 			return false;
 		}
 		
-	}
-	
-	class Route {
-		
-		private $id;
-		
-		private $data;
-		
-		private $controllerName;
-		private $actionName;
-		
-		public function __construct($id, $data){
-			$this->id = $id;
-			$this->data = $data;
-			
-			// we can assume a controller + action is already defined
-			// since we have checked for that while compiling the route
-			list($this->controllerName, $this->actionName) = explode("::", $this->data['action']);
-		}
-		
-		public function hasKey($key){
-			return isset($this->data[$key]);
-		}
-		
-		public function set($key, $d){
-			$this->data[$key] = $d;
-		}
-		
-		public function get($key){
-			return $this->data[$key];
-		}
-		
-		public function getControllerName(){
-			return $this->controllerName . "Controller";
-		}
-		
-		public function getActionName(){
-			return $this->actionName . "Action";
-		}
-		
-		public function getUrlParameters(){
-			// is always set for matching routes, no need to check
-			return $this->get("urlMatch");
-		}
-		
-		public function getId(){
-			return $this->id;
-		}
 	}
 	
 	class RouteCompiler {
@@ -195,9 +147,13 @@
 						$total .= ",";
 					}
 					
-					$total .= "\"" . $key . "\" => ";
+					if (is_numeric($key)){
+						$total .= $key;
+					} else {
+						$total .= "\"" . $key . "\"";
+					}
 					
-					$total .= $this->compilePHP($value);
+					$total .= " => " . $this->compilePHP($value);
 					$i++;
 				}
 				$total .= ")";
@@ -230,7 +186,7 @@
 					} else {
 						$requirement = "[a-zA-Z0-9-]*?";
 					}
-					$matchWith = str_replace($this->wrap($paramName), "(" . $requirement . ")", $matchWith);
+					$matchWith = str_replace(Route::wrapParameter($paramName), "(" . $requirement . ")", $matchWith);
 				}
 				
 				$route['match'] = $this->wrapRegexDelimiter($matchWith);
@@ -270,10 +226,6 @@
 					$route['paramMap'][] = $paramName;
 				}
 			}
-		}
-		
-		private function wrap($str){
-			return "{" . $str . "}";
 		}
 		
 		private function wrapRegexDelimiter($str){
