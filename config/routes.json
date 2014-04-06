@@ -29,13 +29,6 @@
 		"404": {
 			"path": "/404",
 			"action": "Index::p404"
-		},
-		
-		
-		"admin_index": {
-			"path": "/admin",
-			"action": "Admin::index"
 		}
 	}
 }
-	

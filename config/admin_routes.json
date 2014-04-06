@@ -1,0 +1,8 @@
+{
+	"routes": {
+		"admin_index": {
+			"path": "/admin",
+			"action": "Admin::index"
+		}
+	}
+}

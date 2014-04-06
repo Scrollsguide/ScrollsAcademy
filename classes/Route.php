@@ -70,3 +70,20 @@
 			return "{" . $str . "}";
 		}
 	}
+	
+	class RouteHelper {
+		
+		public static function getCacheKey(Route $r){
+			$add = "";
+			if ($r->hasKey("urlMatch")){
+				$match = $r->getUrlParameters();
+				
+				foreach ($match as $m){
+					$add .= Route::wrapParameter($m);
+				}
+			}
+			
+			return md5($r->getId() . $add);
+		}
+		
+	}

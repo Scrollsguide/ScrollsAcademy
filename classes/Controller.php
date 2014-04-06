@@ -11,18 +11,20 @@
 			$twig = $this->app->get("twig");
 			$template = $twig->loadTemplate($templatePath);
 			
-			return $template->render($parameters);
+			$response = new HtmlResponse();
+			$response->setContent($template->render($parameters));
+			return $response;
 		}
 		
 		protected function getApp(){
 			return $this->app;
 		}
 		
-		protected function redirect($toUrl, $statusCode = 302){
-			$redirectRequest = new RedirectRequest($toUrl);
-			$redirectRequest->setStatusCode($statusCode);
+		protected function redirect($toUrl, $statusCode = 301){ // moved permanently for default
+			$redirectResponse = new RedirectResponse($toUrl);
+			$redirectResponse->setStatusCode($statusCode);
 			
-			return $redirectRequest;
+			return $redirectResponse;
 		}
 	
 	}

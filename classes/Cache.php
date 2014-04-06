@@ -15,10 +15,20 @@
 			$absPath = $this->getPathForFile($path);
 			
 			$parent = dirname($absPath);
-				$this->prepareDirectory($parent);
+			$this->prepareDirectory($parent);
 			
 			$fileHandle = fopen($absPath, "w");
 			fwrite($fileHandle, $content);
+		}
+		
+		public function load($path){
+			if (!$this->exists($path)){
+				return false;
+			}
+			
+			$absPath = $this->getPathForFile($path);
+			
+			return file_get_contents($absPath);
 		}
 		
 		public function prepareDirectory($path){
