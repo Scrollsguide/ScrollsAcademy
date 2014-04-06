@@ -27,6 +27,7 @@
 		public function setHeader($content){
 			header($content);
 		}
+		
 	}
 	
 	class StatusCode {

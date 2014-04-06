@@ -11,6 +11,18 @@
 			return is_file($this->getPathForFile($file));
 		}
 		
+		public function isValid($key, $ttl = 300){
+			$absPath = $this->getPathForFile($key);
+			
+			$exists = $this->exists($key);
+			if (!$exists){
+				return false;
+			}
+			
+			// file exists, just check the time now
+			return (time() - filemtime($absPath)) < $ttl;
+		}
+		
 		public function save($path, $content){
 			$absPath = $this->getPathForFile($path);
 			

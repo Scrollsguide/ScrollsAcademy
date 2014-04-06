@@ -4,14 +4,19 @@
 		public function viewCategoryTypeAction($category){
 			// set up entity and repository
 			$em = $this->getApp()->get("EntityManager");
-			$articleRepository = $em->getRepository("Article");
+			$guideRepository = $em->getRepository("Guide");
 			
 			// look for guides in the repo
-			$guides = $articleRepository->findAllByCategory($category);
+			$guides = $guideRepository->findAllByCategory($category);
 			
 			return $this->render("guidelist.html", array(
 				"guides" => $guides
 			));
+		}
+	
+		public function viewGuidesByLevelAction($level){
+			// temporarily use same method
+			return $this->viewCategoryTypeAction($level);
 		}
 		
 	}

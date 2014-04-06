@@ -3,6 +3,12 @@
 		
 		private $app;
 		
+		// default caching rules, cache any page for 5 minutes
+		private $cacheRules = array(
+			"cache" => false,
+			"ttl" => 300
+		);
+		
 		public function __construct(App $app){
 			$this->app = $app;
 		}
@@ -26,5 +32,16 @@
 			
 			return $redirectResponse;
 		}
-	
+		
+		public function setCacheRules(array $rules){
+			$this->cacheRules = Util::array_empty_merge($this->cacheRules, $rules);
+		}
+		
+		public function getCacheRule($rule){
+			if (!isset($this->cacheRules[$rule])){
+				throw new Exception(sprintf("Default cache rule '%s' not set.", $rule));
+			}
+			
+			return $this->cacheRules[$rule];
+		}
 	}

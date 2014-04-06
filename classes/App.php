@@ -49,22 +49,27 @@
 			// retrieve matching route, if any
 			$this->route = $this->matchRoute();
 			
+			$this->setupController();
+			
 			// check cache here, load controller if cache cannot be used
-			$cacheKey = "Pages/" . RouteHelper::getCacheKey($this->getRoute());
 			$usedCache = false;
-			if ($this->getCache()->exists($cacheKey) && false){
-				if (($contentFromCache = $this->getCache()->load($cacheKey)) !== false){ 
-					// successfully loaded from cache
-					$usedCache = true;
-					
-					echo $contentFromCache;
+			$shouldCache = $this->controller->getCacheRule("cache");
+			if ($shouldCache){
+				$cacheKey = "Pages/" . RouteHelper::getCacheKey($this->getRoute());
+				if ($this->getCache()->isValid($cacheKey, $this->controller->getCacheRule("ttl"))){
+					if (($contentFromCache = $this->getCache()->load($cacheKey)) !== false){
+						// successfully loaded from cache
+						$usedCache = true;
+						
+						echo $contentFromCache;
+					}
 				}
 			}
 			
+			// no hit on the cache, execute request through the controller
 			if (!$usedCache){
 				$this->setupDatabase();
 				$this->setupTemplateEngine();
-				$this->setupController();
 				
 				// returns instance of Response class
 				$response = $this->runAction();
@@ -79,7 +84,9 @@
 				// cache the response if necessary
 				// and output the page if it has content
 				if ($response instanceof ContentResponse){
-					$this->tryCache($response, $cacheKey);
+					if ($shouldCache){
+						$this->tryCache($response, $cacheKey);
+					}
 					
 					echo $response->getContent();
 				}
@@ -135,6 +142,7 @@
 		}
 		
 		private function tryCache(ContentResponse $response, $location){
+			// check whether the response can be cached
 			$this->getCache()->save($location, $response->getContent());
 		}
 		

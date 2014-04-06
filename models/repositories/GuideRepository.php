@@ -1,20 +1,20 @@
 <?php
-	class ArticleRepository extends Repository {
+	class GuideRepository extends Repository {
 	
 		public function getTableName(){
-			return "articles";
+			return "guides";
 		}
 	
 		public function getEntityName(){
-			return "Article";
+			return "Guide";
 		}
 		
 		public function findAllByCategory($categoryString){
 			$sth = $this->getConnection()->prepare("SELECT A.*
-						FROM articles A, articlecategories AC, categories C
+						FROM guides A, guidecategories AC, categories C
 						WHERE C.name = :category
 						AND AC.categoryid = C.id
-						AND AC.articleid = A.id");
+						AND AC.guideid = A.id");
 			$sth->bindParam(":category", $categoryString, PDO::PARAM_STR);
 			
 			$sth->execute();

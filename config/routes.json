@@ -15,6 +15,13 @@
 			},
 			"action": "Category::viewCategoryType"
 		},
+		"levels": {
+			"path": "/category/{level}",
+			"requirements": {
+				"level": "beginner|intermediate|expert"
+			},
+			"action": "Category::viewGuidesByLevel"
+		},
 		"view_guide": {
 			"path": "/guide/{title}",
 			"requirements": {
