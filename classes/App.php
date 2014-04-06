@@ -29,6 +29,7 @@
 		public function init(){
 			// add user controller directory to classloader
 			$this->classloader->addDirectory("controllers");
+			$this->classloader->addDirectory("models", true);
 			$this->classloader->addDirectory("extensions");
 			
 			// set up cache
@@ -51,7 +52,7 @@
 			// check cache here, load controller if cache cannot be used
 			$cacheKey = "Pages/" . RouteHelper::getCacheKey($this->getRoute());
 			$usedCache = false;
-			if ($this->getCache()->exists($cacheKey)){
+			if ($this->getCache()->exists($cacheKey) && false){
 				if (($contentFromCache = $this->getCache()->load($cacheKey)) !== false){ 
 					// successfully loaded from cache
 					$usedCache = true;
