@@ -62,6 +62,7 @@
 			}
 			
 			if (!$usedCache){
+				$this->setupDatabase();
 				$this->setupTemplateEngine();
 				$this->setupController();
 				
@@ -83,6 +84,27 @@
 					echo $response->getContent();
 				}
 			}
+		}
+		
+		public function close(){
+			if (($db = $this->get("database")) !== null){
+				$db->close();
+			}
+		}
+		
+		private function setupDatabase(){
+			$c = $this->getConfig();
+			
+			$database = new Database($this);
+			$database->setHost($c->get("pdo_host"), $c->get("pdo_port"));
+			$database->setCredentials($c->get("pdo_user"), $c->get("pdo_pass"));
+			$database->setDatabaseName($c->get("pdo_db"));
+			
+			$this->put("database", $database);
+			
+			// add entity manager
+			$em = new EntityManager($this);
+			$this->put("EntityManager", $em);
 		}
 		
 		private function setupTemplateEngine(){
@@ -154,6 +176,10 @@
 			return $this->route;
 		}
 		
+		public function getConfig(){
+			return $this->config;
+		}
+		
 		public function getClassloader(){
 			return $this->classloader;
 		}
@@ -171,6 +197,9 @@
 		}
 		
 		public function get($obj){
+			if (!isset($this->optObjects[$obj])){
+				return null;
+			}
 			return $this->optObjects[$obj];
 		}
 	}

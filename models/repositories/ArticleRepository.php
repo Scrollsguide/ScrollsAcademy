@@ -8,5 +8,5 @@
 		public function getEntityName(){
 			return "Article";
 		}
-	
+		
 	}

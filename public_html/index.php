@@ -13,5 +13,6 @@
 	
 	$a->init();
 	$a->run();
+	$a->close();
 
 echo ((microtime(true) - $start2) * 1000) . " milliseconds";
