@@ -2,7 +2,7 @@
 {% block content %}
 	<div class="row guide-header" style="background-image:url('/assets/images/{{guide.image}}')">
         <div class="col-md-12">
-            <h2>{{guide.title}}</h2>    
+            <h2>{{guide.getTitle()}}</h2>    
         </div>
     </div>
     <div class="row content-well">
@@ -14,7 +14,7 @@
         </div>
     </div>
     <div class="row content-well primary-content">
-    	{{guide.content|raw}}
+    	{{guide.getContent()|raw}}
     </div>
 {% endblock %}
 
