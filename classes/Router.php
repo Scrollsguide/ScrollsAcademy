@@ -87,6 +87,42 @@
 			return false;
 		}
 		
+		/**
+		 * Generates an url given a path id and a parameter list
+		 * routeParams is optional
+		 */
+		public function generateUrl($routeId, $routeParams = array()){
+			$routeUrl = ""; // return value
+			
+			if ($routeId === null){
+				throw new Exception("'Path' needs at least one argument.");
+			}
+			
+			// get route
+			$route = $this->getRoute($routeId);
+			
+			if ($route === false){ // route does not exist
+				throw new Exception(sprintf("No route for path '%s'.", $routeId));
+			}
+			
+			if (count($route->get("paramMap")) > 0){ // this route needs parameters
+				$requiredParameters = $route->getParameterNames();
+				
+				// check whether all parameters are present
+				foreach ($requiredParameters as $rqParam){
+					if (!isset($routeParams[$rqParam])){
+						throw new Exception(sprintf("Parameter '%s' not set for route '%s'.", $rqParam, $routeId));
+					}					
+				}
+				
+				// everything's there, insert parameters
+				$routeUrl = $route->insertParameters($routeParams);
+			} else {
+				$routeUrl = $route->get("path");
+			}
+			return $routeUrl;
+		}
+		
 	}
 	
 	class RouteCompiler {
