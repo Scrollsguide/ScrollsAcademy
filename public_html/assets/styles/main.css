@@ -374,6 +374,14 @@ a.video-container:hover .play-container {
     margin-top: 30px;
 }
 
+.content-well.primary-content p > img:only-child { /* if theres only an image in a p, kill the p's margin*/
+    margin-top: 0px;
+}
+
+.content-well.primary-content h5 + p > img:only-child { /* if theres only an image in a p after a h5, bump it back up*/
+    margin-top: -30px;
+    border-top: 0;
+}
 .content-well p > img { /*image inside a paragraph*/
     margin-top: 30px;
 }

@@ -4,13 +4,28 @@
         <div class="col-md-12 category-hdr">
             <h4><i class="fa fa-{{categoryIcon(category)}}"></i> {{category|title}}</h4>
         </div>
-    </div>
-	{% if guides|length %}
-		{% for guide in guides %}
-			{{ guide.title }}
-		{% endfor %}
-	{% else %}
-		No guides in this category
-	{% endif %}
+		{% if guides|length %}
+			{% for guide in guides %}
+				 <div class="col-md-4 col-sm-6">
+	                    <a href="/guide/{{guide.url}}">
+	                        <div class="content-item" style="background-image: url(/assets/images/{{guide.image}})">
+	                            <div class="type-tag tier1"><i class="fa fa-cogs"></i> Beginner</div>
+	                            <div class="content-container">
+	                                <h4>{{guide.title}}</h4>
+	                                <p>{{guide.summary}}</p>
+	                            </div>
+	                        </div>
+	                        <div class="bottom-info">
+	                            <span class="author">{{guide.author}}</span>
+	                            <span class="divider"> | </span>
+	                            <span class="date">{{guide.date|date("F jS, Y")}}</span>
+	                        </div>
+	                    </a>
+	                </div>
+			{% endfor %}
+		{% else %}
+			No guides in this category
+		{% endif %}
+	</div>
 {% endblock %}
 
