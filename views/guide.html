@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="row guide-header" style="background-image:url('/assets/images/{{guide.image}}')">
+        <div class="col-md-12">
+            <h2>{{guide.title}}</h2>    
+        </div>
+    </div>
+    <div class="row content-well">
+        <div class="byline">
+            <img src="/assets/images/user-imgs/sysp.png" />
+            <span class="author">{{guide.author}}</span>
+            <span class="divider"> | </span>
+            <span class="date">{{guide.date|date("F jS, Y")}}</span>
+        </div>
+    </div>
+    <div class="row content-well primary-content">
+    	{{guide.content|raw}}
+    </div>
+{% endblock %}
+

@@ -8,8 +8,9 @@
 			
 			// look for guide in the repo
 			if (($guide = $guideRepository->findOneBy("url", $url)) !== false){
-				$r = new HtmlResponse();
-				$r->setContent($guide->getTitle());
+				return $this->render("guide.html", array(
+					"guide" => $guide
+				));
 			} else { // guide not found in the repository
 				$r = new HtmlResponse();
 				$r->setContent("Guide not found");
