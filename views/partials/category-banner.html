@@ -1,0 +1,3 @@
+<div class="type-tag {% for category in guide.categories %} {{category.name}} {%endfor%}">
+	<i class="fa fa-{{ categoryIcon(category.name) }}"></i> {{category.name}}
+</div>

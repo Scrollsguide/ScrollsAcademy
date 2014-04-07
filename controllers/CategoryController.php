@@ -11,7 +11,8 @@
 			
 			return $this->render("guidelist.html", array(
 				"guides" => $guides,
-				"category" => $category
+				"category" => $category,
+				"excludeCategory" => $category
 			));
 		}
 	

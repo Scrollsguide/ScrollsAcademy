@@ -16,6 +16,8 @@
 				$relatedGuides[] = $guideRepository->findRandomByCategory("intermediate");
 				$relatedGuides[] = $guideRepository->findRandomByCategory("master");
 
+				$guide->categories = $guideRepository->findGuideCategories($guide->id);
+
 				return $this->render("guide.html", array(
 					"guide" => $guide,
 					"relatedGuides" => $relatedGuides

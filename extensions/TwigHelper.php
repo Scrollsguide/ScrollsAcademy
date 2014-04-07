@@ -16,6 +16,7 @@
 			$twig->addFunction(new Twig_SimpleFunction("currentRoute", array($t, "currentRoute")));
 			$twig->addFunction(new Twig_SimpleFunction("categoryIcon", array($t, "categoryIcon")));
 			$twig->addFunction(new Twig_SimpleFunction("imagePath", array($t, "imagePath")));
+			$twig->addFunction(new Twig_SimpleFunction("categoryClass", array($t, "categoryClass")));
 			
 			// filters
 			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
@@ -64,6 +65,7 @@
 			Generates the font-awesome icon for a corresponding category
 		*/
 		public function categoryIcon($category) {
+			$category = strtolower($category);
 			switch ($category) {
 				case 'about':
 					return 'exclamation';
@@ -100,6 +102,5 @@
 			}
 
 			return ''; //no icon found
-		}
-		
+		}	
 	}

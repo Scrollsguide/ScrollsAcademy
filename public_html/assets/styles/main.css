@@ -188,32 +188,32 @@ a:hover .jumbotron .content-container {
     border-radius: 2px 0 0 2px;
     z-index: 5;
 }
-.type-tag.tier1 {
+.type-tag.Beginner {
     background: #30c333;
 }
-.navbar-default .navbar-nav>.tier1>a {
+.navbar-default .navbar-nav>.Beginner>a {
     color: #30c333;
 }
-.type-tag.tier2 {
+.type-tag.Intermediate {
     background: #0B5FA5;
 }
-.navbar-default .navbar-nav>.tier2>a {
+.navbar-default .navbar-nav>.Intermediate>a {
     color: #0B5FA5;
 }
-.type-tag.tier3 {
+.type-tag.Master {
     background: #502982;
 }
-.navbar-default .navbar-nav>.tier3>a {
+.navbar-default .navbar-nav>.Master>a {
     color: #502982;
 }
 .content-item:hover .type-tag {
     box-shadow: -3px 3px 5px #000; /* add more dropdshadow when hovering over the content box */
 }
-.tag2 {
+.type-tag:nth-child(2){
     top: 50px;
 }
 
-.tag3 {
+.type-tag:nth-child(3) {
     top: 80px;
 }
 
