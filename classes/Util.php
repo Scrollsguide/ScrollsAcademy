@@ -8,7 +8,7 @@
 			$ret = array();
 
 			for ($i = 0; $i < $numArrays; $i++) {
-				if (!empty($arrs[$i])) {
+				if (!empty($arrs[$i]) && is_array($arrs[$i])) {
 					$ret = array_merge($ret, $arrs[$i]);
 				}
 			}

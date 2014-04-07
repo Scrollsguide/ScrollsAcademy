@@ -65,42 +65,20 @@
 			Generates the font-awesome icon for a corresponding category
 		*/
 		public function categoryIcon($category) {
+			$iconMap = array(
+				'about' 	=> 'exclamation',
+				'beginner'	=> 'cogs',
+				'intermediate'	=> 'star',
+				'master'	=> 'trophy',
+				'video'		=> 'video-camera',
+				'strategy'	=> 'puzzle-piece',
+				'decks'		=> 'inbox',
+				'judgement'	=> 'flag',
+				'ui'		=> 'laptop',
+				'404'		=> 'exclamation'
+			);
 			$category = strtolower($category);
-			switch ($category) {
-				case 'about':
-					return 'exclamation';
-				break;
 
-				case 'beginner':
-					return 'cogs';
-				break;
-				case 'intermediate':
-					return 'star';
-				break;
-				case 'master':
-					return 'trophy';
-				break;
-
-				case 'video':
-					return 'video-camera';
-				break;
-				case 'strategy':
-					return 'puzzle-piece';
-				break;
-				case 'decks':
-					return 'inbox';
-				break;
-				case 'judgement':
-					return 'flag';
-				break;
-				case 'ui':
-					return 'laptop';
-				break;
-				case '404':
-					return 'exclamation';
-				break;
-			}
-
-			return ''; //no icon found
+			return isset($iconMap[$category]) ? $iconMap[$category] : '';
 		}	
 	}

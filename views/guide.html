@@ -17,7 +17,7 @@
     	{{ guide.getContent() | raw }}
     </div>
 
-    {% include 'partials/social.html' %}
+    {% include 'partials/social.html' with { 'guide': guide } %}
 
     <!-- type 2, three articles -->
     {% if relatedGuides|length %}
@@ -26,7 +26,7 @@
             <h4>Related Guides</h4>
         </div>
 			{% for guide in relatedGuides %}
-				{% include 'partials/touts/single-item.html' %}
+				{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
 		    {% endfor %}
 	    </div>
 	{% endif %}

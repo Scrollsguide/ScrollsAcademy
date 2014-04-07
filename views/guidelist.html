@@ -2,11 +2,11 @@
 {% block content %}
 	<div class="row content-block">
         <div class="col-md-12 category-hdr">
-            <h4><i class="fa fa-{{categoryIcon(category)}}"></i> {{category|upper}}</h4>
+            <h4><i class="fa fa-{{ categoryIcon(category) }}"></i> {{ category|upper }}</h4>
         </div>
 		{% if guides|length %}
 			{% for guide in guides %}
-				{% include 'partials/touts/single-item.html' %}
+				{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
 			{% endfor %}
 		{% else %}
 			No guides in this category

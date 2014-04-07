@@ -1,22 +1,20 @@
-{% if guide %}
 <div class="col-md-4 col-sm-6">
     <a href="{{ path('view_guide', { 'title': guide.url }) }}">
         <div class="content-item" style="background-image: url({{ imagePath(guide.image) }})">
             {% for category in guide.categories %}
                 {% if category.name|lower != excludeCategory|lower %}
-                    {% include 'partials/category-banner.html' %}
+                    {% include 'partials/category-banner.html' with { 'guide': guide, 'category': category } %}
                 {% endif %}
             {% endfor %}
             <div class="content-container">
-                <h4>{{guide.getTitle()}}</h4>
-                <p>{{guide.summary}}</p>
+                <h4>{{ guide.getTitle() }}</h4>
+                <p>{{ guide.summary }}</p>
             </div>
         </div>
         <div class="bottom-info">
-            <span class="author">{{guide.author}}</span>
+            <span class="author">{{ guide.author }}</span>
             <span class="divider"> | </span>
-            <span class="date">{{guide.date|date("F jS, Y")}}</span>
+            <span class="date">{{ guide.date|date("F jS, Y") }}</span>
         </div>
     </a>
 </div>
-{% endif %}

@@ -16,7 +16,13 @@
 				$relatedGuides[] = $guideRepository->findRandomByCategory("intermediate");
 				$relatedGuides[] = $guideRepository->findRandomByCategory("master");
 
-				$guide->categories = $guideRepository->findGuideCategories($guide->id);
+				// remove empty guides
+				$relatedGuides = array_filter($relatedGuides, function($e){ return $e !== false; });
+				
+				$categories = $guideRepository->findGuideCategories($guide);
+				foreach ($categories as $category){
+					$guide->addCategory($category);
+				}
 
 				return $this->render("guide.html", array(
 					"guide" => $guide,

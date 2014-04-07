@@ -19,6 +19,19 @@
 		
 		public abstract function getTableName();
 		
+		// select all objects from db
+		public function findAll(){
+			$query = "SELECT *
+						FROM " . $this->getTableName();
+			
+			$sth = $this->getConnection()->prepare($query);			
+			$sth->execute();
+			
+			$resultSet = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityName());
+			
+			return $resultSet;
+		}
+		
 		public function findAllBy($column, $value, $limit = array()){
 			$query = "SELECT *
 						FROM " . $this->getTableName() . "

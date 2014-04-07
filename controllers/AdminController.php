@@ -1,25 +1,24 @@
 <?php
 	class AdminController extends Controller {
 		
-		private $user;
-		
-		private $session;
-		
-		public function __construct(){
+		public function __construct(App $app){
+			parent::__construct($app);
 			// don't cache the admin pages
 			$this->setCacheRules(array(
 				"cache" => false
 			));
-			
-			// set up session
-			$this->session = Session::getInstance();
-			
-			// check privileges
-			$this->user = new User();
 		}
 		
 		public function indexAction(){
-			$response = new HtmlResponse();
-			return $response;
-		}		
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+			
+			// look for guides in the repo
+			$guides = $guideRepository->findAll();
+			
+			return $this->render("admin/index.html", array(
+				"guides" => $guides
+			));
+		}
 	}

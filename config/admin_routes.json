@@ -3,6 +3,10 @@
 		"admin_index": {
 			"path": "/admin",
 			"action": "Admin::index"
+		},
+		"admin_guides": {
+			"path": "/admin/guides",
+			"action": "Admin::guideList"
 		}
 	}
 }

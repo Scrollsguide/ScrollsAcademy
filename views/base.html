@@ -37,46 +37,48 @@
 
         <div class="container-fluid">
             <!-- Fixed navbar -->
-            <div class="navbar navbar-default navbar-fixed-top" role="navigation">
-              <div class="container-fluid">
-                <div class="navbar-header">
-                  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                  </button>
-                  <a class="navbar-brand" href="/">Scrolls Guides</a>
-                </div>
-                <div class="navbar-collapse collapse">
-                  <ul class="nav navbar-nav">
-                    <li class="Beginner"><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}">Beginner</a></li>
-                    <li class="Intermediate"><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}">Intermediate</a></li>
-                    <li class="Master"><a href="{{ path('categories', { 'categoryType': 'master' }) }}">Master</a></li>
-                  </ul>
-                  <ul class="nav navbar-nav navbar-right">
-                     <li><a href="{{ path('about') }}">About</a></li>
-                    <li class="dropdown">
-                      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
-                      <ul class="dropdown-menu">
-                        <li><a href="{{ path('categories', { 'categoryType': 'video' }) }}"><i class="fa fa-{{ categoryIcon('video') }}"></i> Video</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Complexity</li>
-                        <li><a href="{{ path('levels', { 'level': 'beginner' }) }}"><i class="fa fa-{{ categoryIcon('beginner') }}"></i> Beginner</a></li>
-                        <li><a href="{{ path('levels', { 'level': 'intermediate' }) }}"><i class="fa fa-{{ categoryIcon('intermediate') }}"></i> Intermediate</a></li>
-                        <li><a href="{{ path('levels', { 'level': 'master' }) }}"><i class="fa fa-{{ categoryIcon('master') }}"></i> Master</a></li>
-                        <li class="divider"></li>
-                        <li class="dropdown-header">Topic</li>
-                        <li><a href="{{ path('categories', { 'categoryType': 'decks' }) }}"><i class="fa fa-{{ categoryIcon('decks') }}"></i> Decks</a></li>
-                        <li><a href="{{ path('categories', { 'categoryType': 'strategy' }) }}"><i class="fa fa-{{ categoryIcon('strategy') }}"></i> Strategy</a></li>
-                        <li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}"><i class="fa fa-{{ categoryIcon('judgement') }}"></i> Judgement</a></li>
-                        <li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}"><i class="fa fa-{{ categoryIcon('ui') }}"></i> UI</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </div><!--/.nav-collapse -->
-              </div>
-            </div>
+			{% block navbar %}
+				<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+				  <div class="container-fluid">
+					<div class="navbar-header">
+					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					  </button>
+					  <a class="navbar-brand" href="/">Scrolls Guides</a>
+					</div>
+					<div class="navbar-collapse collapse">
+					  <ul class="nav navbar-nav">
+						<li class="Beginner"><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}">Beginner</a></li>
+						<li class="Intermediate"><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}">Intermediate</a></li>
+						<li class="Master"><a href="{{ path('categories', { 'categoryType': 'master' }) }}">Master</a></li>
+					  </ul>
+					  <ul class="nav navbar-nav navbar-right">
+						 <li><a href="{{ path('about') }}">About</a></li>
+						<li class="dropdown">
+						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
+						  <ul class="dropdown-menu">
+							<li><a href="{{ path('categories', { 'categoryType': 'video' }) }}"><i class="fa fa-{{ categoryIcon('video') }}"></i> Video</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Complexity</li>
+							<li><a href="{{ path('levels', { 'level': 'beginner' }) }}"><i class="fa fa-{{ categoryIcon('beginner') }}"></i> Beginner</a></li>
+							<li><a href="{{ path('levels', { 'level': 'intermediate' }) }}"><i class="fa fa-{{ categoryIcon('intermediate') }}"></i> Intermediate</a></li>
+							<li><a href="{{ path('levels', { 'level': 'master' }) }}"><i class="fa fa-{{ categoryIcon('master') }}"></i> Master</a></li>
+							<li class="divider"></li>
+							<li class="dropdown-header">Topic</li>
+							<li><a href="{{ path('categories', { 'categoryType': 'decks' }) }}"><i class="fa fa-{{ categoryIcon('decks') }}"></i> Decks</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'strategy' }) }}"><i class="fa fa-{{ categoryIcon('strategy') }}"></i> Strategy</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}"><i class="fa fa-{{ categoryIcon('judgement') }}"></i> Judgement</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}"><i class="fa fa-{{ categoryIcon('ui') }}"></i> UI</a></li>
+						  </ul>
+						</li>
+					  </ul>
+					</div><!--/.nav-collapse -->
+				  </div>
+				</div>
+			{% endblock %}
 
             {% block content %}
 		

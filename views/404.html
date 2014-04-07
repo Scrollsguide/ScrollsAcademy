@@ -10,11 +10,11 @@
     </div>
     <!-- type 2, three articles -->
     {% if recommendedGuides|length %}
-    <div class="row content-block more-block">
-    	{% for guide in recommendedGuides %}
-			{% include 'partials/touts/single-item.html' %}
-	    {% endfor %}
-	</div>
+		<div class="row content-block more-block">
+			{% for guide in recommendedGuides %}
+				{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
+			{% endfor %}
+		</div>
 	{% endif %}
 {% endblock %}
 
