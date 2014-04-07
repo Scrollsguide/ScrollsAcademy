@@ -12,8 +12,10 @@
 			
 			// functions
 			$twig->addFunction(new Twig_SimpleFunction("path", array($t, "path")));
+			$twig->addFunction(new Twig_SimpleFunction("fullPath", array($t, "fullPath")));
 			$twig->addFunction(new Twig_SimpleFunction("currentRoute", array($t, "currentRoute")));
 			$twig->addFunction(new Twig_SimpleFunction("categoryIcon", array($t, "categoryIcon")));
+			$twig->addFunction(new Twig_SimpleFunction("imagePath", array($t, "imagePath")));
 			
 			// filters
 			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
@@ -30,9 +32,18 @@
 		public function path($routeId, $routeParams = array()){
 			return $this->app->getRouter()->generateUrl($routeId, $routeParams);
 		}
+
+		//todo - replace with proper get of domain
+		public function fullPath($routeId, $routeParams = array()) {
+			return 'http://siteddomain' . $this->path($routeId,$routeParams);
+		}
 		
 		public function currentRoute(){
 			return $this->app->getRoute();
+		}
+
+		public function imagePath($filename) {
+			return '/assets/images/' . $filename;
 		}
 		
 		public function cut($str, $length = 30, $toSpace = true, $last = "..."){
@@ -82,6 +93,9 @@
 				break;
 				case 'ui':
 					return 'laptop';
+				break;
+				case '404':
+					return 'exclamation';
 				break;
 			}
 

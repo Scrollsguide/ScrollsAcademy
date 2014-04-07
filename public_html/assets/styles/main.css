@@ -479,6 +479,6 @@ p > i.faction-growth {
     text-shadow: none;
 }
 
-.about-page {
+.about-page, .error-page {
     font-size: 20px;
 }

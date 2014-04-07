@@ -1,1 +1,20 @@
-404
+{% extends "base.html" %}
+{% block content %}
+	<div class="row content-well content-block error-page">
+        <div class="col-md-12 category-hdr">
+            <h4><i class="fa fa-{{categoryIcon('404')}}"></i> 404 - Page Not Found</h4>
+        </div>
+        <p>
+        	We were unable to find a page that matched your request.  You could try the <a href="/">Homepage</a>, or one of the guides below.
+        </p>
+    </div>
+    <!-- type 2, three articles -->
+    {% if recommendedGuides|length %}
+    <div class="row content-block more-block">
+    	{% for guide in recommendedGuides %}
+			{% include 'partials/touts/single-item.html' %}
+	    {% endfor %}
+	</div>
+	{% endif %}
+{% endblock %}
+

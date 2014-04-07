@@ -14,7 +14,19 @@
 		}
 		
 		public function p404Action(){
-			return $this->render("404.html");
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+			
+			//get the random guides for the recommended
+			$recommendedGuides = array();
+			$recommendedGuides[] = $guideRepository->findRandomByCategory("beginner");
+			$recommendedGuides[] = $guideRepository->findRandomByCategory("intermediate");
+			$recommendedGuides[] = $guideRepository->findRandomByCategory("master");
+			
+			return $this->render("404.html", array(
+				'recommendedGuides' => $recommendedGuides
+			));
 		}
 
 		public function aboutAction() {

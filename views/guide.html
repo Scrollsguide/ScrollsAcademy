@@ -1,20 +1,34 @@
 {% extends "base.html" %}
 {% block content %}
-	<div class="row guide-header" style="background-image:url('/assets/images/{{guide.image}}')">
+	<div class="row guide-header" style="background-image:url('{{ imagePath(guide.image) }}')">
         <div class="col-md-12">
-            <h2>{{guide.getTitle()}}</h2>    
+            <h2>{{ guide.getTitle() }}</h2>    
         </div>
     </div>
     <div class="row content-well">
         <div class="byline">
-            <img src="/assets/images/user-imgs/sysp.png" />
-            <span class="author">{{guide.author}}</span>
+            <img src="{{ imagePath('user-imgs/sysp.png') }}" />
+            <span class="author">{{ guide.author }}</span>
             <span class="divider"> | </span>
-            <span class="date">{{guide.date|date("F jS, Y")}}</span>
+            <span class="date">{{ guide.date | date("F jS, Y") }}</span>
         </div>
     </div>
     <div class="row content-well primary-content">
-    	{{guide.getContent()|raw}}
+    	{{ guide.getContent() | raw }}
     </div>
+
+    {% include 'partials/social.html' %}
+
+    <!-- type 2, three articles -->
+    {% if relatedGuides|length %}
+    <div class="row content-block more-block">
+        <div class="col-md-12">
+            <h4>Related Guides</h4>
+        </div>
+			{% for guide in relatedGuides %}
+				{% include 'partials/touts/single-item.html' %}
+		    {% endfor %}
+	    </div>
+	{% endif %}
 {% endblock %}
 

@@ -21,5 +21,11 @@
 			
 			return $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
 		}
+
+		public function findRandomByCategory($categoryString) {
+			$all = $this->findAllByCategory($categoryString);
+			if (empty($all)) { return false; }
+			return $all[array_rand($all)];
+		}
 		
 	}

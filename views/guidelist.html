@@ -6,22 +6,7 @@
         </div>
 		{% if guides|length %}
 			{% for guide in guides %}
-				 <div class="col-md-4 col-sm-6">
-	                    <a href="{{ path('view_guide', { 'title': guide.url }) }}">
-	                        <div class="content-item" style="background-image: url(/assets/images/{{guide.image}})">
-	                            <div class="type-tag tier1"><i class="fa fa-cogs"></i> Beginner</div>
-	                            <div class="content-container">
-	                                <h4>{{guide.getTitle()}}</h4>
-	                                <p>{{guide.summary}}</p>
-	                            </div>
-	                        </div>
-	                        <div class="bottom-info">
-	                            <span class="author">{{guide.author}}</span>
-	                            <span class="divider"> | </span>
-	                            <span class="date">{{guide.date|date("F jS, Y")}}</span>
-	                        </div>
-	                    </a>
-	                </div>
+				{% include 'partials/touts/single-item.html' %}
 			{% endfor %}
 		{% else %}
 			No guides in this category

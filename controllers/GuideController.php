@@ -8,8 +8,17 @@
 			
 			// look for guide in the repo
 			if (($guide = $guideRepository->findOneBy("url", $url)) !== false){
+
+				// For now we just get one guide of each level - TODO use the tags from the guide
+				$relatedGuides = array();
+				//get the random guides for the relateds
+				$relatedGuides[] = $guideRepository->findRandomByCategory("beginner");
+				$relatedGuides[] = $guideRepository->findRandomByCategory("intermediate");
+				$relatedGuides[] = $guideRepository->findRandomByCategory("master");
+
 				return $this->render("guide.html", array(
-					"guide" => $guide
+					"guide" => $guide,
+					"relatedGuides" => $relatedGuides
 				));
 			} else { // guide not found in the repository
 				$r = new HtmlResponse();
