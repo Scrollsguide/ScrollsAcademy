@@ -12,5 +12,3 @@
 	$a->init();
 	$a->run();
 	$a->close();
-	
-	print_r($_SERVER);
