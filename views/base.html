@@ -47,31 +47,31 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					  </button>
-					  <a class="navbar-brand" href="/">Scrolls Guides</a>
+					  <a class="navbar-brand" href="{{ path('index') }}" data-instant>Scrolls Guides</a>
 					</div>
 					<div class="navbar-collapse collapse">
 					  <ul class="nav navbar-nav">
-						<li class="beginner"><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}">Beginner</a></li>
-						<li class="intermediate"><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}">Intermediate</a></li>
-						<li class="master"><a href="{{ path('categories', { 'categoryType': 'master' }) }}">Master</a></li>
+						<li class="beginner"><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}" data-instant>Beginner</a></li>
+						<li class="intermediate"><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}" data-instant>Intermediate</a></li>
+						<li class="master"><a href="{{ path('categories', { 'categoryType': 'master' }) }}" data-instant>Master</a></li>
 					  </ul>
 					  <ul class="nav navbar-nav navbar-right">
-						 <li><a href="{{ path('about') }}">About</a></li>
+						 <li><a href="{{ path('about') }}" data-instant>About</a></li>
 						<li class="dropdown">
 						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
 						  <ul class="dropdown-menu">
-							<li><a href="{{ path('categories', { 'categoryType': 'video' }) }}"><i class="fa fa-{{ categoryIcon('video') }}"></i> Video</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'video' }) }}" data-instant><i class="fa fa-{{ categoryIcon('video') }}"></i> Video</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Complexity</li>
-							<li><a href="{{ path('levels', { 'level': 'beginner' }) }}"><i class="fa fa-{{ categoryIcon('beginner') }}"></i> Beginner</a></li>
-							<li><a href="{{ path('levels', { 'level': 'intermediate' }) }}"><i class="fa fa-{{ categoryIcon('intermediate') }}"></i> Intermediate</a></li>
-							<li><a href="{{ path('levels', { 'level': 'master' }) }}"><i class="fa fa-{{ categoryIcon('master') }}"></i> Master</a></li>
+							<li><a href="{{ path('levels', { 'level': 'beginner' }) }}" data-instant><i class="fa fa-{{ categoryIcon('beginner') }}"></i> Beginner</a></li>
+							<li><a href="{{ path('levels', { 'level': 'intermediate' }) }}" data-instant><i class="fa fa-{{ categoryIcon('intermediate') }}"></i> Intermediate</a></li>
+							<li><a href="{{ path('levels', { 'level': 'master' }) }}" data-instant><i class="fa fa-{{ categoryIcon('master') }}"></i> Master</a></li>
 							<li class="divider"></li>
 							<li class="dropdown-header">Topic</li>
-							<li><a href="{{ path('categories', { 'categoryType': 'decks' }) }}"><i class="fa fa-{{ categoryIcon('decks') }}"></i> Decks</a></li>
-							<li><a href="{{ path('categories', { 'categoryType': 'strategy' }) }}"><i class="fa fa-{{ categoryIcon('strategy') }}"></i> Strategy</a></li>
-							<li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}"><i class="fa fa-{{ categoryIcon('judgement') }}"></i> Judgement</a></li>
-							<li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}"><i class="fa fa-{{ categoryIcon('ui') }}"></i> UI</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'decks' }) }}" data-instant><i class="fa fa-{{ categoryIcon('decks') }}"></i> Decks</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'strategy' }) }}" data-instant><i class="fa fa-{{ categoryIcon('strategy') }}"></i> Strategy</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}" data-instant><i class="fa fa-{{ categoryIcon('judgement') }}"></i> Judgement</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}" data-instant><i class="fa fa-{{ categoryIcon('ui') }}"></i> UI</a></li>
 						  </ul>
 						</li>
 					  </ul>
@@ -94,33 +94,42 @@
 
         </div>
 
-        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js" data-no-instant></script>
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
-        <script>
+        <script data-no-instant>
             (function(b,o,i,l,e,r){b.GoogleAnalyticsObject=l;b[l]||(b[l]=
             function(){(b[l].q=b[l].q||[]).push(arguments)});b[l].l=+new Date;
             e=o.createElement(i);r=o.getElementsByTagName(i)[0];
             e.src='//www.google-analytics.com/analytics.js';
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
-            ga('create','UA-XXXXX-X');ga('send','pageview');
+            ga('create','UA-XXXXX-X');
         </script>
 
-        <script src="/assets/js/vendor/bootstrap/affix.js"></script>
-        <script src="/assets/js/vendor/bootstrap/alert.js"></script>
-        <script src="/assets/js/vendor/bootstrap/dropdown.js"></script>
-        <script src="/assets/js/vendor/bootstrap/tooltip.js"></script>
-        <script src="/assets/js/vendor/bootstrap/modal.js"></script>
-        <script src="/assets/js/vendor/bootstrap/transition.js"></script>
-        <script src="/assets/js/vendor/bootstrap/button.js"></script>
-        <script src="/assets/js/vendor/bootstrap/popover.js"></script>
-        <script src="/assets/js/vendor/bootstrap/carousel.js"></script>
-        <script src="/assets/js/vendor/bootstrap/scrollspy.js"></script>
-        <script src="/assets/js/vendor/bootstrap/collapse.js"></script>
-        <script src="/assets/js/vendor/bootstrap/tab.js"></script>
+        <script src="/assets/js/vendor/bootstrap/affix.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/alert.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/dropdown.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/tooltip.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/modal.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/transition.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/button.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/popover.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/carousel.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/scrollspy.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/collapse.js" data-no-instant></script>
+        <script src="/assets/js/vendor/bootstrap/tab.js" data-no-instant></script>
 
-        <script src="/assets/js/vendor/rrssb.js"></script>
+        <script src="/assets/js/vendor/rrssb.js" data-no-instant></script>
 
         <script src="/assets/js/main.js"></script>
+		
+		<script src="/assets/js/vendor/instantclick.min.js"></script>
+		<script data-no-instant>
+			InstantClick.on('change', function(){
+				ga('send', 'pageview');
+			});
+		
+			InstantClick.init('mousedown', true);
+		</script>
 </body>
 </html>

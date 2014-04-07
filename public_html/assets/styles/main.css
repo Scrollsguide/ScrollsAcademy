@@ -482,3 +482,7 @@ p > i.faction-growth {
 .about-page, .error-page {
     font-size: 20px;
 }
+
+#instantclick-bar {
+	background-color: #f6f6f6;
+}

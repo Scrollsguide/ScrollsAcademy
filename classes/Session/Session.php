@@ -4,13 +4,15 @@
 		private $user;
 		
 		private $flashbag;
+		
+		private $variables = array();
 	
-		private static $instance; 
+		private static $instance; // singleton
 	
 		private function __construct(){
 			session_start();
-			$this->user = User::createFromSession($_SESSION);
 			
+			$this->user = User::createFromSession($_SESSION);
 			$this->flashbag = FlashBag::createFromSession($_SESSION);
 		}
 		
@@ -22,10 +24,21 @@
 			return $this->flashbag;
 		}
 		
+		// store item in session
+		public function set($key, $value){
+			$this->variables[$key] = $value;
+		}
+		
+		// retrieve item stored in session
+		public function get($key){
+			return isset($this->variables[$key]) ? $this->variables[$key] : null;
+		}
+		
 		public function close(){
 			// save state
 			$_SESSION['user'] = serialize($this->user);
 			$_SESSION['flashbag'] = serialize($this->flashbag);
+			$_SESSION['variables'] = $this->variables;
 		}
 		
 		public static function getInstance(){

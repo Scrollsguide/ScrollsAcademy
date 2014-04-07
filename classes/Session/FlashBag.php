@@ -4,6 +4,7 @@
 		private $flashes = array();
 		
 		public function add($key, $value){
+			// add new flash if nonexistent
 			if (!isset($this->flashes[$key])){
 				$flash = new Flash();
 				$this->flashes[$key] = $flash;
@@ -12,6 +13,7 @@
 			$this->flashes[$key]->add($value);
 		}
 		
+		// for debug only?
 		public function size(){
 			return count($this->flashes);
 		}
@@ -22,6 +24,7 @@
 			}
 			
 			$out = $this->flashes[$key]->get();
+			// remove flash from session
 			unset($this->flashes[$key]);
 			return $out;
 		}
@@ -61,7 +64,7 @@
 		
 		private $values = array();
 		
-		private $age = 0;
+		private $age = 0; // number of requests this flash has lived
 		
 		public function __construct(){
 		}
@@ -85,7 +88,9 @@
 			);
 		}
 		
-		public function __wakeup(){
+		public function __wakeup(){ 
+			// called on deserialization, 
+			// so the age increases by one
 			$this->age++;
 		}
 	}
