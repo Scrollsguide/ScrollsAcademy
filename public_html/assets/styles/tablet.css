@@ -7,6 +7,9 @@
 	.navbar-default .navbar-collapse {
 		background: none;
 	}
+	.navbar-nav.navbar-right {
+		font-size: 12px;
+	}
 	.navbar-nav.navbar-right:last-child {
 		margin-right: 25px;
 	}
@@ -33,6 +36,10 @@
 	}
 	.navbar-default .navbar-nav>li>a:hover {
 	    color: #f7f7f7;
+	}
+
+	.guide-header h2 {
+		line-height: 150px;
 	}
 	.content-well h5 {
 		clear: both;
