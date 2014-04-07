@@ -2,7 +2,7 @@
 {% block content %}
 	<div class="row content-block">
         <div class="col-md-12 category-hdr">
-            <h4><i class="fa fa-{{categoryIcon(category)}}"></i> {{category|title}}</h4>
+            <h4><i class="fa fa-{{categoryIcon(category)}}"></i> {{category|upper}}</h4>
         </div>
 		{% if guides|length %}
 			{% for guide in guides %}
