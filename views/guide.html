@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-	<div class="row guide-header" style="background-image:url({{ app.request.url.baseurl }}{{ imagePath(guide.image) }})">
+	<div class="row guide-header" style="background-image:url({{ imagePath(guide.image) }})">
         <div class="col-md-12">
             <h2>{{ guide.getTitle() }}</h2>    
         </div>
