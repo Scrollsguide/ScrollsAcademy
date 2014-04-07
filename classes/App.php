@@ -15,6 +15,8 @@
 		
 		private $controller;
 		
+		private $session;
+		
 		// array of objects not used for every request, for example the database object
 		private $optObjects;
 		
@@ -39,7 +41,9 @@
 			$this->config = new Config();
 			$this->config->addConfigFile($this->baseDir . "/config/db.ini");
 			
-			$this->request = new Request($this);
+			$this->session = Session::getInstance();
+			
+			$this->request = new Request();
 			
 			// set up router
 			$this->router = new Router($this);
@@ -173,6 +177,10 @@
 		
 		public function getBaseDir(){
 			return $this->baseDir;
+		}
+		
+		public function getSession(){
+			return $this->session;
 		}
 		
 		public function getRequest(){

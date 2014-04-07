@@ -10,17 +10,21 @@
 		}
 		
 		public function match($relUrl){
+			$requestMethod = $this->app->getRequest()->getRequestMethod();
 			foreach ($this->routes as $key => $route){
 				if (preg_match($route['match'], $relUrl, $match)){
-					$r = new Route($key, $route);
-					
-					// since we are only interested in the url parts and
-					// not the complete regex result,
-					// shift the complete match out of the array
-					array_shift($match);
-					$r->set("urlMatch", $match);
-					
-					return $r;
+					// route matches, check for additional parameters
+					if ($route['method'] === $requestMethod){
+						$r = new Route($key, $route);
+						
+						// since we are only interested in the url parts and
+						// not the complete regex result,
+						// shift the complete match out of the array
+						array_shift($match);
+						$r->set("urlMatch", $match);
+						
+						return $r;
+					}
 				}
 			}
 			
@@ -229,6 +233,9 @@
 			} else {
 				$route['match'] = $this->wrapRegexDelimiter($route['path']);
 			}
+			
+			// default to the GET method
+			$route['method'] = isset($route['method']) ? $route['method'] : "GET";
 			
 			return $route;
 		}

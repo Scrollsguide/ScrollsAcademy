@@ -4,9 +4,25 @@
 			"path": "/admin",
 			"action": "Admin::index"
 		},
+		"admin_login": {
+			"path": "/admin/login",
+			"action": "Admin::login"
+		},
+		"admin_login_post": {
+			"path": "/admin/login",
+			"action": "Admin::doLogin",
+			"method": "POST"
+		},
 		"admin_guides": {
 			"path": "/admin/guides",
 			"action": "Admin::guideList"
+		},
+		"admin_edit_guide": {
+			"path": "/admin/guide/edit/{title}",
+			"requirements": {
+				"title": "[a-z-]+"
+			},
+			"action": "Admin::editGuide"
 		}
 	}
 }

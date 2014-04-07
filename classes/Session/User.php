@@ -1,14 +1,24 @@
 <?php
 	class User {
 		
-		private $accessLevel;
+		private $accessLevel = AccessLevel::NONE;
+		
+		private $isLoggedIn = false;
 		
 		public function __construct(){
 		
 		}
 		
+		public function isLoggedIn(){
+			return $isLoggedIn;
+		}
+		
 		public function checkAccessLevel($level){
 			return ($this->accessLevel & $level) === $level;
+		}
+		
+		public static function fromSession($sessionVars){
+			return new User();
 		}
 	}
 	
