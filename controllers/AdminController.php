@@ -11,17 +11,47 @@
 		}
 		
 		public function loginAction(){
+			if ($this->getApp()->getSession()->getUser()->isLoggedIn()){
+				// user is already logged in, redirect to homepage
+				$loginRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+				return new RedirectResponse($loginRoute->get("path"));
+			}
 			return $this->render("admin/login.html");
 		}
 		
 		// contains POST login information
 		public function doLoginAction(){
+			$r = $this->getApp()->getRequest();
+			
+			$username = $r->getParameter("username");
+			$password = $r->getParameter("password");
+			
+			$bag = $this->getApp()->getSession()->getFlashBag();
+			if (empty($username)){
+				$bag->add("admin_login_message", "Fill out a username.");
+				
+				return $this->toLogin();
+			}
+			if (empty($password)){
+				$bag->add("admin_login_message", "Fill out a password.");
+				
+				return $this->toLogin();
+			}
+			$this->getApp()->getSession()->getUser()->login($username, $password);			
+			
+			$loginRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+			return new RedirectResponse($loginRoute->get("path"));
+		}
 		
+		public function doLogoutAction(){
+			$this->getApp()->getSession()->getUser()->logout();
+			
+			return $this->toLogin();
 		}
 		
 		public function indexAction(){
 			if (!$this->userPerms()){
-				$this->toLogin();
+				return $this->toLogin();
 			}
 			
 			// set up entity and repository

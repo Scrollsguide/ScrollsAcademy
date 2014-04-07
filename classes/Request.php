@@ -23,4 +23,20 @@
 			return $this->requestMethod;
 		}
 		
+		public function getParameter($param, $default = ""){
+			if ($this->getRequestMethod() === "POST"){
+				if (isset($_POST[$param])){
+					return $_POST[$param];
+				} else {
+					return $default;
+				}
+			} else if ($this->getRequestMethod() === "GET"){
+				if (isset($_GET[$param])){
+					return $_GET[$param];
+				} else {
+					return $default;
+				}
+			}
+		}
+		
 	}	

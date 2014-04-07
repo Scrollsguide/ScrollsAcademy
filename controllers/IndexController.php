@@ -23,6 +23,9 @@
 			$recommendedGuides[] = $guideRepository->findRandomByCategory("beginner");
 			$recommendedGuides[] = $guideRepository->findRandomByCategory("intermediate");
 			$recommendedGuides[] = $guideRepository->findRandomByCategory("master");
+
+			// remove empty guides
+			$recommendedGuides = array_filter($recommendedGuides, function($e){ return $e !== false; });
 			
 			return $this->render("404.html", array(
 				'recommendedGuides' => $recommendedGuides

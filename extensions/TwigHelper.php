@@ -20,6 +20,9 @@
 			
 			// filters
 			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
+			
+			// variables
+			$twig->addGlobal('app', $app);
 
 			//set the timezone so the date helper can work properly
 			$twig->getExtension('core')->setTimezone('Europe/Paris');

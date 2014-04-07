@@ -13,6 +13,10 @@
 			"action": "Admin::doLogin",
 			"method": "POST"
 		},
+		"admin_logout": {
+			"path": "/admin/logout",
+			"action": "Admin::doLogout"
+		},
 		"admin_guides": {
 			"path": "/admin/guides",
 			"action": "Admin::guideList"

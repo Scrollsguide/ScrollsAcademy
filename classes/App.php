@@ -103,6 +103,8 @@
 			if (($db = $this->get("database")) !== null){
 				$db->close();
 			}
+			
+			$this->session->close();
 		}
 		
 		private function setupDatabase(){
