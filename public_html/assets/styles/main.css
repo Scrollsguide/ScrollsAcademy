@@ -188,22 +188,22 @@ a:hover .jumbotron .content-container {
     border-radius: 2px 0 0 2px;
     z-index: 5;
 }
-.type-tag.Beginner {
+.type-tag.beginner {
     background: #30c333;
 }
-.navbar-default .navbar-nav>.Beginner>a {
+.navbar-default .navbar-nav>.beginner>a {
     color: #30c333;
 }
-.type-tag.Intermediate {
+.type-tag.intermediate {
     background: #0B5FA5;
 }
-.navbar-default .navbar-nav>.Intermediate>a {
+.navbar-default .navbar-nav>.intermediate>a {
     color: #0B5FA5;
 }
-.type-tag.Master {
+.type-tag.master {
     background: #502982;
 }
-.navbar-default .navbar-nav>.Master>a {
+.navbar-default .navbar-nav>.master>a {
     color: #502982;
 }
 .content-item:hover .type-tag {

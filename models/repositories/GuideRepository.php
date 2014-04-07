@@ -47,7 +47,7 @@
 						JOIN guidecategories A
 						ON C.id = A.categoryid
 						WHERE A.guideid = :guideId");
-			$sth->bindParam(":guideId", $guide->getId(), PDO::PARAM_INT);
+			$sth->bindValue(":guideId", $guide->getId(), PDO::PARAM_INT);
 
 			$sth->execute();
 			
