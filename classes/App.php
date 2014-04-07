@@ -39,6 +39,8 @@
 			$this->config = new Config();
 			$this->config->addConfigFile($this->baseDir . "/config/db.ini");
 			
+			$this->request = new Request($this);
+			
 			// set up router
 			$this->router = new Router($this);
 			$this->router->addRouteFile($this->baseDir . "/config", "routes.json");
@@ -147,11 +149,8 @@
 		}
 		
 		private function matchRoute(){
-			$requestUrl = new RelativeURL($_SERVER['REQUEST_URI']);
-			
-			// now try matching it against any route
 			// exlude get parameters, pass false
-			$relPath = $requestUrl->getPath(false);
+			$relPath = $this->getRequest()->getURL()->getPath(false);
 			return $this->router->match($relPath);
 		}
 		
@@ -174,6 +173,10 @@
 		
 		public function getBaseDir(){
 			return $this->baseDir;
+		}
+		
+		public function getRequest(){
+			return $this->request;
 		}
 		
 		public function getRouter(){

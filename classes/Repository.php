@@ -21,8 +21,7 @@
 		
 		// select all objects from db
 		public function findAll(){
-			$query = "SELECT *
-						FROM " . $this->getTableName();
+			$query = "SELECT * FROM " . $this->getTableName();
 			
 			$sth = $this->getConnection()->prepare($query);			
 			$sth->execute();

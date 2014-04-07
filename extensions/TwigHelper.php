@@ -36,7 +36,7 @@
 
 		//todo - replace with proper get of domain
 		public function fullPath($routeId, $routeParams = array()) {
-			return 'http://siteddomain' . $this->path($routeId,$routeParams);
+			return $this->app->getRequest()->getURL()->getBaseURL() . $this->path($routeId, $routeParams);
 		}
 		
 		public function currentRoute(){
