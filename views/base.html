@@ -127,6 +127,9 @@
 		<script data-no-instant>
 			InstantClick.on('change', function(){
 				ga('send', 'pageview');
+                //fix social buttons and any other weird responsive glitches caused by
+                //instaclick ajaxing stuff and not trigging a full domready cycle
+                $(window).resize();
 			});
 		
 			InstantClick.init('mousedown', true);

@@ -29,6 +29,5 @@
 		$('.content-block').on('click', '.video-container', loadVideo);
 	}
 
-
 	$(init);
 }(window, jQuery));
