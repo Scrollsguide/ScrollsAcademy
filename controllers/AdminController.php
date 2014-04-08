@@ -102,8 +102,13 @@
 
 			$newUrl = URLUtils::makeBlob($title);
 
+			// convert markdown to html
+			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
+
+			$htmlFromMarkdown = Markdown::defaultTransform($content);
+
 			$out = new HtmlResponse();
-			$out->setContent("saved");
+			$out->setContent($htmlFromMarkdown);
 
 			return $out;
 		}
