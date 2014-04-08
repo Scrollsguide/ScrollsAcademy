@@ -80,6 +80,14 @@
 			));
 		}
 
+		public function newGuideAction(){
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			return $this->render("admin/edit_guide.html");
+		}
+
 		public function editGuideAction($url) {
 			if (!$this->userPerms()) {
 				return $this->toLogin();
@@ -105,17 +113,29 @@
 		public function doSaveAction() {
 			$r = $this->getApp()->getRequest();
 
-			$guideId = $r->getParameter("id");
 			$title = $r->getParameter("title");
-			$summary = $r->getParameter("summary");
 			$content = $r->getParameter("content");
 
-			$newUrl = URLUtils::makeBlob($title);
+			$g = new Guide();
+			if (($guideId = $r->getParameter("guideid", 0)) !== 0){
+				// edit guide
+				$g->setId($guideId);
+			} else {
+				// make new guide, so don't set id in guide
+			}
+			$g->setTitle($title);
+			$g->setSummary($r->getParameter("summary"));
+			$g->setURL(URLUtils::makeBlob($title));
 
 			// convert markdown to html
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
 
 			$htmlFromMarkdown = Markdown::defaultTransform($content);
+			$g->setContent($htmlFromMarkdown);
+
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+			$guideRepository->persist($g);
 
 			$out = new HtmlResponse();
 			$out->setContent($htmlFromMarkdown);

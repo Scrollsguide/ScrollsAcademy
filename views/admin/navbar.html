@@ -7,11 +7,13 @@
 		<span class="icon-bar"></span>
 		<span class="icon-bar"></span>
 	  </button>
-	  <a class="navbar-brand" href="/">Scrolls Guides Admin</a>
+		<a class="navbar-brand" href="{{ path('admin_index') }}" data-instant>
+			<img src="/assets/images/logo.png" />Scrolls Academy Admin
+		</a>
 	</div>
 	<div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav">
-		<li class="Beginner"><a href="{{ path('admin_guides') }}">All guides</a></li>
+		  <li class="Beginner"><a href="{{ path('admin_new_guide') }}">Add guide</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		{% if app.session.user.isloggedin %}

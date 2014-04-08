@@ -53,4 +53,17 @@
 			
 			return $sth->fetchAll(PDO::FETCH_ASSOC);
 		}
+
+		// saves guide to database
+		public function persist(Guide $guide){
+			$setQuery = "";
+			if (($guideId = $guide->getId()) !== null){
+				// old guide, edit
+			} else {
+				// new guide, add
+			}
+
+			$sth = $this->getConnection()->prepare($setQuery);
+		}
+
 	}

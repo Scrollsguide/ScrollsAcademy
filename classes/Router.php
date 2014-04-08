@@ -155,11 +155,6 @@
 			
 			$routes = $json['routes'];
 
-			// check existence of 404
-			if (!isset($routes['404'])){
-				throw new Exception("No '404' route set.");
-			}
-
 			foreach ($routes as $key => $route){
 				// no need to check for duplicate routes since json_decode 
 				// will auto-remove duplicates

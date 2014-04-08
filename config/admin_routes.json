@@ -17,9 +17,9 @@
 			"path": "/admin/logout",
 			"action": "Admin::doLogout"
 		},
-		"admin_guides": {
-			"path": "/admin/guides",
-			"action": "Admin::guideList"
+		"admin_new_guide": {
+			"path": "/admin/guide/new",
+			"action": "Admin::newGuide"
 		},
 		"admin_edit_guide": {
 			"path": "/admin/guide/edit/{title}",
@@ -28,10 +28,10 @@
 			},
 			"action": "Admin::editGuide"
 		},
-        "admin_save_guide": {
-            "path": "/admin/guide/save",
-            "action": "Admin::doSave",
-            "method": "POST"
-        }
+		"admin_save_guide": {
+			"path": "/admin/guide/save",
+			"action": "Admin::doSave",
+			"method": "POST"
+		}
 	}
 }
