@@ -57,18 +57,21 @@ a:hover {
 }
 .navbar-default .navbar-brand img {
     display: inline-block;
-    max-height: 50px;
-    margin: 0 10px 0px 0;
+    max-height: 25px;
+    margin: 0 2px 0px 0;
 }
 .navbar-default .navbar-brand {
     font-family: 'Libre Baskerville', serif;
     letter-spacing: .05em;
     color: #000;
     font-weight: bold;
-    padding: 5px 10px;
+    font-size: 20px;
+    vertical-align: bottom;
+    padding: 10px 25px;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
+
 .navbar-default .navbar-brand:hover {
     color: #000;
 }
