@@ -6,17 +6,23 @@
 		public function __construct($database){
 			$this->database = $database;
 		}
-		
+
+		/**
+		 * @return Database
+		 */
 		public function getDatabase(){
 			return $this->database;
 		}
-		
+
+		/**
+		 * @return PDO
+		 */
 		public function getConnection(){
 			return $this->getDatabase()->getConnection();
 		}
 		
 		public abstract function getEntityName();
-		
+
 		public abstract function getTableName();
 		
 		// select all objects from db

@@ -28,7 +28,10 @@
 		public function setDatabaseName($dbName){
 			$this->databaseName = $dbName;
 		}
-		
+
+		/**
+		 * @return PDO
+		 */
 		public function getConnection(){
 			if ($this->connection === null){
 				$this->connect();

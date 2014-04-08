@@ -15,11 +15,17 @@
 			$this->user = User::createFromSession($_SESSION);
 			$this->flashbag = FlashBag::createFromSession($_SESSION);
 		}
-		
+
+		/**
+		 * @return User
+		 */
 		public function getUser(){
 			return $this->user;
 		}
-		
+
+		/**
+		 * @return FlashBag
+		 */
 		public function getFlashBag(){
 			return $this->flashbag;
 		}

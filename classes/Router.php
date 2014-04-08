@@ -30,7 +30,11 @@
 			
 			return $this->getRoute("404");
 		}
-		
+
+		/**
+		 * @param $id
+		 * @return bool|Route
+		 */
 		public function getRoute($id){
 			foreach ($this->routes as $key => $route){
 				if ($key == $id){ // not === for json_decode can return ints

@@ -27,6 +27,11 @@
 				"title": "[a-z-]+"
 			},
 			"action": "Admin::editGuide"
-		}
+		},
+        "admin_save_guide": {
+            "path": "/admin/guide/save",
+            "action": "Admin::doSave",
+            "method": "POST"
+        }
 	}
 }

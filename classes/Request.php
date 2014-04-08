@@ -14,7 +14,10 @@
 			
 			$this->requestMethod = $_SERVER['REQUEST_METHOD'];
 		}
-		
+
+		/**
+		 * @return URL
+		 */
 		public function getURL(){
 			return $this->url;
 		}

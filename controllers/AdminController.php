@@ -1,82 +1,86 @@
 <?php
+
 	class AdminController extends BaseController {
-		
-		public function __construct(App $app){
+
+		public function __construct(App $app) {
 			parent::__construct($app);
 			// don't cache the admin pages
 			$this->setCacheRules(array(
 				"cache" => false
 			));
-			
+
 		}
-		
-		public function loginAction(){
-			if ($this->getApp()->getSession()->getUser()->isLoggedIn()){
+
+		public function loginAction() {
+			if ($this->getApp()->getSession()->getUser()->isLoggedIn()) {
 				// user is already logged in, redirect to homepage
 				$loginRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+
 				return new RedirectResponse($loginRoute->get("path"));
 			}
+
 			return $this->render("admin/login.html");
 		}
-		
+
 		// contains POST login information
-		public function doLoginAction(){
+		public function doLoginAction() {
 			$r = $this->getApp()->getRequest();
-			
+
 			$username = $r->getParameter("username");
 			$password = $r->getParameter("password");
-			
+
 			$bag = $this->getApp()->getSession()->getFlashBag();
-			if (empty($username)){
+			if (empty($username)) {
 				$bag->add("admin_login_message", "Fill out a username.");
-				
+
 				return $this->toLogin();
 			}
-			if (empty($password)){
+			if (empty($password)) {
 				$bag->add("admin_login_message", "Fill out a password.");
-				
+
 				return $this->toLogin();
 			}
-			$this->getApp()->getSession()->getUser()->login($username, $password);			
-			
+			$this->getApp()->getSession()->getUser()->login($username, $password);
+
 			$loginRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+
 			return new RedirectResponse($loginRoute->get("path"));
 		}
-		
-		public function doLogoutAction(){
+
+		public function doLogoutAction() {
 			$this->getApp()->getSession()->getUser()->logout();
-			
+
 			return $this->toLogin();
 		}
-		
-		public function indexAction(){
-			if (!$this->userPerms()){
+
+		public function indexAction() {
+			if (!$this->userPerms()) {
 				return $this->toLogin();
 			}
-			
+
 			// set up entity and repository
 			$em = $this->getApp()->get("EntityManager");
 			$guideRepository = $em->getRepository("Guide");
-			
+
 			// look for guides in the repo
 			$guides = $guideRepository->findAll();
-			
+
 			return $this->render("admin/index.html", array(
 				"guides" => $guides
 			));
 		}
-		
-		public function editGuideAction($url){
-			if (!$this->userPerms()){
+
+		public function editGuideAction($url) {
+			if (!$this->userPerms()) {
 				return $this->toLogin();
 			}
-			
+
 			// set up entity and repository
 			$em = $this->getApp()->get("EntityManager");
 			$guideRepository = $em->getRepository("Guide");
-			
+
 			// look for guides in the repo
-			if (($guide = $guideRepository->findOneBy("url", $url)) !== false){ 
+			if (($guide = $guideRepository->findOneBy("url", $url)) !== false) {
 				return $this->render("admin/edit_guide.html", array(
 					"guide" => $guide
 				));
@@ -84,17 +88,34 @@
 				$r = new HtmlResponse();
 				$r->setContent("Guide not found");
 			}
-			
+
 			return $r;
 		}
-		
-		private function userPerms(){
+
+		public function doSaveAction() {
+			$r = $this->getApp()->getRequest();
+
+			$guideId = $r->getParameter("id");
+			$title = $r->getParameter("title");
+			$summary = $r->getParameter("summary");
+			$content = $r->getParameter("content");
+
+			$newUrl = URLUtils::makeBlob($title);
+
+			$out = new HtmlResponse();
+			$out->setContent("saved");
+
+			return $out;
+		}
+
+		private function userPerms() {
 			return $this->getApp()->getSession()->getUser()->isLoggedIn();
 		}
-		
+
 		// redirects to admin login page
-		private function toLogin(){
+		private function toLogin() {
 			$loginRoute = $this->getApp()->getRouter()->getRoute("admin_login");
+
 			return new RedirectResponse($loginRoute->get("path"));
 		}
 	}

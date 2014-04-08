@@ -37,7 +37,11 @@
 		public function save(){
 			$_SESSION['user'] = serialize($this);
 		}
-		
+
+		/**
+		 * @param $sessionVars
+		 * @return User
+		 */
 		public static function createFromSession($sessionVars){
 			if (!isset($_SESSION['user'])){
 				// create new user

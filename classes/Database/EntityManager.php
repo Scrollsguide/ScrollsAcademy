@@ -8,7 +8,12 @@
 		public function __construct(App $app){
 			$this->app = $app;
 		}
-		
+
+		/**
+		 * @param $entity
+		 * @return Repository
+		 * @throws Exception
+		 */
 		public function getRepository($entity){
 			if (!isset($repos[$entity])){
 				$repoName = $entity . "Repository";

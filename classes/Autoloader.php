@@ -5,7 +5,11 @@
 		
 		// list of directories which can contain classes
 		private $dirs = array();
-		
+
+		/**
+		 * @param null $baseDir
+		 * @return Autoloader
+		 */
 		public static function register($baseDir = null){
 			$loader = new self($baseDir);
 			// register the autoloader

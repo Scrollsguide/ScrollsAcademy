@@ -159,7 +159,12 @@
 			$relPath = $this->getRequest()->getURL()->getPath(false);
 			return $this->router->match($relPath);
 		}
-		
+
+		/**
+		 * @param Route $route
+		 * @return Controller
+		 * @throws Exception
+		 */
 		private function getControllerForRoute(Route $route){
 			// load the controller
 			// the classloader checks whether the class exists or not
@@ -180,35 +185,59 @@
 		public function getBaseDir(){
 			return $this->baseDir;
 		}
-		
+
+		/**
+		 * @return Session
+		 */
 		public function getSession(){
 			return $this->session;
 		}
-		
+
+		/**
+		 * @return Request
+		 */
 		public function getRequest(){
 			return $this->request;
 		}
-		
+
+		/**
+		 * @return Router
+		 */
 		public function getRouter(){
 			return $this->router;
 		}
-		
+
+		/**
+		 * @return Route
+		 */
 		public function getRoute(){
 			return $this->route;
 		}
-		
+
+		/**
+		 * @return Config
+		 */
 		public function getConfig(){
 			return $this->config;
 		}
-		
+
+		/**
+		 * @return Autoloader
+		 */
 		public function getClassloader(){
 			return $this->classloader;
 		}
-		
+
+		/**
+		 * @return Twig_Environment
+		 */
 		public function getTwig(){
 			return $this->twig;
 		}
-		
+
+		/**
+		 * @return Cache
+		 */
 		public function getCache(){
 			return $this->cache;
 		}
