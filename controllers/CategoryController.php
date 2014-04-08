@@ -1,5 +1,5 @@
 <?php
-	class CategoryController extends Controller {
+	class CategoryController extends BaseController {
 		
 		public function viewCategoryTypeAction($category){
 			// set up entity and repository
@@ -12,6 +12,7 @@
 			return $this->render("guidelist.html", array(
 				"guides" => $guides,
 				"category" => $category,
+				"title"	=> ucfirst($category),
 				"excludeCategory" => $category
 			));
 		}

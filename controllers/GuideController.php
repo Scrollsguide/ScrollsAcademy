@@ -1,5 +1,5 @@
 <?php
-	class GuideController extends Controller {
+	class GuideController extends BaseController {
 	
 		public function viewGuideAction($url){
 			// set up entity and repository
@@ -26,6 +26,7 @@
 
 				return $this->render("guide.html", array(
 					"guide" => $guide,
+					"title" => $guide->getTitle(),
 					"relatedGuides" => $relatedGuides
 				));
 			} else { // guide not found in the repository

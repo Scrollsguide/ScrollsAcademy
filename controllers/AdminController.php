@@ -1,5 +1,5 @@
 <?php
-	class AdminController extends Controller {
+	class AdminController extends BaseController {
 		
 		public function __construct(App $app){
 			parent::__construct($app);

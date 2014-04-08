@@ -1,5 +1,5 @@
 <?php
-	class IndexController extends Controller {
+	class IndexController extends BaseController {
 		
 		public function indexAction(){
 			return $this->render("index.html", array(
@@ -28,11 +28,14 @@
 			$recommendedGuides = array_filter($recommendedGuides, function($e){ return $e !== false; });
 			
 			return $this->render("404.html", array(
+				'title' => 'Page not found',
 				'recommendedGuides' => $recommendedGuides
 			));
 		}
 
 		public function aboutAction() {
-			return $this->render("about.html");
+			return $this->render("about.html", array(
+				'title' => 'About'
+			));
 		}
 	}
