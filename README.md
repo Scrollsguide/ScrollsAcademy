@@ -1,2 +1,2 @@
-BeginnerPages
-=============
+Scrolls Academy website
+=======================
