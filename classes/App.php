@@ -39,7 +39,7 @@
 			
 			// read config files
 			$this->config = new Config();
-			$this->config->addConfigFile($this->baseDir . "/config/db.ini");
+			$this->config->addConfigFile($this->baseDir . "/config/config.ini");
 			
 			$this->session = Session::getInstance();
 			

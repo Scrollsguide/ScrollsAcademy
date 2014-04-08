@@ -40,7 +40,16 @@
 
 				return $this->toLogin();
 			}
-			$this->getApp()->getSession()->getUser()->login($username, $password);
+
+			// set up Account Provider
+			$accountProviderName = $this->getApp()->getConfig()->get("accountprovider") . "AccountProvider";
+			$sgAccount = new $accountProviderName($this->getApp());
+
+			if (!$this->getApp()->getSession()->getUser()->login($sgAccount, $username, $password)) {
+				$bag->add("admin_login_message", "Wrong password or nonexistent user.");
+
+				return $this->toLogin();
+			}
 
 			$loginRoute = $this->getApp()->getRouter()->getRoute("admin_index");
 
@@ -49,6 +58,7 @@
 
 		public function doLogoutAction() {
 			$this->getApp()->getSession()->getUser()->logout();
+			$this->getApp()->getSession()->getFlashBag()->add("admin_login_message", "Bye!");
 
 			return $this->toLogin();
 		}
