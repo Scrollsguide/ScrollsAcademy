@@ -7,6 +7,11 @@
 		<div class="col-md-12 category-hdr">
 			<h4><i class="fa fa-cogs"></i> All Guides</h4>
 		</div>
+
+		{% for flash in app.session.flashbag.get('guide_message') %}
+			{{ flash }}
+		{% endfor %}
+
 		{% for guide in guides %}
 			<div class="col-md-4 col-sm-6">
 				<a href="{{ path('admin_edit_guide', { 'title': guide.url }) }}">

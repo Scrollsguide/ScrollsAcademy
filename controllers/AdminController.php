@@ -14,9 +14,9 @@
 		public function loginAction() {
 			if ($this->getApp()->getSession()->getUser()->isLoggedIn()) {
 				// user is already logged in, redirect to homepage
-				$loginRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+				$indexRoute = $this->getApp()->getRouter()->getRoute("admin_index");
 
-				return new RedirectResponse($loginRoute->get("path"));
+				return new RedirectResponse($indexRoute->get("path"));
 			}
 
 			return $this->render("admin/login.html");
@@ -85,7 +85,14 @@
 				return $this->toLogin();
 			}
 
-			return $this->render("admin/edit_guide.html");
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+
+			$allCategories = $guideRepository->findAllCategories();
+
+			return $this->render("admin/edit_guide.html", array(
+				"categories" => $allCategories
+			));
 		}
 
 		public function editGuideAction($url) {
@@ -99,8 +106,21 @@
 
 			// look for guides in the repo
 			if (($guide = $guideRepository->findOneBy("url", $url)) !== false) {
+				// map guide categories to categories
+				$guideCategories = $guideRepository->findGuideCategories($guide);
+				$allCategories = $guideRepository->findAllCategories();
+
+				foreach ($allCategories as $key => $c){
+					$contains = false;
+					for ($i = 0; $i < count($guideCategories) && !$contains; $i++){
+						$contains |= $guideCategories[$i]['name'] === $c['name'];
+					}
+					$allCategories[$key]['in'] = $contains;
+				}
+
 				return $this->render("admin/edit_guide.html", array(
-					"guide" => $guide
+					"guide" => $guide,
+					"categories" => $allCategories
 				));
 			} else { // guide not found in the repository
 				$r = new HtmlResponse();
@@ -130,17 +150,19 @@
 			// convert markdown to html
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
 
-			$htmlFromMarkdown = Markdown::defaultTransform($content);
+			$htmlFromMarkdown = $content; //Markdown::defaultTransform($content);
 			$g->setContent($htmlFromMarkdown);
 
 			$em = $this->getApp()->get("EntityManager");
 			$guideRepository = $em->getRepository("Guide");
 			$guideRepository->persist($g);
 
-			$out = new HtmlResponse();
-			$out->setContent($htmlFromMarkdown);
+			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Guide saved.");
 
-			return $out;
+			// redirect to homepage
+			$indexRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+
+			return new RedirectResponse($indexRoute->get("path"));
 		}
 
 		private function userPerms() {

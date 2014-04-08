@@ -54,16 +54,43 @@
 			return $sth->fetchAll(PDO::FETCH_ASSOC);
 		}
 
+		public function findAllCategories(){
+			$sth = $this->getConnection()->prepare("SELECT *
+				FROM categories");
+
+			$sth->execute();
+
+			return $sth->fetchAll(PDO::FETCH_ASSOC);
+		}
+
 		// saves guide to database
 		public function persist(Guide $guide){
-			$setQuery = "";
-			if (($guideId = $guide->getId()) !== null){
+			$setQuery = "SET title = :title,
+				summary = :summary,
+				content = :content,
+				url = :url";
+
+			$isExistingGuide = ($guideId = $guide->getId()) !== null;
+			if ($isExistingGuide){
 				// old guide, edit
+				$query = "UPDATE " . $this->getTableName() . " " . $setQuery .
+					" WHERE id = :id";
 			} else {
 				// new guide, add
+				$query = "INSERT INTO " . $this->getTableName() . " " . $setQuery;
 			}
 
-			$sth = $this->getConnection()->prepare($setQuery);
+			$sth = $this->getConnection()->prepare($query);
+
+			$sth->bindValue(":title", $guide->getTitle(), PDO::PARAM_STR);
+			$sth->bindValue(":summary", $guide->getSummary(), PDO::PARAM_STR);
+			$sth->bindValue(":content", $guide->getContent(), PDO::PARAM_STR);
+			$sth->bindValue(":url", $guide->getUrl(), PDO::PARAM_STR);
+			if ($isExistingGuide){
+				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
+			}
+
+			$sth->execute();
 		}
 
 	}

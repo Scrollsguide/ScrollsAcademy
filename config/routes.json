@@ -25,7 +25,7 @@
 		"view_guide": {
 			"path": "/guide/{title}",
 			"requirements": {
-				"title": "[a-z-]+"
+				"title": "[a-z0-9-]+"
 			},
 			"action": "Guide::viewGuide"
 		},

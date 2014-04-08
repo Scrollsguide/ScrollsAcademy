@@ -24,7 +24,7 @@
 		"admin_edit_guide": {
 			"path": "/admin/guide/edit/{title}",
 			"requirements": {
-				"title": "[a-z-]+"
+				"title": "[a-z0-9-]+"
 			},
 			"action": "Admin::editGuide"
 		},

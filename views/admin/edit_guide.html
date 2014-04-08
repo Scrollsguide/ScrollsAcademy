@@ -28,6 +28,17 @@
 				  <textarea rows="20" class="form-control" name="content">{% if guide %}{{ guide.content }}{% endif %}</textarea>
 				</div>
 			  </div>
+			  {% for category in categories %}
+				<div class="form-group">
+					<div class="col-sm-offset-2 col-sm-10">
+						<div class="checkbox">
+							<label>
+								<input type="checkbox" name="{{ category.name }}"{% if category.in %} checked="checked"{% endif %}> {{ category.name }}
+							</label>
+						</div>
+					</div>
+				</div>
+			  {% endfor %}
 			  <div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 				  {% if guide %}
