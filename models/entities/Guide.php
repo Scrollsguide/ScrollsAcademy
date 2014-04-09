@@ -7,6 +7,8 @@
 
 		private $summary;
 
+		private $markdown;
+
 		private $content;
 		
 		private $url;
@@ -50,7 +52,15 @@
 		public function setSummary($summary) {
 			$this->summary = $summary;
 		}
-		
+
+		public function getMarkdown(){
+			return $this->markdown;
+		}
+
+		public function setMarkdown($markdown){
+			$this->markdown = $markdown;
+		}
+
 		public function getContent(){
 			return $this->content;
 		}

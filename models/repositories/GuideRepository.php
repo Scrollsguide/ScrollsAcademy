@@ -75,6 +75,12 @@
 				// old guide, edit
 				$query = "UPDATE " . $this->getTableName() . " " . $setQuery .
 					" WHERE id = :id";
+
+				// make sure to remove categories
+				$sth = $this->getConnection()->prepare("DELETE FROM guidecategories WHERE guideid = :id");
+				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
+
+				$sth->execute();
 			} else {
 				// new guide, add
 				$query = "INSERT INTO " . $this->getTableName() . " " . $setQuery;
@@ -91,6 +97,25 @@
 			}
 
 			$sth->execute();
+
+			// now update categories
+			if (!$isExistingGuide){
+				$guideId = $this->getConnection()->lastInsertId();
+			}
+
+			// watch out! Not at all consistent with a regular guide request
+			// since getCategories() returns a list of ids here, not strings
+			$this->getConnection()->beginTransaction();
+			foreach ($guide->getCategories() as $category){
+				$sth = $this->getConnection()->prepare("INSERT INTO guidecategories
+					SET guideid = :id, categoryid = :catid");
+				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
+				$sth->bindValue(":catid", $category, PDO::PARAM_INT);
+
+				$sth->execute();
+			}
+			// finish inserting categories
+			$this->getConnection()->commit();
 		}
 
 	}

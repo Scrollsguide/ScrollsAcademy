@@ -146,15 +146,25 @@
 			$g->setTitle($title);
 			$g->setSummary($r->getParameter("summary"));
 			$g->setURL(URLUtils::makeBlob($title));
+			$g->setMarkdown($content);
 
 			// convert markdown to html
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
 
-			$htmlFromMarkdown = $content; //Markdown::defaultTransform($content);
+			$htmlFromMarkdown = Markdown::defaultTransform($content);
 			$g->setContent($htmlFromMarkdown);
 
 			$em = $this->getApp()->get("EntityManager");
 			$guideRepository = $em->getRepository("Guide");
+			// load categories and check whether they're toggled or not
+			$categories = $guideRepository->findAllCategories();
+
+			foreach ($categories as $category){
+				if ($r->getParameter("category_" . $category['id'], 0) === "on"){
+					$g->addCategory($category['id']);
+				}
+			}
+
 			$guideRepository->persist($g);
 
 			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Guide saved.");

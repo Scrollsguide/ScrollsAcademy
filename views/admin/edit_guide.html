@@ -25,7 +25,7 @@
 			  <div class="form-group">
 				<label for="content" class="col-sm-2 control-label">Content</label>
 				<div class="col-sm-10">
-				  <textarea rows="20" class="form-control" name="content">{% if guide %}{{ guide.content }}{% endif %}</textarea>
+				  <textarea rows="20" class="form-control" name="content">{% if guide %}{{ guide.markdown }}{% endif %}</textarea>
 				</div>
 			  </div>
 			  {% for category in categories %}
@@ -33,7 +33,7 @@
 					<div class="col-sm-offset-2 col-sm-10">
 						<div class="checkbox">
 							<label>
-								<input type="checkbox" name="{{ category.name }}"{% if category.in %} checked="checked"{% endif %}> {{ category.name }}
+								<input type="checkbox" name="category_{{ category.id }}"{% if category.in %} checked="checked"{% endif %}> {{ category.name }}
 							</label>
 						</div>
 					</div>
