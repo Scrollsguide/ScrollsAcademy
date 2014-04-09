@@ -146,6 +146,7 @@
 			$g->setTitle($title);
 			$g->setSummary($r->getParameter("summary"));
 			$g->setURL(URLUtils::makeBlob($title));
+			$g->setAuthor($r->getParameter("author"));
 			$g->setMarkdown($content);
 
 			// convert markdown to html

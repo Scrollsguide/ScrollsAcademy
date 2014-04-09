@@ -69,7 +69,8 @@
 				summary = :summary,
 				content = :content,
 				markdown = :markdown,
-				url = :url";
+				url = :url,
+				author = :author";
 
 			$isExistingGuide = ($guideId = $guide->getId()) !== null;
 			if ($isExistingGuide){
@@ -93,6 +94,7 @@
 			$sth->bindValue(":summary", $guide->getSummary(), PDO::PARAM_STR);
 			$sth->bindValue(":content", $guide->getContent(), PDO::PARAM_STR);
 			$sth->bindValue(":markdown", $guide->getMarkdown(), PDO::PARAM_STR);
+			$sth->bindValue(":author", $guide->getAuthor(), PDO::PARAM_STR);
 			$sth->bindValue(":url", $guide->getUrl(), PDO::PARAM_STR);
 			if ($isExistingGuide){
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);

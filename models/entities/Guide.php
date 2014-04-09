@@ -12,7 +12,9 @@
 		private $content;
 		
 		private $url;
-		
+
+		private $author;
+
 		private $image;
 		
 		private $categories = array();
@@ -75,6 +77,14 @@
 		
 		public function setImage($image){
 			$this->image = $image;
+		}
+
+		public function getAuthor(){
+			return $this->author;
+		}
+
+		public function setAuthor($author){
+			$this->author = $author;
 		}
 		
 		public function addCategory($category){
