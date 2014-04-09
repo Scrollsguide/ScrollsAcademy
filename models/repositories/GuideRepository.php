@@ -68,6 +68,7 @@
 			$setQuery = "SET title = :title,
 				summary = :summary,
 				content = :content,
+				markdown = :markdown,
 				url = :url";
 
 			$isExistingGuide = ($guideId = $guide->getId()) !== null;
@@ -91,6 +92,7 @@
 			$sth->bindValue(":title", $guide->getTitle(), PDO::PARAM_STR);
 			$sth->bindValue(":summary", $guide->getSummary(), PDO::PARAM_STR);
 			$sth->bindValue(":content", $guide->getContent(), PDO::PARAM_STR);
+			$sth->bindValue(":markdown", $guide->getMarkdown(), PDO::PARAM_STR);
 			$sth->bindValue(":url", $guide->getUrl(), PDO::PARAM_STR);
 			if ($isExistingGuide){
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
