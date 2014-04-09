@@ -17,7 +17,7 @@
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 		{% if app.session.user.isloggedin %}
-		 <li><a href="{{ path('admin_logout') }}">Logout</a></li>
+		 <li><a href="{{ path('admin_logout') }}">Logout ({{ app.session.user.username }})</a></li>
 		{% endif %}
 	  </ul>
 	</div><!--/.nav-collapse -->
