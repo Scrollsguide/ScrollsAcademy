@@ -25,6 +25,9 @@
         <link rel="stylesheet" href="/assets/styles/main.css">
         <link rel="stylesheet" href="/assets/styles/tablet.css">
         <link rel="stylesheet" href="/assets/styles/desktop.css">
+
+        {% block customcss %}
+        {% endblock %}
         
         <script src="/assets/js/vendor/modernizr.js"></script>
 
@@ -136,5 +139,9 @@
 		
 			InstantClick.init('mousedown', true);
 		</script>
+
+        {% block customjs %}
+
+        {% endblock %}
 </body>
 </html>

@@ -7,7 +7,6 @@
 		<div class="col-md-12 category-hdr">
 			<h4><i class="fa fa-cogs"></i> {% if guide %}{{ guide.title }}{% else %}New guide{% endif %}</h4>
 		</div>
-		
 		<div class="row content-well">
 			<form class="form-horizontal" role="form" method="POST" action="{{ path('admin_save_guide') }}">
 			  <div class="form-group">
@@ -31,7 +30,10 @@
 			  <div class="form-group">
 				<label for="content" class="col-sm-2 control-label">Content</label>
 				<div class="col-sm-10">
-				  <textarea rows="20" class="form-control" name="content">{% if guide %}{{ guide.markdown }}{% endif %}</textarea>
+				  <!-- the actual content -->
+				  <textarea name="content" style="display: none"></textarea>
+				  <!-- the redactor editor -->
+				  <textarea class="form-control" id="redactor">{% if guide %}{{ guide.markdown }}{% endif %}</textarea>
 				</div>
 			  </div>
 			  {% for category in categories %}
@@ -57,4 +59,13 @@
 		</div>
 		
 	</div>
+{% endblock %}
+{% block customcss %}
+<link rel="stylesheet" href="http://imperavi.com/js/redactor/redactor.css" />
+{% endblock %}
+{% block customjs %}
+	<script src="http://imperavi.com/js/redactor/redactor.js"></script>
+	<script src="/assets/js/vendor/marked.js"></script>
+	<script src="/assets/js/vendor/remarked.js"></script>
+	<script src="/assets/js/admin.js"></script>
 {% endblock %}

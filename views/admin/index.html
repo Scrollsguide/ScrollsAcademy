@@ -18,13 +18,13 @@
 					<div class="content-item">
 						<div class="content-container">
 							<h4>{{ guide.title }}</h4>
-							<p>fdgfds</p>
+							<p>{{ guide.summary }}</p>
 						</div>
 					</div>
 					<div class="bottom-info">
-						<span class="author">koen</span>
+						<span class="author">{{ guide.author }}</span>
 						<span class="divider"> | </span>
-						<span class="date">November 29th, 1973</span>
+						<span class="date">{{ guide.date|date("F jS, Y") }}</span>
 					</div>
 				</a>
 			</div>
