@@ -130,6 +130,61 @@
 			return $r;
 		}
 
+		public function editHomepageAction($id) {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$homepageRepository = $em->getRepository("Homepage");
+
+			if (($homepage = $homepageRepository->findOneBy("id", $id)) !== false) {
+				$blocks = $homepageRepository->findHomepageBlocks($homepage);
+
+				foreach ($blocks as $block) {
+					$homepage->addBlock($block);
+				}
+
+				return $this->render("admin/edit_homepage.html", array(
+					"homepage" => $homepage
+				));
+			} else {
+				$r = new HtmlResponse();
+				$r->setContent("Homepage not found");
+			}
+			return $r;
+		}
+
+		public function doHomepageSaveAction() {
+			$r = $this->getApp()->getRequest();
+
+			$blocks = $r->getParameter('blocks');
+
+			//var_dump($blocks);
+			$h = new Homepage();
+
+			if (($homepageId = $r->getParameter("homepageid", 0)) !== 0){
+				// edit homepage
+				$h->setId($homepageId);
+			}
+
+			foreach ($blocks as $block) {
+				$h->addBlock($block);
+			}
+
+			$em = $this->getApp()->get("EntityManager");
+			$homepageRepository = $em->getRepository("Homepage");
+
+			$homepageRepository->persist($h);
+
+			$this->getApp()->getSession()->getFlashBag()->add("homepage_message", "Homepage saved.");
+
+			// redirect to homepage
+			$indexRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+
+			return new RedirectResponse($indexRoute->get("path"));
+		}
+
 		public function doSaveAction() {
 			$r = $this->getApp()->getRequest();
 

@@ -1,5 +1,5 @@
+/* The guide editor */
 (function($) {
-
 	var rem;
 	var $red;
 	var $valTextarea;

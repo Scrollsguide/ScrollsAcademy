@@ -13,9 +13,11 @@
 	</div>
 	<div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav">
-		  <li class="Beginner"><a href="{{ path('admin_new_guide') }}">Add guide</a></li>
+		  <li><a href="{{ path('admin_new_guide') }}">Add guide</a></li>
+		  <li><a href="{{ path('admin_edit_homepage', {id: 1}) }}">Edit Homepage</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
+	  	<li><a href="{{ path('index') }}">Frontend</a></li>
 		{% if app.session.user.isloggedin %}
 		 <li><a href="{{ path('admin_logout') }}">Logout ({{ app.session.user.username }})</a></li>
 		{% endif %}

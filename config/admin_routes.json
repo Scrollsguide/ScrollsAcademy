@@ -32,6 +32,18 @@
 			"path": "/admin/guide/save",
 			"action": "Admin::doSave",
 			"method": "POST"
+		},
+		"admin_edit_homepage": {
+			"path": "/admin/homepage/edit/{id}",
+			"requirements": {
+				"id": "[0-9]+"
+			},
+			"action": "Admin::editHomepage"
+		},
+		"admin_save_homepage": {
+			"path": "/admin/homepage/save",
+			"action": "Admin::doHomepageSave",
+			"method": "POST"
 		}
 	}
 }

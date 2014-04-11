@@ -1,0 +1,86 @@
+{% extends "base.html" %}
+{% block navbar %}
+	{% include "admin/navbar.html" %}
+{% endblock %}
+{% block content %}
+	<div class="row content-block">
+		<div class="col-md-12 category-hdr">
+			<h4>Editing Homepage</h4>
+		</div>
+		<div class="row content-well">
+			<form class="form-horizontal" role="form" method="POST" action="{{ path('admin_save_homepage') }}">
+			  <strong>Blocks</strong>
+			  {% for block in homepage.getBlocks() %}
+			  	<div class="block">
+					<div class="form-group">
+						<label for="blocks[{{loop.index0}}][layout]" class="col-sm-2 control-label">Layout</label>
+						<div class="col-sm-10">
+						  <select class="form-control" name="blocks[{{loop.index0}}][layout]">
+						  	<option value="">
+						  		No Layout
+						  	</option>
+						  	<option value="jumbotron" {{ block.layout == 'jumbotron' ? 'selected' : '' }}>
+						  		Top Jumbotron
+						  	</option>
+						  	<option value="3-across" {{ block.layout == '3-across' ? 'selected' : '' }}>
+						  		Desktop 3 Across
+						  	</option>
+						  </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="blocks[{{loop.index0}}][guideids]" class="col-sm-2 control-label">Guide Ids</label>
+						<div class="col-sm-10">
+						  <input type="text" class="form-control" name="blocks[{{loop.index0}}][guideids]" value="{{block.guideids}}"/>
+						</div>
+					</div>
+					<button class="btn btn-default pull-right" style="margin-bottom: 5px; " data-remove-block>Remove Block</button>
+					<hr style="clear: both" />
+				</div>
+			  {% endfor %}
+
+			  <div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+				  {% if homepage %}
+				    <input type="hidden" value="{{ homepage.id }}" name="homepageid" />
+			      {% endif %}
+				  <button type="submit" class="btn btn-default">Save</button>
+
+				  <button class="btn btn-default" data-add-block>Add Block</button>
+				</div>
+			  </div>
+			</form>
+		</div>
+	</div>
+
+	<script id="blockTemplate" type="text/template">
+	<div class="block">
+		<div class="form-group">
+			<label for="blocks[0][layout]" class="col-sm-2 control-label">Layout</label>
+			<div class="col-sm-10">
+			  <select class="form-control" name="blocks[0][layout]">
+			  	<option value="">
+			  		No Layout
+			  	</option>
+			  	<option value="jumbotron">
+			  		Top Jumbotron
+			  	</option>
+			  	<option value="3-across">
+			  		Desktop 3 Across
+			  	</option>
+			  </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="blocks[0][guideids]" class="col-sm-2 control-label">Guide Ids</label>
+			<div class="col-sm-10">
+			  <input type="text" class="form-control" name="blocks[0][guideids]" />
+			</div>
+		</div>
+		<hr />
+	</div>
+	</script>
+{% endblock %}
+{% block customjs %}
+	<script src="/assets/js/homepage-editor.js"></script>
+{% endblock %}

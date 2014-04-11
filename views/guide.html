@@ -26,6 +26,9 @@
             <h4>Related Guides</h4>
         </div>
 			{% for guide in relatedGuides %}
+            {% if loop.index == 3%}
+                {% set collapseClass = 12 %}
+            {% endif %}
 				{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
 		    {% endfor %}
 	    </div>

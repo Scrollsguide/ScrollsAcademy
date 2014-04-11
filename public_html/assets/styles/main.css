@@ -222,9 +222,16 @@ a:hover .jumbotron .content-container {
 .type-tag:nth-child(2){
     top: 50px;
 }
+.jumbotron .type-tag:nth-child(2) {
+    top: 80px;
+}
 
 .type-tag:nth-child(3) {
     top: 80px;
+}
+
+.jumbotron .type-tag:nth-child(3) {
+    top: 140px;
 }
 
 .jumbotron .type-tag {
@@ -495,4 +502,8 @@ p > i.faction-growth {
 
 #instantclick-bar {
 	background-color: #3d3d3d;
+}
+
+.alert {
+    clear: both;
 }
