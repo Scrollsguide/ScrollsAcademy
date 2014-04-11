@@ -13,13 +13,14 @@
 	</div>
 	<div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav">
-		  <li><a href="{{ path('admin_new_guide') }}">Add guide</a></li>
-		  <li><a href="{{ path('admin_edit_homepage', {id: 1}) }}">Edit Homepage</a></li>
+		  <li><a href="{{ path('admin_new_guide') }}" data-instant>Add guide</a></li>
+		  <li><a href="{{ path('admin_edit_homepage', {id: 1}) }}" data-instant>Edit Homepage</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 	  	<li><a href="{{ path('index') }}">Frontend</a></li>
 		{% if app.session.user.isloggedin %}
-		 <li><a href="{{ path('admin_logout') }}">Logout ({{ app.session.user.username }})</a></li>
+		 <!-- no data instant, would log user out on mousedown, even if user moves mouse away afterwards -->
+		 <li><a href="{{ path('admin_logout') }}">Logout ({{ app.session.user.username }})</a></li> 
 		{% endif %}
 	  </ul>
 	</div><!--/.nav-collapse -->

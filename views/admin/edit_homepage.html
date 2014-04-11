@@ -13,16 +13,19 @@
 			  {% for block in homepage.getBlocks() %}
 			  	<div class="block">
 					<div class="form-group">
-						<label for="blocks[{{loop.index0}}][layout]" class="col-sm-2 control-label">Layout</label>
+						<label for="blocks[{{ loop.index0 }}][layout]" class="col-sm-2 control-label">Layout</label>
 						<div class="col-sm-10">
-						  <select class="form-control" name="blocks[{{loop.index0}}][layout]">
+						  <select class="form-control" name="blocks[{{ loop.index0 }}][layout]">
 						  	<option value="">
 						  		No Layout
 						  	</option>
-						  	<option value="jumbotron" {{ block.layout == 'jumbotron' ? 'selected' : '' }}>
+						  	<option value="jumbotron" {{ block.layout == 'jumbotron' ? 'selected="selected"' : '' }}>
 						  		Top Jumbotron
 						  	</option>
-						  	<option value="3-across" {{ block.layout == '3-across' ? 'selected' : '' }}>
+						  	<option value="2-across" {{ block.layout == '2-across' ? 'selected="selected"' : '' }}>
+						  		Desktop 2 Across
+						  	</option>
+						  	<option value="3-across" {{ block.layout == '3-across' ? 'selected="selected"' : '' }}>
 						  		Desktop 3 Across
 						  	</option>
 						  </select>
@@ -31,10 +34,10 @@
 					<div class="form-group">
 						<label for="blocks[{{loop.index0}}][guideids]" class="col-sm-2 control-label">Guide Ids</label>
 						<div class="col-sm-10">
-						  <input type="text" class="form-control" name="blocks[{{loop.index0}}][guideids]" value="{{block.guideids}}"/>
+						  <input type="text" class="form-control" name="blocks[{{ loop.index0 }}][guideids]" value="{{ block.guideids }}"/>
 						</div>
 					</div>
-					<button class="btn btn-default pull-right" style="margin-bottom: 5px; " data-remove-block>Remove Block</button>
+					<button class="btn btn-default pull-right" style="margin-bottom: 5px;" data-remove-block>Remove Block</button>
 					<hr style="clear: both" />
 				</div>
 			  {% endfor %}
@@ -64,6 +67,9 @@
 			  	</option>
 			  	<option value="jumbotron">
 			  		Top Jumbotron
+			  	</option>
+			  	<option value="2-across">
+			  		Desktop 2 Across
 			  	</option>
 			  	<option value="3-across">
 			  		Desktop 3 Across

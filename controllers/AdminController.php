@@ -160,7 +160,6 @@
 
 			$blocks = $r->getParameter('blocks');
 
-			//var_dump($blocks);
 			$h = new Homepage();
 
 			if (($homepageId = $r->getParameter("homepageid", 0)) !== 0){

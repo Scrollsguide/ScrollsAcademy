@@ -1,11 +1,7 @@
 <div class="row content-block">
-	{% set guide = guides[0] %}
-	{% include 'partials/touts/single-item.html' %}
+	{% include 'partials/touts/single-item.html' with { 'guide': guides[0] } %}
 
-	{% set guide = guides[1] %}
-	{% include 'partials/touts/single-item.html' %}
+	{% include 'partials/touts/single-item.html' with { 'guide': guides[1] } %}
 
-	{% set guide = guides[2] %}
-	{% set collapseClass = '12' %}
-	{% include 'partials/touts/single-item.html' %}
+	{% include 'partials/touts/single-item.html' with { 'guide': guides[2], 'collapseClass': '12' } %}
 </div>
