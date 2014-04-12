@@ -217,7 +217,7 @@ a:hover .jumbotron .content-container {
     color: #502982;
 }
 .content-item:hover .type-tag {
-    box-shadow: -3px 3px 5px #000; /* add more dropdshadow when hovering over the content box */
+    /* box-shadow: -3px 3px 5px #000; /* add more dropdshadow when hovering over the content box */
 }
 .type-tag:nth-child(2){
     top: 50px;
@@ -239,7 +239,7 @@ a:hover .jumbotron .content-container {
     padding-right: 10px;
 }
 a:hover .jumbotron .type-tag {
-    box-shadow: -5px 5px 8px #000;
+    /* box-shadow: -5px 5px 8px #000; */
 }
 
 
