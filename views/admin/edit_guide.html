@@ -69,7 +69,22 @@
 			  </div>
 			</form>
 		</div>
-		
+	</div>
+
+	<div id="imageuploader" style="display: none;">
+	    <section>
+	  		<span class="btn btn-default btn-file uploadbtn">
+			    Browse <input type="file" name="inline-file">
+			</span>
+	  		<input type="hidden" name="imagepath" />
+	  		<a href="" target="_new" thumbnail>
+	  			<img src="" style="max-height: 80px;" />
+	  		</a>
+	    </section>
+	    <footer>
+	        <button class="redactor_modal_btn redactor_modal_action_btn" id="imageuploader-insert">Insert</button>
+	        <button class="redactor_modal_btn redactor_btn_modal_close">Close</button>
+	    </footer>
 	</div>
 {% endblock %}
 {% block customcss %}

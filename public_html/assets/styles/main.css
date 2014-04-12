@@ -530,3 +530,11 @@ p > i.faction-growth {
     cursor: inherit;
     display: block;
 }
+
+.redactor_modal_btn {
+    width: 247px !important;
+}
+
+.uploadbtn {
+    margin: 20px auto;
+}
