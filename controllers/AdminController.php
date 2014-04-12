@@ -1,6 +1,7 @@
 <?php
 
 	class AdminController extends BaseController {
+
 		const MAXUPLOADSIZE = 1024000; //5 megs
 		const USERIMAGEDIRECTORY = '/public_html/assets/images/user-imgs/';
 
@@ -283,11 +284,14 @@
 				
 			if (!$error) {
 				//all good, move it
-				$filePath = self::USERIMAGEDIRECTORY . strtolower($image['name']);
+				$ext = pathinfo($image['name'], PATHINFO_EXTENSION);
+				$filename = uniqid(rand()) . "." . $ext;
+
+				$filePath = self::USERIMAGEDIRECTORY . $filename;
 				$newLocation = $this->getApp()->getBaseDir() . $filePath;
 		
 				move_uploaded_file($tmpPath, $newLocation);
-				$r->setContent(array('success' => true, 'imagePath' => $filePath, 'filename' => strtolower($image['name'])));
+				$r->setContent(array('success' => true, 'filename' => $filename));
 			}
 
 			return $r;
