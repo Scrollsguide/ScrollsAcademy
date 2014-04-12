@@ -35,7 +35,6 @@
 			// update blocks
 			$this->getConnection()->beginTransaction();
 			foreach ($homepage->getBlocks() as $block){
-				var_dump($block);
 				$sth = $this->getConnection()->prepare("INSERT INTO homepageblocks
 					SET homepageid = :id, layout = :layout, guideids = :guideids");
 				$sth->bindValue(":id", $homepageId, PDO::PARAM_INT);

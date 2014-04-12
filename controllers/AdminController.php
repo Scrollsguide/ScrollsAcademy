@@ -147,8 +147,19 @@
 					$homepage->addBlock($block);
 				}
 
+				// load guides
+				$guideRepository = $em->getRepository("Guide");
+				$guides = $guideRepository->findAll();
+
+				// map guides to array with id as index
+				$tplGuides = array();
+				foreach ($guides as $guide){
+					$tplGuides[$guide->getId()] = $guide;
+				}
+
 				return $this->render("admin/edit_homepage.html", array(
-					"homepage" => $homepage
+					"homepage" => $homepage,
+					"guides" => $tplGuides
 				));
 			} else {
 				$r = new HtmlResponse();
@@ -170,6 +181,9 @@
 			}
 
 			foreach ($blocks as $block) {
+				// concat guides into a string
+				$block['guideids'] = implode(",", $block['guides']);
+
 				$h->addBlock($block);
 			}
 

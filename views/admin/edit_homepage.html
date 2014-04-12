@@ -16,27 +16,19 @@
 						<label for="blocks[{{ loop.index0 }}][layout]" class="col-sm-2 control-label">Layout</label>
 						<div class="col-sm-10">
 						  <select class="form-control" name="blocks[{{ loop.index0 }}][layout]">
-						  	<option value="">
-						  		No Layout
-						  	</option>
-						  	<option value="jumbotron" {{ block.layout == 'jumbotron' ? 'selected="selected"' : '' }}>
+						  	<option value="jumbotron" {{ block.layout == 'jumbotron' ? 'selected="selected"' : '' }} data-guides="1">
 						  		Top Jumbotron
 						  	</option>
-						  	<option value="2-across" {{ block.layout == '2-across' ? 'selected="selected"' : '' }}>
+						  	<option value="2-across" {{ block.layout == '2-across' ? 'selected="selected"' : '' }} data-guides="2">
 						  		Desktop 2 Across
 						  	</option>
-						  	<option value="3-across" {{ block.layout == '3-across' ? 'selected="selected"' : '' }}>
+						  	<option value="3-across" {{ block.layout == '3-across' ? 'selected="selected"' : '' }} data-guides="3">
 						  		Desktop 3 Across
 						  	</option>
 						  </select>
 						</div>
 					</div>
-					<div class="form-group">
-						<label for="blocks[{{loop.index0}}][guideids]" class="col-sm-2 control-label">Guide Ids</label>
-						<div class="col-sm-10">
-						  <input type="text" class="form-control" name="blocks[{{ loop.index0 }}][guideids]" value="{{ block.guideids }}"/>
-						</div>
-					</div>
+					<div class="guiderows" data-guides="{{ block.guideids }}" data-row-id="{{ loop.index0 }}"></div>
 					<button class="btn btn-default pull-right" style="margin-bottom: 5px;" data-remove-block>Remove Block</button>
 					<hr style="clear: both" />
 				</div>
@@ -62,29 +54,34 @@
 			<label for="blocks[0][layout]" class="col-sm-2 control-label">Layout</label>
 			<div class="col-sm-10">
 			  <select class="form-control" name="blocks[0][layout]">
-			  	<option value="">
-			  		No Layout
-			  	</option>
-			  	<option value="jumbotron">
+			  	<option value="jumbotron" data-guides="1">
 			  		Top Jumbotron
 			  	</option>
-			  	<option value="2-across">
+			  	<option value="2-across" data-guides="2">
 			  		Desktop 2 Across
 			  	</option>
-			  	<option value="3-across">
+			  	<option value="3-across" data-guides="3">
 			  		Desktop 3 Across
 			  	</option>
 			  </select>
 			</div>
 		</div>
-		<div class="form-group">
-			<label for="blocks[0][guideids]" class="col-sm-2 control-label">Guide Ids</label>
-			<div class="col-sm-10">
-			  <input type="text" class="form-control" name="blocks[0][guideids]" />
-			</div>
+		<div class="guiderows">
 		</div>
 		<hr />
 	</div>
+	</script>
+	<script id="guideSelector" type="text/template">
+		<div class="form-group">
+			<label for="blocks[0][guides][]" class="col-sm-2 control-label">Guide</label>
+			<div class="col-sm-10">
+				<select class="form-control" name="blocks[0][guides][]">
+					{% for guide in guides %}
+						<option value="{{ guide.id }}">{{ guide.title }}</option>
+					{% endfor %}
+				</select>
+			</div>
+		</div>
 	</script>
 {% endblock %}
 {% block customjs %}

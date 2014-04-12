@@ -11,6 +11,9 @@
 			$t = new self($app);
 			
 			// functions
+			$twig->addFunction(new Twig_SimpleFunction("dump", function($arg){
+				return var_dump($arg);
+			}));
 			$twig->addFunction(new Twig_SimpleFunction("path", array($t, "path")));
 			$twig->addFunction(new Twig_SimpleFunction("fullPath", array($t, "fullPath")));
 			$twig->addFunction(new Twig_SimpleFunction("currentRoute", array($t, "currentRoute")));
