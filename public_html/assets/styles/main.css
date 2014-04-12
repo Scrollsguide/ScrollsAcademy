@@ -430,6 +430,9 @@ a.video-container:hover .play-container {
     margin-bottom: 0;
     margin-top: 0;
 }
+.more-block .content-contaner h4 {
+	border-bottom: 0px;
+}
 .more-block > div {
     margin-top: 0;
 }
