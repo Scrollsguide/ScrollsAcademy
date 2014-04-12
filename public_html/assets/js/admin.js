@@ -44,7 +44,7 @@
 		$('form').on('submit', function() {
 			syncModel();
 			//if they have the markdown code editor open, we want that to be the value instead
-			if ($mdEditor.is(':visible')) {
+			if ($mdEditor && $mdEditor.is(':visible')) {
 				$valTextarea.val($mdEditor.val());
 			}
 		})
@@ -98,3 +98,63 @@
 
 	$(init);
 }(jQuery));
+
+
+//file upload
+(function() {
+	var files;
+	 
+	// Grab the files and set them to our variable
+	function prepareUpload(event) {
+		files = event.target.files;
+		uploadFiles();
+
+		return false;
+	}
+	function init() {
+		$('input[name=file]').on('change', prepareUpload);
+	}
+	function uploadFiles() {
+		// Create a formdata object and add the files
+		var data = new FormData();
+		$.each(files, function(key, value) {
+			data.append(key, value);
+		});
+
+		$.ajax({
+			url: '/admin/image/save',
+			type: 'POST',
+			data: data,
+			cache: false,
+			dataType: 'json',
+			processData: false, // Don't process the files
+			contentType: false, // Set content type to false as jQuery will tell the server its a query string request
+			success: function(data, textStatus, jqXHR) {
+				if (typeof data.error === 'undefined') {
+					// Success so call function to process the form
+					updateForm(data);
+				} else {
+					// Handle errors here
+					alert('error uploading image, see console for details');
+					console.log(data, textStatus, jqXHR);
+				}
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				// Handle errors here
+				alert('error uploading image, see console for details');
+				console.log(jqXHR, textStatus, errorThrown);
+			}
+		});
+	}
+
+	function updateForm(data) {
+		console.log('updated', data)
+		var path = '/assets/images/user-imgs/'+data.filename;
+		var $thumb = $('[img-thumbnail]');
+		$thumb.attr('href', path);
+		$thumb.find('img').attr('src', path);
+		$('input[name=image]').val(data.filename);
+	}
+
+	$(init);
+}());

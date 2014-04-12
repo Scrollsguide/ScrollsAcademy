@@ -1,6 +1,8 @@
 <?php
 
 	class AdminController extends BaseController {
+		const MAXUPLOADSIZE = 1024000; //5 megs
+		const USERIMAGEDIRECTORY = '/public_html/assets/images/user-imgs/';
 
 		public function __construct(App $app) {
 			parent::__construct($app);
@@ -202,6 +204,7 @@
 			$g->setURL(URLUtils::makeBlob($title));
 			$g->setAuthor($r->getParameter("author"));
 			$g->setMarkdown($content);
+			$g->setImage($r->getParameter("image"));
 
 			// convert markdown to html
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
@@ -228,6 +231,52 @@
 			$indexRoute = $this->getApp()->getRouter()->getRoute("admin_index");
 
 			return new RedirectResponse($indexRoute->get("path"));
+		}
+
+		public function uploadImageAction() {
+			$request = $this->getApp()->getRequest();
+			$files = $request->getFiles();
+			$image = $files[0];
+
+			$error = false;
+			$r = new JsonResponse();
+			if (!$image) {
+				$r->setContent(array('error' => 'No file'));
+				$error = true;
+			}
+
+			if(!$image['name'] || !$image['tmp_name']) {
+				$r->setContent(array('error' => 'No file name'));
+				$error = true;
+			}
+
+			if($image['error']) {
+				$r->setContent(array('error' => $image['error']));
+				$error = true;
+			}
+			if($image['size'] > (self::MAXUPLOADSIZE)) {
+				$r->setContent(array('error' => 'File size too large'));
+				$error = true;
+			}
+
+			$tmpPath = $image['tmp_name'];
+				
+			$isImage = @getimagesize($tmpPath) ? true : false; //ensure the file was actually an image
+			if (!$isImage) {
+				$r->setContent(array('error' => 'File is not a valid image'));
+				$error = true;
+			}
+				
+			if (!$error) {
+				//all good, move it
+				$filePath = self::USERIMAGEDIRECTORY . strtolower($image['name']);
+				$newLocation = $this->getApp()->getBaseDir() . $filePath;
+		
+				move_uploaded_file($tmpPath, $newLocation);
+				$r->setContent(array('success' => true, 'imagePath' => $filePath, 'filename' => strtolower($image['name'])));
+			}
+
+			return $r;
 		}
 
 		private function userPerms() {

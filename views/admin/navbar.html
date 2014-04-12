@@ -13,8 +13,9 @@
 	</div>
 	<div class="navbar-collapse collapse">
 	  <ul class="nav navbar-nav">
-		  <li><a href="{{ path('admin_new_guide') }}" data-instant>Add guide</a></li>
-		  <li><a href="{{ path('admin_edit_homepage', {id: 1}) }}" data-instant>Edit Homepage</a></li>
+		  <!-- removed data-instant for now so we dont have to deal with the js issues associated with not having a domready -->
+		  <li><a href="{{ path('admin_new_guide') }}">Add guide</a></li>
+		  <li><a href="{{ path('admin_edit_homepage', {id: 1}) }}">Edit Homepage</a></li>
 	  </ul>
 	  <ul class="nav navbar-nav navbar-right">
 	  	<li><a href="{{ path('index') }}">Frontend</a></li>

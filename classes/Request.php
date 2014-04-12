@@ -25,6 +25,10 @@
 		public function getRequestMethod(){
 			return $this->requestMethod;
 		}
+
+		public function getFiles() {
+			return $_FILES;
+		}
 		
 		public function getParameter($param, $default = ""){
 			if ($this->getRequestMethod() === "POST"){

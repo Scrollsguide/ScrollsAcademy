@@ -504,6 +504,29 @@ p > i.faction-growth {
 	background-color: #3d3d3d;
 }
 
+
+
+/* admin styles */
 .alert {
     clear: both;
+}
+.btn-file {
+    position: relative;
+    overflow: hidden;
+    width: 20%;
+}
+.btn-file input[type=file] {
+    position: absolute;
+    top: 0;
+    right: 0;
+    min-width: 50%;
+    min-height: 50%;
+    font-size: 999px;
+    text-align: right;
+    filter: alpha(opacity=0);
+    opacity: 0;
+    outline: none;
+    background: white;
+    cursor: inherit;
+    display: block;
 }

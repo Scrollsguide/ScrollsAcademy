@@ -47,7 +47,7 @@
 		}
 
 		public function imagePath($filename) {
-			return $this->app->getRequest()->getURL()->getBaseURL() . '/assets/images/' . $filename;
+			return $this->app->getRequest()->getURL()->getBaseURL() . '/assets/images/user-imgs/' . $filename;
 		}
 		
 		public function cut($str, $length = 30, $toSpace = true, $last = "..."){

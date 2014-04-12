@@ -44,6 +44,11 @@
 			"path": "/admin/homepage/save",
 			"action": "Admin::doHomepageSave",
 			"method": "POST"
+		},
+		"admin_upload_image": {
+			"path": "/admin/image/save",
+			"action": "Admin::uploadImage",
+			"method": "POST"
 		}
 	}
 }
