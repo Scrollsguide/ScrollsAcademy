@@ -340,6 +340,7 @@ a.video-container:hover .play-container {
 }
 .byline .divider {
     color: #000 !important;
+	text-shadow: none;
 }
 .byline img {
     max-height: 40px;
