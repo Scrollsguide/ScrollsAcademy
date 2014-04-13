@@ -383,7 +383,7 @@ a.video-container:hover .play-container {
 }
 
 .content-well.primary-content img { 
-    width: 100%;
+    /*width: 100%;*/
     margin-bottom: 30px;
     display: block;
 }
