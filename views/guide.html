@@ -1,8 +1,18 @@
 {% extends "base.html" %}
 {% block content %}
-	<div class="row guide-header" style="background-image:url({{ imagePath(guide.image) }})">
-        <div class="col-md-12">
-            <h2>{{ guide.getTitle() }}</h2>    
+	<div class="row guide-header {% if guide.getVideo() %}video-header{% endif %}" style="background-image:url({{ imagePath(guide.image) }})">
+        <div class="col-md-12 header-container">
+            {% if guide.getVideo() %}
+                <div class="player-placeholder" data-video-id="{{ getIdFromEmbed(guide.video) }}"></div>
+                <div class="play-container">
+                    <i class="fa fa-play-circle"></i>
+                </div>
+                <div class="content-container">
+                    <h2>{{ guide.getTitle() }}</h2>
+                </div>
+            {% else %}
+                <h2>{{ guide.getTitle() }}</h2>    
+            {% endif %}
         </div>
     </div>
     <div class="row content-well">
@@ -13,11 +23,7 @@
             <span class="date">{{ guide.date | date("F jS, Y") }}</span>
         </div>
     </div>
-    {% if guide.getVideo() %}
-    <div class="row video">
-        {{ guide.getVideo() | raw }}
-    </div>
-    {% endif %}
+
     <div class="row content-well primary-content">
     	{{ guide.getContent() | raw }}
     </div>

@@ -296,7 +296,7 @@ a:hover .jumbotron .type-tag {
     text-align: center;
     display: table;
 }
-.video-container .play-container {
+.play-container {
     margin: 0px auto;
     width: 1em;
     color: #000;
@@ -304,8 +304,10 @@ a:hover .jumbotron .type-tag {
     text-shadow: 0px 0px 20px #fff;
     font-size: 12em;
 }
-a.video-container:hover .play-container {
+a.video-container:hover .play-container,
+.video-header:hover .play-container {
     opacity: .8;
+    text-shadow: 0px 0px 20px #428bca;
 }
 
 .playing .play-container, .playing .content-container, .playing .type-tag {
@@ -531,21 +533,28 @@ p > i.faction-growth {
 	background-color: #3d3d3d;
 }
 
-.row.video {
+.video-header {
+    min-height: 400px;
     position: relative;
-    padding-bottom: 56.25%; /* 16:9 */
-    padding-top: 25px;
-    height: 0;
+    overflow: hidden;
+    cursor: pointer;
+}
+.video-header .header-container {
+    position: relative;
+    min-height: 380px;
     margin: 30px 0;
 }
-.row.video iframe {
+.video-header iframe {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
-    height: 100%;
+    height: 345px;
 }
-
+.video-header .content-container {
+    background: none;
+    text-align: center;
+}
 
 
 /* admin styles */
