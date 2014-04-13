@@ -228,6 +228,7 @@
 			$g->setURL(URLUtils::makeBlob($title));
 			$g->setAuthor($r->getParameter("author"));
 			$g->setMarkdown($content);
+			$g->setStatus($r->getParameter("status"));
 			$g->setImage($r->getParameter("image"));
 
 			// convert markdown to html

@@ -9,7 +9,7 @@
 			// look for guide in the repo
 			if (($guide = $guideRepository->findOneBy("url", $url)) !== false){
 				// check visibility
-				if ($guide->getStatus() > 0){
+				if ($guide->getStatus() === GuideStatus::VISIBLE || $guide->getStatus() === GuideStatus::VISIBLE_WITH_URL){
 					// For now we just get one guide of each level - TODO use the tags from the guide
 					$relatedGuides = array();
 					//get the random guides for the relateds

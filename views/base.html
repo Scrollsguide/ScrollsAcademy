@@ -61,7 +61,16 @@
 						<li class="master"><a href="{{ path('categories', { 'categoryType': 'master' }) }}" data-instant>Master</a></li>
 					  </ul>
 					  <ul class="nav navbar-nav navbar-right">
-						 <li><a href="{{ path('about') }}" data-instant>About</a></li>
+						<li class="dropdown">
+							<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+							<ul class="dropdown-menu">
+								<li><a href="{{ path('about') }}" data-instant><i class="fa fa-{{ categoryIcon('about') }}"></i> Scrolls Academy</a></li>
+								<li class="divider"></li>
+								<li class="dropdown-header">External</li>
+								<li><a href="http://www.scrollsguide.com/forum" target="_blank"><i class="fa fa-{{ categoryIcon('forum') }}"></i> Forum</a></li>
+								<li><a href="http://www.scrollsguide.com/wiki/index.php/Main_Page" target="_blank"><i class="fa fa-{{ categoryIcon('wiki') }}"></i> Wiki</a></li>
+							</ul>
+						</li>
 						<li class="dropdown">
 						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
 						  <ul class="dropdown-menu">

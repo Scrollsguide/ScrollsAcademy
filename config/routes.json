@@ -29,6 +29,13 @@
 			},
 			"action": "Guide::viewGuide"
 		},
+		"view_avatar": {
+			"path": "/assets/images/avatar/{user}",
+			"requirements": {
+				"user": "[a-zA-Z0-9-]+"
+			},
+			"action": "Resource::getAvatar"
+		},
 		"about": {
 			"path": "/about",
 			"action": "Index::about"

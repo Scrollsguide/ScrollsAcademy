@@ -5,7 +5,7 @@
 {% block content %}
 	<div class="row content-block">
 		<div class="col-md-12 category-hdr">
-			<h4><i class="fa fa-cogs"></i> {% if guide %}<a href="{{ path('view_guide', { 'title': guide.url }) }}">{{ guide.title }}</a>{% else %}New guide{% endif %}</h4>
+			<h4><i class="fa fa-cogs"></i> {% if guide %}<a href="{{ path('view_guide', { 'title': guide.url }) }}" target="_blank">{{ guide.title }}</a>{% else %}New guide{% endif %}</h4>
 		</div>
 		<div class="row content-well">
 			<form class="form-horizontal" role="form" method="POST" action="{{ path('admin_save_guide') }}">
@@ -33,10 +33,20 @@
 				  <input type="text" class="form-control" name="summary" value="{% if guide %}{{ guide.summary }}{% endif %}" />
 				</div>
 			  </div>
+			  <div class="form-group">
+				<label for="summary" class="col-sm-2 control-label">Author</label>
+				<div class="col-sm-10">
+				  <input type="text" class="form-control" name="author" value="{% if guide %}{{ guide.author }}{% else %}{{ app.session.user.username }}{% endif %}" />
+				</div>
+			  </div>
 				<div class="form-group">
-					<label for="summary" class="col-sm-2 control-label">Author</label>
+					<label for="status" class="col-sm-2 control-label">Status</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="author" value="{% if guide %}{{ guide.author }}{% else %}{{ app.session.user.username }}{% endif %}" />
+						<select class="form-control" name="status">
+							<option value="0"{% if guide and guide.status == 0 %}selected="selected"{% endif %}>Hidden</option>
+							<option value="1"{% if guide and guide.status == 1 %}selected="selected"{% endif %}>Visible with URL only</option>
+							<option value="2"{% if not guide or guide.status == 2 %}selected="selected"{% endif %}>Always visible</option>
+						</select>
 					</div>
 				</div>
 			  <div class="form-group">
