@@ -40,15 +40,9 @@
 		clear: both;
 	}
 	.content-well.primary-content img {
-		/*float: left;*/
 		max-width: 45%;
 		margin: 0 30px 30px 0;
 		border: 1px solid #3d3d3d;
-	}
-
-	.content-well.primary-content img:nth-of-type(even) {
-		/*float: right;*/
-		margin: 0 0 30px 30px;
 	}
 
 	.content-well.primary-content p > img {

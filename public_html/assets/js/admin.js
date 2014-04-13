@@ -111,58 +111,34 @@ if (typeof window.RedactorPlugins === 'undefined') {
 		},
 		previewAutoRefresh: true,
 		markupSet: [{
-			name: 'First Level Heading',
-			key: "1",
-			placeHolder: 'Your title here...',
-			closeWith: function(markItUp) {
-				return miu.markdownTitle(markItUp, '=')
-			}
-		}, {
-			name: 'Second Level Heading',
-			key: "2",
-			placeHolder: 'Your title here...',
-			closeWith: function(markItUp) {
-				return miu.markdownTitle(markItUp, '-')
-			}
-		}, {
-			name: 'Heading 3',
-			key: "3",
-			openWith: '### ',
-			placeHolder: 'Your title here...'
-		}, {
-			name: 'Heading 4',
-			key: "4",
-			openWith: '#### ',
-			placeHolder: 'Your title here...'
-		}, {
 			name: 'Heading 5',
 			key: "5",
 			openWith: '##### ',
-			placeHolder: 'Your title here...'
-		}, {
-			name: 'Heading 6',
-			key: "6",
-			openWith: '###### ',
+			className: 'hdr',
 			placeHolder: 'Your title here...'
 		}, {
 			separator: '---------------'
 		}, {
 			name: 'Bold',
 			key: "B",
+			className: 'bold',
 			openWith: '**',
 			closeWith: '**'
 		}, {
 			name: 'Italic',
 			key: "I",
+			className: 'italic',
 			openWith: '_',
 			closeWith: '_'
 		}, {
 			separator: '---------------'
 		}, {
 			name: 'Bulleted List',
+			className: 'bull',
 			openWith: '- '
 		}, {
 			name: 'Numeric List',
+			className: 'num',
 			openWith: function(markItUp) {
 				return markItUp.line + '. ';
 			}
@@ -171,10 +147,38 @@ if (typeof window.RedactorPlugins === 'undefined') {
 		}, {
 			name: 'Picture',
 			key: "P",
+			className: 'pic',
 			replaceWith: '![[![Alternative text]!]]([![Url:!:http://]!] "[![Title]!]")'
+		}, {
+			name: 'Picture Left',
+			className: "pic-left",
+			replaceWith: function(markItUp) {
+				return '{.left}';
+			}
+		}, {
+			name: 'Picture Right',
+			className: "pic-right",
+			replaceWith: function(markItUp) {
+				return '{.right}';
+			}
+		}, {
+			name: 'Picture Full Width',
+			className: "pic-full",
+			replaceWith: function(markItUp) {
+				return '{.full}';
+			}
+		}, {
+			name: 'Picture Center No Resize',
+			className: "pic-center",
+			replaceWith: function(markItUp) {
+				return '{.center}';
+			}
+		},{
+			separator: '---------------'
 		}, {
 			name: 'Link',
 			key: "L",
+			className: 'link',
 			openWith: '[',
 			closeWith: ']([![Url:!:http://]!] "[![Title]!]")',
 			placeHolder: 'Your text to link here...'
@@ -182,11 +186,14 @@ if (typeof window.RedactorPlugins === 'undefined') {
 			separator: '---------------'
 		}, {
 			name: 'Quotes',
+			className: 'quote',
 			openWith: '> '
 		}, {
-			name: 'Code Block / Code',
-			openWith: '(!(\t|!|`)!)',
-			closeWith: '(!(`)!)'
+			name: 'Line Break',
+			className: "line-break",
+			replaceWith: function(markItUp) {
+				return "<br />";
+			}
 		}, {
 			separator: '---------------'
 		}, {
