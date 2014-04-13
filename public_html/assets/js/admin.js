@@ -104,6 +104,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 		nameSpace: 'markdown', // Useful to prevent multi-instances CSS conflict
 		previewParserPath: '/admin/guide/precompile',
 		previewParserVar: 'guide',
+		previewInWindow: 'width=800, height=600, resizable=yes, scrollbars=yes',
 		onShiftEnter: {
 			keepDefault: false,
 			openWith: '\n\n'
