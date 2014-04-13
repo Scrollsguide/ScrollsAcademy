@@ -1,7 +1,7 @@
 RewriteEngine On
 
-RewriteCond %{REQUEST_URI} !\.(js|ico|gif|jpg|jpeg|png|css)$ 
-RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !\.(js|ico|gif|jpg|jpeg|png|css)$
+# Also redirect directories to controller to 404, so no: RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 
 RewriteRule ^/?([^.]*)$ index.php [L]

@@ -53,5 +53,14 @@
 		public function getPathForFile($file){
 			return $this->basePath . "/" . $file;
 		}
+
+		public function remove($file){
+			if ($this->exists($file)){
+				$absPath = $this->getPathForFile($file);
+
+				// delete file
+				unlink($absPath);
+			}
+		}
 		
 	}

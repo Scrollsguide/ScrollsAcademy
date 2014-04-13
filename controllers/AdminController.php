@@ -222,6 +222,8 @@
 			$g->setImage($r->getParameter("image"));
 
 			// convert markdown to html
+			// don't just require the markdown class as it needs more than one
+			// file to run properly, so add entire directory
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
 
 			$htmlFromMarkdown = MarkdownExtra::defaultTransform($content);
@@ -240,6 +242,14 @@
 
 			$guideRepository->persist($g);
 
+			// clear rendered guide html page from cache so it's refreshed immediately
+			$route = $this->getApp()->getRouter()->getRoute("view_guide");
+			$route->set("urlMatch", array($g->getUrl()));
+
+			$cacheKey = RouteHelper::getCacheKey($route);
+			$this->getApp()->getCache()->remove("Pages/" . $cacheKey);
+
+			// set save message
 			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Guide saved.");
 
 			// redirect to homepage
