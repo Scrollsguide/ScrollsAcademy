@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+{% block navbar %}
+{% include "admin/navbar.html" %}
+{% endblock %}
+{% block content %}
+<div class="row content-block">
+	<div class="col-md-12 category-hdr">
+		<h4><i class="fa fa-cogs"></i> {% if series %}<a href="{{ path('series_guide_list', { 'title': series.url }) }}" target="_blank">{{ series.title }}</a>{% else %}New series{% endif %}</h4>
+	</div>
+
+	{% for flash in app.session.flashbag.get('series_message') %}
+	<div class="alert alert-success">{{ flash }}</div>
+	{% endfor %}
+
+	<div class="row content-well">
+		<form class="form-horizontal" role="form" method="POST" action="{{ path('admin_save_series') }}">
+			<div class="form-group">
+				<label for="title" class="col-sm-2 control-label">Title</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="title" value="{% if series %}{{ series.title }}{% endif %}"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="image" class="col-sm-2 control-label">Image</label>
+				<div class="col-sm-10">
+			  		<span class="form-control btn btn-default btn-file">
+					    Browse <input type="file" name="file">
+					</span>
+					<input type="hidden" name="image" value="{% if series %}{{ series.image}}{% endif %}" />
+					<a href="{{imagePath(series.image)}}" target="_new" img-thumbnail>
+						<img src="{% if series %}{{ imagePath(series.image) }}{% endif %}" style="max-height: 30px;" />
+					</a>
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="summary" class="col-sm-2 control-label">Summary</label>
+				<div class="col-sm-10">
+					<input type="text" class="form-control" name="summary" value="{% if series %}{{ series.summary }}{% endif %}" />
+				</div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-offset-2 col-sm-10">
+					{% if series %}
+					<input type="hidden" value="{{ series.id }}" name="seriesid" />
+					{% endif %}
+					<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+				</div>
+			</div>
+		</form>
+	</div>
+</div>
+
+<div id="myModal" class="modal fade">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+				<h4 class="modal-title">Upload Image</h4>
+			</div>
+			<div class="modal-body">
+	        <span class="form-control btn btn-default btn-file">
+			    Browse <input type="file" name="file">
+			    <input type="hidden" value="" name="image" />
+			</span>
+				<a href="" target="_new" img-thumbnail>
+					<img src="" style="max-height: 30px;" />
+				</a>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+				<button type="button" class="btn btn-primary">Use</button>
+			</div>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+{% endblock %}
+{% block customcss %}
+<link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/sets/markdown/style.css" />
+{% endblock %}
+{% block customjs %}
+<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/sets/markdown/set.js"></script>
+
+<script src="/assets/js/admin.js"></script>
+{% endblock %}

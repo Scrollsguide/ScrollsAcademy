@@ -16,7 +16,7 @@
 				url = :url,
 				image = :image";
 
-			$isExistingSeries = ($seriesId = $series->getId()) !== null;
+			$isExistingSeries = ($seriesId = $series->getId()) !== 0;
 			if ($isExistingSeries) {
 				// old series, edit
 				$query = "UPDATE " . $this->getTableName() . " " . $setQuery .

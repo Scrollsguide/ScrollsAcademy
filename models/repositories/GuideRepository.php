@@ -77,7 +77,7 @@
 				`status` = :status,
 				video = :video";
 
-			$isExistingGuide = ($guideId = $guide->getId()) !== null;
+			$isExistingGuide = ($guideId = $guide->getId()) !== 0;
 			if ($isExistingGuide) {
 				// old guide, edit
 				$query = "UPDATE " . $this->getTableName() . " " . $setQuery .

@@ -111,7 +111,7 @@
 			$em = $this->getApp()->get("EntityManager");
 			$guideRepository = $em->getRepository("Guide");
 
-			// look for guides in the repo
+			// look for guide in the repo
 			if (($guide = $guideRepository->findOneBy("url", $url)) !== false) {
 				// map guide categories to categories
 				$guideCategories = $guideRepository->findGuideCategories($guide);
@@ -269,7 +269,7 @@
 			// set save message
 			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Guide saved.");
 
-			// redirect to homepage
+			// return to edit guide page
 			$guideRoute = $this->getApp()->getRouter()->generateUrl("admin_edit_guide", array("title" => $g->getUrl()));
 
 			return new RedirectResponse($guideRoute);
@@ -312,6 +312,82 @@
 				"title"  => "Series",
 				"series" => $series
 			));
+		}
+
+		public function newSeriesAction() {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			return $this->render("admin/edit_series.html", array(
+				"title" => "New series"
+			));
+		}
+
+		public function editSeriesAction($url) {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$seriesRepository = $em->getRepository("Series");
+
+			// look for series in the repo
+			if (($series = $seriesRepository->findOneBy("url", $url)) !== false) {
+				return $this->render("admin/edit_series.html", array(
+					"title"      => "Edit series",
+					"series"      => $series
+				));
+			} else { // series not found in the repository
+				$r = new HtmlResponse();
+				$r->setContent("Series not found");
+			}
+
+			return $r;
+		}
+
+		public function doSaveSeriesAction() {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			$r = $this->getApp()->getRequest();
+
+			$title = $r->getParameter("title");
+
+			$s = new Series();
+			if (($seriesId = $r->getParameter("seriesid", 0)) !== 0) {
+				// edit series
+				$s->setId($seriesId);
+			} else {
+				// make new series, so don't set id in series
+			}
+
+			$s->setTitle($title);
+			$s->setSummary($r->getParameter("summary"));
+			$s->setURL(URLUtils::makeBlob($title));
+			$s->setImage($r->getParameter("image"));
+
+			$em = $this->getApp()->get("EntityManager");
+			$seriesRepository = $em->getRepository("Series");
+
+			$seriesRepository->persist($s);
+
+			// clear rendered series html page from cache so it's refreshed immediately
+			$route = $this->getApp()->getRouter()->getRoute("view_series");
+			$route->set("urlMatch", array($s->getUrl()));
+
+			$cacheKey = RouteHelper::getCacheKey($route);
+			$this->getApp()->getCache()->remove("Pages/" . $cacheKey);
+
+			// set save message
+			$this->getApp()->getSession()->getFlashBag()->add("series_message", "Series saved.");
+
+			// return to edit series page
+			$seriesRoute = $this->getApp()->getRouter()->generateUrl("admin_edit_series", array("title" => $s->getUrl()));
+
+			return new RedirectResponse($seriesRoute);
 		}
 
 		public function uploadImageAction() {

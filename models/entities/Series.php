@@ -10,6 +10,8 @@
 
 		private $image;
 
+		private $summary;
+
 		public function getId() {
 			return (int)$this->id;
 		}
@@ -32,6 +34,14 @@
 
 		public function getUrl() {
 			return $this->url;
+		}
+
+		public function getSummary() {
+			return $this->summary;
+		}
+
+		public function setSummary($summary) {
+			$this->summary = $summary;
 		}
 
 		public function getImage() {
