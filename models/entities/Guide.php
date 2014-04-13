@@ -27,7 +27,7 @@
 		}
 
 		public function getId() {
-			return $this->id;
+			return (int)$this->id;
 		}
 
 		public function setId($id) {
@@ -99,7 +99,7 @@
 		}
 
 		public function getStatus() {
-			return $this->status;
+			return (int)$this->status;
 		}
 
 		public function setStatus($status) {

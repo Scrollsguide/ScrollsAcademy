@@ -5,7 +5,7 @@
 {% block content %}
 	<div class="row content-block">
 		<div class="col-md-12 category-hdr">
-			<h4><i class="fa fa-cogs"></i> {% if guide %}<a href="{{ path('view_guide', { 'title': guide.url }) }}">{{ guide.title }}</a>{% else %}New guide{% endif %}</h4>
+			<h4><i class="fa fa-cogs"></i> {% if guide %}<a href="{{ path('view_guide', { 'title': guide.url }) }}" target="_blank">{{ guide.title }}</a>{% else %}New guide{% endif %}</h4>
 		</div>
 		<div class="row content-well">
 			<form class="form-horizontal" role="form" method="POST" action="{{ path('admin_save_guide') }}">
