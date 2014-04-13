@@ -361,6 +361,8 @@ a.video-container:hover .play-container {
 
 .content-well p {
     margin-bottom: 30px;
+    display: inline-block;
+    width: 100%;
 }
 
 .content-well h5 {
@@ -383,6 +385,7 @@ a.video-container:hover .play-container {
 .content-well.primary-content img { 
     width: 100%;
     margin-bottom: 30px;
+    display: block;
 }
 
 .content-well h5 + blockquote { /*header followed by a blockquote*/
@@ -402,6 +405,16 @@ a.video-container:hover .play-container {
 }
 .content-well p > img { /*image inside a paragraph*/
     margin-top: 30px;
+}
+.content-well p > img.left {
+    float: left;
+}
+.content-well p > img.right {
+    float: right;
+    margin-right: 0;
+}
+.content-well p > img.center {
+    margin: auto;
 }
 .content-well.primary-content > a {
     margin-bottom: 30px;

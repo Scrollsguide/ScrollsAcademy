@@ -224,7 +224,7 @@
 			// convert markdown to html
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
 
-			$htmlFromMarkdown = Markdown::defaultTransform($content);
+			$htmlFromMarkdown = MarkdownExtra::defaultTransform($content);
 			$g->setContent($htmlFromMarkdown);
 
 			$em = $this->getApp()->get("EntityManager");
