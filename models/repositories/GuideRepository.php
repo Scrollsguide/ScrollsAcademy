@@ -1,45 +1,47 @@
 <?php
+
 	class GuideRepository extends Repository {
-	
-		public function getTableName(){
+
+		public function getTableName() {
 			return "guides";
 		}
-	
-		public function getEntityName(){
+
+		public function getEntityName() {
 			return "Guide";
 		}
-		
-		public function findAllByCategory($categoryString){
+
+		public function findAllByCategory($categoryString) {
 			$sth = $this->getConnection()->prepare("SELECT A.*
 						FROM guides A, guidecategories AC, categories C
 						WHERE C.name = :category
 						AND AC.categoryid = C.id
 						AND AC.guideid = A.id");
 			$sth->bindParam(":category", $categoryString, PDO::PARAM_STR);
-			
+
 			$sth->execute();
-			
+
 			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
 			foreach ($guides as $guide) {
 				$categories = $this->findGuideCategories($guide);
-				foreach ($categories as $category){
+				foreach ($categories as $category) {
 					$guide->addCategory($category);
 				}
 			}
+
 			return $guides;
 		}
 
 		//this should use a minimal query since it only is looking for one guide
 		public function findRandomByCategory($categoryString) {
 			$all = $this->findAllByCategory($categoryString);
-			
-			if (empty($all)){
+
+			if (empty($all)) {
 				return false;
 			}
-			
+
 			return $all[array_rand($all)];
 		}
-		
+
 
 		public function findGuideCategories(Guide $guide) {
 			$sth = $this->getConnection()->prepare("SELECT C.name
@@ -50,11 +52,11 @@
 			$sth->bindValue(":guideId", $guide->getId(), PDO::PARAM_INT);
 
 			$sth->execute();
-			
+
 			return $sth->fetchAll(PDO::FETCH_ASSOC);
 		}
 
-		public function findAllCategories(){
+		public function findAllCategories() {
 			$sth = $this->getConnection()->prepare("SELECT *
 				FROM categories");
 
@@ -64,7 +66,7 @@
 		}
 
 		// saves guide to database
-		public function persist(Guide $guide){
+		public function persist(Guide $guide) {
 			$setQuery = "SET title = :title,
 				summary = :summary,
 				content = :content,
@@ -75,7 +77,7 @@
 				`status` = :status";
 
 			$isExistingGuide = ($guideId = $guide->getId()) !== null;
-			if ($isExistingGuide){
+			if ($isExistingGuide) {
 				// old guide, edit
 				$query = "UPDATE " . $this->getTableName() . " " . $setQuery .
 					" WHERE id = :id";
@@ -87,6 +89,7 @@
 				$sth->execute();
 			} else {
 				// new guide, add
+				$setQuery .= ", date = UNIX_TIMESTAMP()"; // temporary solution
 				$query = "INSERT INTO " . $this->getTableName() . " " . $setQuery;
 			}
 
@@ -100,21 +103,21 @@
 			$sth->bindValue(":url", $guide->getUrl(), PDO::PARAM_STR);
 			$sth->bindValue(":image", $guide->getImage(), PDO::PARAM_STR);
 			$sth->bindValue(":status", $guide->getStatus(), PDO::PARAM_INT);
-			if ($isExistingGuide){
+			if ($isExistingGuide) {
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
 			}
 
 			$sth->execute();
 
 			// now update categories
-			if (!$isExistingGuide){
+			if (!$isExistingGuide) {
 				$guideId = $this->getConnection()->lastInsertId();
 			}
 
 			// watch out! Not at all consistent with a regular guide request
 			// since getCategories() returns a list of ids here, not strings
 			$this->getConnection()->beginTransaction();
-			foreach ($guide->getCategories() as $category){
+			foreach ($guide->getCategories() as $category) {
 				$sth = $this->getConnection()->prepare("INSERT INTO guidecategories
 					SET guideid = :id, categoryid = :catid");
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
