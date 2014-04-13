@@ -36,6 +36,9 @@
 	.guide-header h2 {
 		line-height: 150px;
 	}
+	.guide-header.video-header h2 {
+		line-height: 50px;	
+	}
 	.content-well h5 {
 		clear: both;
 	}
