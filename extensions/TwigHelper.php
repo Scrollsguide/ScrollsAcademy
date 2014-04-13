@@ -1,17 +1,18 @@
 <?php
+
 	class TwigHelper {
-		
+
 		private $app;
-		
-		public function __construct(App $app){
+
+		public function __construct(App $app) {
 			$this->app = $app;
 		}
-		
-		public static function registerHelpers(App $app, Twig_Environment $twig){
+
+		public static function registerHelpers(App $app, Twig_Environment $twig) {
 			$t = new self($app);
-			
+
 			// functions
-			$twig->addFunction(new Twig_SimpleFunction("dump", function($arg){
+			$twig->addFunction(new Twig_SimpleFunction("dump", function ($arg) {
 				return var_dump($arg);
 			}));
 			$twig->addFunction(new Twig_SimpleFunction("path", array($t, "path")));
@@ -24,20 +25,20 @@
 			
 			// filters
 			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
-			
+
 			// variables
 			$twig->addGlobal('app', $app);
 
 			//set the timezone so the date helper can work properly
 			$twig->getExtension('core')->setTimezone('Europe/Paris');
 		}
-		
+
 		/**
 		 * path() function in twig templates
 		 * Usage: path("routeId", { "param1": "paramval" });
 		 * routeParams is optional
 		 */
-		public function path($routeId, $routeParams = array()){
+		public function path($routeId, $routeParams = array()) {
 			return $this->app->getRouter()->generateUrl($routeId, $routeParams);
 		}
 
@@ -45,26 +46,26 @@
 		public function fullPath($routeId, $routeParams = array()) {
 			return $this->app->getRequest()->getURL()->getBaseURL() . $this->path($routeId, $routeParams);
 		}
-		
-		public function currentRoute(){
+
+		public function currentRoute() {
 			return $this->app->getRoute();
 		}
 
 		public function imagePath($filename) {
 			return $this->app->getRequest()->getURL()->getBaseURL() . '/assets/images/user-imgs/' . $filename;
 		}
-		
-		public function cut($str, $length = 30, $toSpace = true, $last = "..."){
-			if (strlen($str) <= $length){
+
+		public function cut($str, $length = 30, $toSpace = true, $last = "...") {
+			if (strlen($str) <= $length) {
 				return $str;
 			}
-			
-			if ($toSpace){
-				if (($break = strpos($str, " ", $length)) !== false){
+
+			if ($toSpace) {
+				if (($break = strpos($str, " ", $length)) !== false) {
 					$length = $break;
 				}
 			}
-			
+
 			return rtrim(substr($str, 0, $length)) . $last;
 		}
 
@@ -79,21 +80,21 @@
 		*/
 		public function categoryIcon($category) {
 			$iconMap = array(
-				'about' 	=> 'info',
-				'beginner'	=> 'cogs',
-				'intermediate'	=> 'star',
-				'master'	=> 'trophy',
-				'video'		=> 'video-camera',
-				'strategy'	=> 'puzzle-piece',
-				'decks'		=> 'inbox',
-				'judgement'	=> 'flag',
-				'ui'		=> 'laptop',
-				'404'		=> 'exclamation',
-				'forum'		=> 'comments',
-				'wiki'		=> 'globe'
+				'about'        => 'info',
+				'beginner'     => 'cogs',
+				'intermediate' => 'star',
+				'master'       => 'trophy',
+				'video'        => 'video-camera',
+				'strategy'     => 'puzzle-piece',
+				'decks'        => 'inbox',
+				'judgement'    => 'flag',
+				'ui'           => 'laptop',
+				'404'          => 'exclamation',
+				'forum'        => 'comments',
+				'wiki'         => 'globe'
 			);
 			$category = strtolower($category);
 
 			return isset($iconMap[$category]) ? $iconMap[$category] : '';
-		}	
+		}
 	}

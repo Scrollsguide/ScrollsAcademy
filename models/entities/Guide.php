@@ -12,6 +12,8 @@
 
 		private $content;
 
+		private $date;
+
 		private $url;
 
 		private $author;
@@ -58,6 +60,14 @@
 
 		public function setSummary($summary) {
 			$this->summary = $summary;
+		}
+
+		public function getDate() {
+			return $this->date;
+		}
+
+		public function setDate($date) {
+			$this->date = $date;
 		}
 
 		public function getMarkdown() {

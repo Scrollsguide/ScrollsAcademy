@@ -50,6 +50,17 @@
 			"action": "Admin::doHomepageSave",
 			"method": "POST"
 		},
+		"admin_series":{
+			"path": "/admin/series",
+			"action": "Admin::series"
+		},
+		"admin_edit_series": {
+			"path": "/admin/series/edit/{title}",
+			"requirements": {
+				"title": "[a-z0-9-]+"
+			},
+			"action": "Admin::editSeries"
+		},
 		"admin_upload_image": {
 			"path": "/admin/image/save",
 			"action": "Admin::uploadImage",

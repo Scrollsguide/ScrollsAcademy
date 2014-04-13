@@ -22,7 +22,9 @@
 				return new RedirectResponse($indexRoute->get("path"));
 			}
 
-			return $this->render("admin/login.html");
+			return $this->render("admin/login.html", array(
+				"title" => "Admin login"
+			));
 		}
 
 		// contains POST login information
@@ -79,6 +81,7 @@
 			$guides = $guideRepository->findAll();
 
 			return $this->render("admin/index.html", array(
+				"title"  => "Academy admin",
 				"guides" => $guides
 			));
 		}
@@ -94,6 +97,7 @@
 			$allCategories = $guideRepository->findAllCategories();
 
 			return $this->render("admin/edit_guide.html", array(
+				"title"      => "New guide",
 				"categories" => $allCategories
 			));
 		}
@@ -122,6 +126,7 @@
 				}
 
 				return $this->render("admin/edit_guide.html", array(
+					"title"      => "Edit guide",
 					"guide"      => $guide,
 					"categories" => $allCategories
 				));
@@ -159,6 +164,7 @@
 				}
 
 				return $this->render("admin/edit_homepage.html", array(
+					"title"    => "Admin index",
 					"homepage" => $homepage,
 					"guides"   => $tplGuides
 				));
@@ -284,9 +290,27 @@
 			$g->setContent($htmlFromMarkdown);
 
 			return $this->render("guide.html", array(
-				"guide" => $g,
-				"title" => 'Guide Preview',
+				"guide"   => $g,
+				"title"   => 'Guide Preview',
 				"preview" => true
+			));
+		}
+
+		public function seriesAction() {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$seriesRepository = $em->getRepository("Series");
+
+			// look for series in the repo
+			$series = $seriesRepository->findAll();
+
+			return $this->render("admin/series_index.html", array(
+				"title"  => "Series",
+				"series" => $series
 			));
 		}
 
