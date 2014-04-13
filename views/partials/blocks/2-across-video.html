@@ -1,0 +1,13 @@
+<div class="row content-block">
+	{% if guides[0].video %}
+		{% include 'partials/touts/video-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'collapseMedium': 6 } %}
+	{% else %}
+		{% include 'partials/touts/single-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'collapseMedium': 6 } %}
+	{% endif %}
+
+	{% if guides[1].video %}
+		{% include 'partials/touts/video-item.html' with { 'guide': guides[1], 'collapseClass': '12', 'collapseMedium': 6 } %}
+	{% else %}
+		{% include 'partials/touts/single-item.html' with { 'guide': guides[1], 'collapseClass': '12', 'collapseMedium': 6 } %}
+	{% endif %}
+</div>
