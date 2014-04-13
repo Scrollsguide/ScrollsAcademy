@@ -72,7 +72,8 @@
 		public function getIdFromEmbed($str) {
 			$parts = explode('youtube.com/embed/', $str);
 
-			return explode('"', $parts[1])[0];
+			$ex = explode('"', $parts[1]);
+			return $ex[0];
 		}
 
 		/*
