@@ -271,6 +271,7 @@
 			if (!$this->userPerms()) {
 				return $this->toLogin();
 			}
+			$g = new Guide();
 
 			$guideMarkdown = $r = $this->getApp()->getRequest()->getParameter("guide");
 
@@ -278,10 +279,13 @@
 
 			$htmlFromMarkdown = MarkdownExtra::defaultTransform($guideMarkdown);
 
-			$r = new JsonResponse();
-			$r->setContent(array("html" => $htmlFromMarkdown));
+			$g->setContent($htmlFromMarkdown);
 
-			return $r;
+			return $this->render("guide.html", array(
+				"guide" => $g,
+				"title" => 'Guide Preview',
+				"preview" => true
+			));
 		}
 
 		public function uploadImageAction() {

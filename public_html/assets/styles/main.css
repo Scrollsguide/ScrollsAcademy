@@ -548,10 +548,23 @@ p > i.faction-growth {
     display: block;
 }
 
-.redactor_modal_btn {
-    width: 247px !important;
+.markItUp, .markItUpContainer {
+    border: 0;
+    background: none;
+    width: 100%;
 }
-
-.uploadbtn {
-    margin: 20px auto;
+.content-well .markItUp ul, .content-well .markItUp ol {
+    margin: 0;
+}
+.markItUpHeader ul li {
+    margin: 0 5px 5px 0;
+}
+.markdown .markItUpEditor {
+    background-color: #fff;
+    background-image: none;
+    padding: 5px;
+    width: 100%;
+}
+.markItUpButton1, .markItUpButton2, .markItUpButton3, .markItUpButton4, .markItUpButton6, .markItUpButton14 {
+    display: none;
 }

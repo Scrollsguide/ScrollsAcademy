@@ -5,7 +5,7 @@
 {% block content %}
 	<div class="row content-block">
 		<div class="col-md-12 category-hdr">
-			<h4><i class="fa fa-cogs"></i> {% if guide %}{{ guide.title }}{% else %}New guide{% endif %}</h4>
+			<h4><i class="fa fa-cogs"></i> {% if guide %}<a href="{{ path('view_guide', { 'title': guide.url }) }}">{{ guide.title }}</a>{% else %}New guide{% endif %}</h4>
 		</div>
 		<div class="row content-well">
 			<form class="form-horizontal" role="form" method="POST" action="{{ path('admin_save_guide') }}">
@@ -42,10 +42,8 @@
 			  <div class="form-group">
 				<label for="content" class="col-sm-2 control-label">Content</label>
 				<div class="col-sm-10">
-				  <!-- the actual content -->
-				  <textarea name="content" style="display: none"></textarea>
 				  <!-- the redactor editor -->
-				  <textarea class="form-control" id="redactor">{% if guide %}{{ guide.markdown }}{% endif %}</textarea>
+				  <textarea class="form-control" id="markdown" name="content" rows="20">{% if guide %}{{ guide.markdown }}{% endif %}</textarea>
 				</div>
 			  </div>
 			  {% for category in categories %}
@@ -70,29 +68,14 @@
 			</form>
 		</div>
 	</div>
-
-	<div id="imageuploader" style="display: none;">
-	    <section>
-	  		<span class="btn btn-default btn-file uploadbtn">
-			    Browse <input type="file" name="inline-file">
-			</span>
-	  		<input type="hidden" name="imagepath" />
-	  		<a href="" target="_new" thumbnail>
-	  			<img src="" style="max-height: 80px;" />
-	  		</a>
-	    </section>
-	    <footer>
-	        <button class="redactor_modal_btn redactor_modal_action_btn" id="imageuploader-insert">Insert</button>
-	        <button class="redactor_modal_btn redactor_btn_modal_close">Close</button>
-	    </footer>
-	</div>
 {% endblock %}
 {% block customcss %}
-<link rel="stylesheet" href="http://imperavi.com/js/redactor/redactor.css" />
+<link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/sets/markdown/style.css" />
 {% endblock %}
 {% block customjs %}
-	<script src="http://imperavi.com/js/redactor/redactor.js"></script>
-	<script src="/assets/js/vendor/marked.js"></script>
-	<script src="/assets/js/vendor/remarked.js"></script>
+	<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/jquery.markitup.js"></script>
+	<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/sets/markdown/set.js"></script>
+
 	<script src="/assets/js/admin.js"></script>
 {% endblock %}

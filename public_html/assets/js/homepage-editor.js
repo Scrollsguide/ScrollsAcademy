@@ -34,7 +34,6 @@
 				var cpy = newRow.clone();
 				var childs = cpy.find('select[name$="[guides][]"] option');
 				for (var j = 0; j < childs.length; j++){
-					console.log(childs[j].value);
 					if (childs[j].value === guides[i]){
 						cpy.find('select[name$="[guides][]"]').val(guides[i]);
 					}

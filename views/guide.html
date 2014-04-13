@@ -17,7 +17,9 @@
     	{{ guide.getContent() | raw }}
     </div>
 
-    {% include 'partials/social.html' with { 'guide': guide } %}
+    {% if preview != true %}
+        {% include 'partials/social.html' with { 'guide': guide } %}
+    {% endif %}
 
     <!-- type 2, three articles -->
     {% if relatedGuides|length %}
