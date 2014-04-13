@@ -20,6 +20,7 @@
 			$twig->addFunction(new Twig_SimpleFunction("categoryIcon", array($t, "categoryIcon")));
 			$twig->addFunction(new Twig_SimpleFunction("imagePath", array($t, "imagePath")));
 			$twig->addFunction(new Twig_SimpleFunction("categoryClass", array($t, "categoryClass")));
+			$twig->addFunction(new Twig_SimpleFunction("getIdFromEmbed", array($t, "getIdFromEmbed")));
 			
 			// filters
 			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
@@ -65,6 +66,12 @@
 			}
 			
 			return rtrim(substr($str, 0, $length)) . $last;
+		}
+
+		public function getIdFromEmbed($str) {
+			$parts = explode('youtube.com/embed/', $str);
+
+			return explode('"', $parts[1])[0];
 		}
 
 		/*

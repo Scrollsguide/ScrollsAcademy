@@ -230,6 +230,7 @@
 			$g->setMarkdown($content);
 			$g->setStatus($r->getParameter("status"));
 			$g->setImage($r->getParameter("image"));
+			$g->setVideo($r->getParameter("video"));
 
 			// convert markdown to html
 			// don't just require the markdown class as it needs more than one
