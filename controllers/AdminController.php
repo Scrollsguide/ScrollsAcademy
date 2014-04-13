@@ -270,9 +270,9 @@
 			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Guide saved.");
 
 			// redirect to homepage
-			$indexRoute = $this->getApp()->getRouter()->getRoute("admin_index");
+			$guideRoute = $this->getApp()->getRouter()->generateUrl("admin_edit_guide", array("title" => $g->getUrl()));
 
-			return new RedirectResponse($indexRoute->get("path"));
+			return new RedirectResponse($guideRoute);
 		}
 
 		public function precompileGuideAction() {

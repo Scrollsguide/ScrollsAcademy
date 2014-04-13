@@ -13,9 +13,6 @@
 			</div>
 		</div>
 
-		{% for flash in app.session.flashbag.get('guide_message') %}
-			<div class="alert alert-success">{{ flash }}</div>
-		{% endfor %}
 		{% for flash in app.session.flashbag.get('homepage_message') %}
 			<div class="alert alert-success">{{ flash }}</div>
 		{% endfor %}
