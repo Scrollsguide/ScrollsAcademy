@@ -1,8 +1,9 @@
 <?php
+
 	class Guide {
-	
+
 		private $id;
-	
+
 		private $title;
 
 		private $summary;
@@ -10,40 +11,42 @@
 		private $markdown;
 
 		private $content;
-		
+
 		private $url;
 
 		private $author;
 
 		private $image;
-		
+
+		private $status;
+
 		private $categories = array();
-		
-		public function __construct(){
-			
+
+		public function __construct() {
+
 		}
-		
-		public function getId(){
+
+		public function getId() {
 			return $this->id;
 		}
 
-		public function setId($id){
+		public function setId($id) {
 			$this->id = $id;
 		}
 
-		public function setUrl($url){
+		public function setUrl($url) {
 			$this->url = $url;
 		}
 
-		public function getUrl(){
+		public function getUrl() {
 			return $this->url;
 		}
-		
-		public function getTitle(){
+
+		public function getTitle() {
 			return $this->title;
 		}
-		
-		public function setTitle($title){
+
+		public function setTitle($title) {
 			$this->title = $title;
 		}
 
@@ -55,44 +58,60 @@
 			$this->summary = $summary;
 		}
 
-		public function getMarkdown(){
+		public function getMarkdown() {
 			return $this->markdown;
 		}
 
-		public function setMarkdown($markdown){
+		public function setMarkdown($markdown) {
 			$this->markdown = $markdown;
 		}
 
-		public function getContent(){
+		public function getContent() {
 			return $this->content;
 		}
-		
-		public function setContent($content){
+
+		public function setContent($content) {
 			$this->content = $content;
 		}
-		
-		public function getImage(){
+
+		public function getImage() {
 			return $this->image;
 		}
-		
-		public function setImage($image){
+
+		public function setImage($image) {
 			$this->image = $image;
 		}
 
-		public function getAuthor(){
+		public function getAuthor() {
 			return $this->author;
 		}
 
-		public function setAuthor($author){
+		public function setAuthor($author) {
 			$this->author = $author;
 		}
-		
-		public function addCategory($category){
-			$this->categories[] = $category;
-		}
-		
-		public function getCategories(){
+
+		public function getCategories() {
 			return $this->categories;
 		}
-		
+
+		public function addCategory($category) {
+			$this->categories[] = $category;
+		}
+
+		public function getStatus() {
+			return $this->stats;
+		}
+
+		public function setStatus($status) {
+			$this->status = $status;
+		}
+
+	}
+
+	class GuideStatus {
+
+		const HIDDEN = 0; // never visible
+		const VISIBLE_WITH_URL = 1; // only visible with correct url
+		const VISIBLE = 2; // visible always and everywhere
+
 	}

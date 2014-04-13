@@ -8,32 +8,33 @@
 			
 			// look for guide in the repo
 			if (($guide = $guideRepository->findOneBy("url", $url)) !== false){
+				// check visibility
+				if ($guide->getStatus() > 0){
+					// For now we just get one guide of each level - TODO use the tags from the guide
+					$relatedGuides = array();
+					//get the random guides for the relateds
+					$relatedGuides[] = $guideRepository->findRandomByCategory("beginner");
+					$relatedGuides[] = $guideRepository->findRandomByCategory("intermediate");
+					$relatedGuides[] = $guideRepository->findRandomByCategory("master");
 
-				// For now we just get one guide of each level - TODO use the tags from the guide
-				$relatedGuides = array();
-				//get the random guides for the relateds
-				$relatedGuides[] = $guideRepository->findRandomByCategory("beginner");
-				$relatedGuides[] = $guideRepository->findRandomByCategory("intermediate");
-				$relatedGuides[] = $guideRepository->findRandomByCategory("master");
+					// remove empty guides
+					$relatedGuides = array_filter($relatedGuides, function($e){ return $e !== false; });
 
-				// remove empty guides
-				$relatedGuides = array_filter($relatedGuides, function($e){ return $e !== false; });
-				
-				$categories = $guideRepository->findGuideCategories($guide);
-				foreach ($categories as $category){
-					$guide->addCategory($category);
+					$categories = $guideRepository->findGuideCategories($guide);
+					foreach ($categories as $category){
+						$guide->addCategory($category);
+					}
+
+					return $this->render("guide.html", array(
+						"guide" => $guide,
+						"title" => $guide->getTitle(),
+						"relatedGuides" => $relatedGuides
+					));
+				} else { // guide not visible
+					return $this->p404();
 				}
-
-				return $this->render("guide.html", array(
-					"guide" => $guide,
-					"title" => $guide->getTitle(),
-					"relatedGuides" => $relatedGuides
-				));
 			} else { // guide not found in the repository
-				$r = new HtmlResponse();
-				$r->setContent("Guide not found");
+				return $this->p404();
 			}
-			
-			return $r;
 		}
 	}
