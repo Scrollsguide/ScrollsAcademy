@@ -24,6 +24,8 @@
 
 		private $categories = array();
 
+		private $video; //raw embed code (maybe parse it later)
+
 		public function __construct() {
 
 		}
@@ -114,6 +116,14 @@
 
 		public function setStatus($status) {
 			$this->status = $status;
+		}
+
+		public function setVideo($video) {
+			$this->video = $video;
+		}
+
+		public function getVideo() {
+			return $this->video;
 		}
 
 	}

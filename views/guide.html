@@ -13,6 +13,11 @@
             <span class="date">{{ guide.date | date("F jS, Y") }}</span>
         </div>
     </div>
+    {% if guide.getVideo() %}
+    <div class="row video">
+        {{ guide.getVideo() | raw }}
+    </div>
+    {% endif %}
     <div class="row content-well primary-content">
     	{{ guide.getContent() | raw }}
     </div>

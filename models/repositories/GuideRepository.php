@@ -74,7 +74,8 @@
 				url = :url,
 				author = :author,
 				image = :image,
-				`status` = :status";
+				`status` = :status,
+				video = :video";
 
 			$isExistingGuide = ($guideId = $guide->getId()) !== null;
 			if ($isExistingGuide) {
@@ -103,7 +104,9 @@
 			$sth->bindValue(":url", $guide->getUrl(), PDO::PARAM_STR);
 			$sth->bindValue(":image", $guide->getImage(), PDO::PARAM_STR);
 			$sth->bindValue(":status", $guide->getStatus(), PDO::PARAM_INT);
-			if ($isExistingGuide) {
+			$sth->bindValue(":video", $guide->getVideo(), PDO::PARAM_STR);
+
+			if ($isExistingGuide){
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
 			}
 
