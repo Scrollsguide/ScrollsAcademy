@@ -9,7 +9,7 @@
 		</div>
 		
 		{% for flash in app.session.flashbag.get('admin_login_message') %}
-			{{ flash }}
+			<div class="alert alert-success">{{ flash }}</div>
 		{% endfor %}
 		
 		<div class="row content-well">
