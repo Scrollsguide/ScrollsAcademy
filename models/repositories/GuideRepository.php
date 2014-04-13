@@ -71,7 +71,8 @@
 				markdown = :markdown,
 				url = :url,
 				author = :author,
-				image = :image";
+				image = :image,
+				`status` = :status";
 
 			$isExistingGuide = ($guideId = $guide->getId()) !== null;
 			if ($isExistingGuide){
@@ -98,6 +99,7 @@
 			$sth->bindValue(":author", $guide->getAuthor(), PDO::PARAM_STR);
 			$sth->bindValue(":url", $guide->getUrl(), PDO::PARAM_STR);
 			$sth->bindValue(":image", $guide->getImage(), PDO::PARAM_STR);
+			$sth->bindValue(":status", $guide->getStatus(), PDO::PARAM_INT);
 			if ($isExistingGuide){
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
 			}

@@ -99,7 +99,7 @@
 		}
 
 		public function getStatus() {
-			return $this->stats;
+			return $this->status;
 		}
 
 		public function setStatus($status) {
