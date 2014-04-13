@@ -54,12 +54,21 @@
 			"path": "/admin/series",
 			"action": "Admin::series"
 		},
+		"admin_new_series": {
+			"path": "/admin/series/new",
+			"action": "Admin::newSeries"
+		},
 		"admin_edit_series": {
 			"path": "/admin/series/edit/{title}",
 			"requirements": {
 				"title": "[a-z0-9-]+"
 			},
 			"action": "Admin::editSeries"
+		},
+		"admin_save_series": {
+			"path": "/admin/series/save",
+			"action": "Admin::doSaveSeries",
+			"method": "POST"
 		},
 		"admin_upload_image": {
 			"path": "/admin/image/save",

@@ -29,6 +29,25 @@
 			},
 			"action": "Guide::viewGuide"
 		},
+		"view_series": {
+			"path": "/series",
+			"action": "Series::index"
+		},
+		"series_guide_list": {
+			"path": "/series/{title}",
+			"requirements": {
+				"title": "[a-z0-9-]+"
+			},
+			"action": "Series::viewSeries"
+		},
+		"series_guide": {
+			"path": "/series/{title}/{guideTitle}",
+			"requirements": {
+				"title": "[a-z0-9-]+",
+				"guideTitle": "[a-z0-9-]+"
+			},
+			"action": "Series::viewSeries"
+		},
 		"view_avatar": {
 			"path": "/assets/images/avatar/{user}",
 			"requirements": {
