@@ -323,14 +323,17 @@
 			}
 
 			if (!$error) {
-				//all good, move it
+				// all good, move it
+				// avoid duplicates by just using the hash of the file as filename
 				$ext = pathinfo($image['name'], PATHINFO_EXTENSION);
-				$filename = uniqid(rand()) . "." . $ext;
+				$filename = md5(file_get_contents($image['tmp_name'])) . "." . $ext;
 
 				$filePath = self::USERIMAGEDIRECTORY . $filename;
 				$newLocation = $this->getApp()->getBaseDir() . $filePath;
 
-				move_uploaded_file($tmpPath, $newLocation);
+				if (!file_exists($newLocation)) {
+					move_uploaded_file($tmpPath, $newLocation);
+				}
 				$r->setContent(array('success' => true, 'filename' => $filename));
 			}
 
