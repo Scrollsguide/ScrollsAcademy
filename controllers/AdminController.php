@@ -83,7 +83,7 @@
 			));
 		}
 
-		public function newGuideAction(){
+		public function newGuideAction() {
 			if (!$this->userPerms()) {
 				return $this->toLogin();
 			}
@@ -113,16 +113,16 @@
 				$guideCategories = $guideRepository->findGuideCategories($guide);
 				$allCategories = $guideRepository->findAllCategories();
 
-				foreach ($allCategories as $key => $c){
+				foreach ($allCategories as $key => $c) {
 					$contains = false;
-					for ($i = 0; $i < count($guideCategories) && !$contains; $i++){
+					for ($i = 0; $i < count($guideCategories) && !$contains; $i++) {
 						$contains |= $guideCategories[$i]['name'] === $c['name'];
 					}
 					$allCategories[$key]['in'] = $contains;
 				}
 
 				return $this->render("admin/edit_guide.html", array(
-					"guide" => $guide,
+					"guide"      => $guide,
 					"categories" => $allCategories
 				));
 			} else { // guide not found in the repository
@@ -154,29 +154,34 @@
 
 				// map guides to array with id as index
 				$tplGuides = array();
-				foreach ($guides as $guide){
+				foreach ($guides as $guide) {
 					$tplGuides[$guide->getId()] = $guide;
 				}
 
 				return $this->render("admin/edit_homepage.html", array(
 					"homepage" => $homepage,
-					"guides" => $tplGuides
+					"guides"   => $tplGuides
 				));
 			} else {
 				$r = new HtmlResponse();
 				$r->setContent("Homepage not found");
 			}
+
 			return $r;
 		}
 
 		public function doHomepageSaveAction() {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
 			$r = $this->getApp()->getRequest();
 
 			$blocks = $r->getParameter('blocks');
 
 			$h = new Homepage();
 
-			if (($homepageId = $r->getParameter("homepageid", 0)) !== 0){
+			if (($homepageId = $r->getParameter("homepageid", 0)) !== 0) {
 				// edit homepage
 				$h->setId($homepageId);
 			}
@@ -202,13 +207,17 @@
 		}
 
 		public function doSaveAction() {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
 			$r = $this->getApp()->getRequest();
 
 			$title = $r->getParameter("title");
 			$content = $r->getParameter("content");
 
 			$g = new Guide();
-			if (($guideId = $r->getParameter("guideid", 0)) !== 0){
+			if (($guideId = $r->getParameter("guideid", 0)) !== 0) {
 				// edit guide
 				$g->setId($guideId);
 			} else {
@@ -234,8 +243,8 @@
 			// load categories and check whether they're toggled or not
 			$categories = $guideRepository->findAllCategories();
 
-			foreach ($categories as $category){
-				if ($r->getParameter("category_" . $category['id'], 0) === "on"){
+			foreach ($categories as $category) {
+				if ($r->getParameter("category_" . $category['id'], 0) === "on") {
 					$g->addCategory($category['id']);
 				}
 			}
@@ -258,7 +267,28 @@
 			return new RedirectResponse($indexRoute->get("path"));
 		}
 
+		public function precompileGuideAction() {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			$guideMarkdown = $r = $this->getApp()->getRequest()->getParameter("guide");
+
+			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
+
+			$htmlFromMarkdown = MarkdownExtra::defaultTransform($guideMarkdown);
+
+			$r = new JsonResponse();
+			$r->setContent(array("html" => $htmlFromMarkdown));
+
+			return $r;
+		}
+
 		public function uploadImageAction() {
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
 			$request = $this->getApp()->getRequest();
 			$files = $request->getFiles();
 			$image = $files[0];
@@ -270,28 +300,28 @@
 				$error = true;
 			}
 
-			if(!$image['name'] || !$image['tmp_name']) {
+			if (!$image['name'] || !$image['tmp_name']) {
 				$r->setContent(array('error' => 'No file name'));
 				$error = true;
 			}
 
-			if($image['error']) {
+			if ($image['error']) {
 				$r->setContent(array('error' => $image['error']));
 				$error = true;
 			}
-			if($image['size'] > (self::MAXUPLOADSIZE)) {
+			if ($image['size'] > (self::MAXUPLOADSIZE)) {
 				$r->setContent(array('error' => 'File size too large'));
 				$error = true;
 			}
 
 			$tmpPath = $image['tmp_name'];
-				
+
 			$isImage = @getimagesize($tmpPath) ? true : false; //ensure the file was actually an image
 			if (!$isImage) {
 				$r->setContent(array('error' => 'File is not a valid image'));
 				$error = true;
 			}
-				
+
 			if (!$error) {
 				//all good, move it
 				$ext = pathinfo($image['name'], PATHINFO_EXTENSION);
@@ -299,7 +329,7 @@
 
 				$filePath = self::USERIMAGEDIRECTORY . $filename;
 				$newLocation = $this->getApp()->getBaseDir() . $filePath;
-		
+
 				move_uploaded_file($tmpPath, $newLocation);
 				$r->setContent(array('success' => true, 'filename' => $filename));
 			}

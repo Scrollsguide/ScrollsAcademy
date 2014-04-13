@@ -28,6 +28,11 @@
 			},
 			"action": "Admin::editGuide"
 		},
+		"admin_precompile_guide": {
+			"path": "/admin/guide/precompile",
+			"action": "Admin::precompileGuide",
+			"method": "POST"
+		},
 		"admin_save_guide": {
 			"path": "/admin/guide/save",
 			"action": "Admin::doSave",
