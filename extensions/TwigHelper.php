@@ -72,7 +72,7 @@
 		*/
 		public function categoryIcon($category) {
 			$iconMap = array(
-				'about' 	=> 'exclamation',
+				'about' 	=> 'info',
 				'beginner'	=> 'cogs',
 				'intermediate'	=> 'star',
 				'master'	=> 'trophy',
@@ -81,7 +81,9 @@
 				'decks'		=> 'inbox',
 				'judgement'	=> 'flag',
 				'ui'		=> 'laptop',
-				'404'		=> 'exclamation'
+				'404'		=> 'exclamation',
+				'forum'		=> 'comments',
+				'wiki'		=> 'globe'
 			);
 			$category = strtolower($category);
 
