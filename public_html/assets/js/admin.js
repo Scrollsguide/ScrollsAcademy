@@ -7,20 +7,20 @@ if (typeof window.RedactorPlugins === 'undefined') {
 	var files;
 
 	// Grab the files and set them to our variable
-	function prepareUpload(cb) {
+	function prepareUpload(el, cb) {
 		files = event.target.files;
-		uploadFiles(cb);
+		uploadFiles(el, cb);
 
 		return false;
 	}
 
 	function init() {
 		$('input[name=file]').on('change', function() {
-			prepareUpload(updateForm);
+			prepareUpload($(this), updateForm);
 		});
 	}
 
-	function uploadFiles(callback) {
+	function uploadFiles(el, callback) {
 		// Create a formdata object and add the files
 		var data = new FormData();
 		$.each(files, function(key, value) {
@@ -38,7 +38,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 			success: function(data, textStatus, jqXHR) {
 				if (typeof data.error === 'undefined') {
 					// Success so call function to process the form
-					callback(data);
+					callback(el, data);
 				} else {
 					// Handle errors here
 					alert('error uploading image, see console for details');
@@ -53,48 +53,15 @@ if (typeof window.RedactorPlugins === 'undefined') {
 		});
 	}
 
-	function updateForm(data) {
+	function updateForm(el, data) {
 		var path = '/assets/images/user-imgs/' + data.filename;
-		var $thumb = $('[img-thumbnail]');
+		var $thumb = el.parent().parent().find('[img-thumbnail]');
 		$thumb.attr('href', path);
 		$thumb.find('img').attr('src', path);
-		$('input[name=image]').val(data.filename);
+		el.parent().parent().find('[name=image]').val(data.filename);
 	}
 
 	$(init);
-
-	window.RedactorPlugins.imgUploader = {
-		init: function() {
-			var self = this;
-
-			this.buttonAdd('imgUploader', 'Upload Image', this.imgUploader);
-			this.buttonAwesome('imgUploader', 'fa-camera');
-		},
-		imgUploader: function() {
-			var cb = $.proxy(function() {
-				this.selectionSave();
-				$('#redactor_modal #imageuploader-insert').click($.proxy(this.insertImage, this))
-
-				$('input[name=inline-file]').on('change', function(event) {
-					files = event.target.files;
-					prepareUpload(function(data) {
-						var path = '/assets/images/user-imgs/' + data.filename;
-						var $thumb = $('[thumbnail]');
-						$thumb.attr('href', path);
-						$thumb.find('img').attr('src', path);
-						$('#redactor_modal input[name=imagepath]').val(path);
-					});
-				});
-			}, this);
-
-			this.modalInit('Image Uploader', '#imageuploader', 500, cb);
-		},
-		insertImage: function(html) {
-			this.selectionRestore();
-			this.insertHtml('<img src="' + $('#redactor_modal input[name=imagepath]').val() + '" />');
-			this.modalClose();
-		}
-	}
 }());
 
 /* The guide editor */
@@ -148,7 +115,16 @@ if (typeof window.RedactorPlugins === 'undefined') {
 			name: 'Picture',
 			key: "P",
 			className: 'pic',
-			replaceWith: '![[![Alternative text]!]]([![Url:!:http://]!] "[![Title]!]")'
+			replaceWith: function(markItUp) {
+				$('#myModal').modal({});
+				$('#myModal .btn-primary').unbind().on('click', function() {
+					var src = $('#myModal [name=image]').val();
+					$.markItUp( 
+						{ replaceWith:'![](/assets/images/user-imgs/'+src+')' }
+					);
+					$('#myModal').modal('hide');
+				});
+			}
 		}, {
 			name: 'Picture Left',
 			className: "pic-left",
