@@ -406,15 +406,20 @@ a.video-container:hover .play-container {
 .content-well p > img { /*image inside a paragraph*/
     margin-top: 30px;
 }
-.content-well p > img.left {
+.content-well p > img.left,
+.content-well p > * > img.left {
     float: left;
 }
-.content-well p > img.right {
+.content-well p > img.right,
+.content-well p > * > img.right {
     float: right;
     margin-right: 0;
     margin-left: 30px;
 }
 .content-well p > img.center {
+    margin: auto;
+}
+.content-well p > * > img.center {
     margin: auto;
 }
 .content-well br {
