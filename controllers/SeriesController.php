@@ -30,6 +30,7 @@
 			}
 
 			return $this->render("serieslist.html", array(
+				"title"  => "Series",
 				"series" => $series
 			));
 		}
@@ -60,6 +61,7 @@
 				}
 
 				return $this->render("series.html", array(
+					"title"  => $series->getTitle(),
 					"series" => $series
 				));
 			} else {
