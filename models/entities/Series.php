@@ -55,7 +55,7 @@
 		}
 
 		public function addGuide($guide) {
-			array_push($this->guides, $guide);
+			$this->guides[] = $guide;
 		}
 
 		public function getGuides() {

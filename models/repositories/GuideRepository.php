@@ -36,7 +36,7 @@
 						FROM guides A, seriesguides B
 						WHERE B.seriesid = :id
 						AND A.id = B.guideid");
-			$sth->bindParam(":id", $seriesId, PDO::PARAM_STR);
+			$sth->bindParam(":id", $seriesId, PDO::PARAM_INT);
 
 			$sth->execute();
 
