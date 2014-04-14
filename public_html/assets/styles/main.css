@@ -520,8 +520,7 @@ p > i.faction-growth {
     margin: 30px 0;
     border-bottom: 1px solid #3d3d3d;
 }
-.category-hdr h4,
-.more-block h4 {
+.category-hdr h4 {
     text-shadow: none;
 }
 
