@@ -46,7 +46,7 @@
 				"title": "[a-z0-9-]+",
 				"guideTitle": "[a-z0-9-]+"
 			},
-			"action": "Series::viewSeries"
+			"action": "Guide::viewSeriesGuide"
 		},
 		"view_avatar": {
 			"path": "/assets/images/avatar/{user}",

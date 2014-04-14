@@ -4,12 +4,12 @@
         <div class="col-md-12 category-hdr">
             <h4>Academy Series!</h4>
         </div>
-		{% if series|length %}
+		{% if series %}
 			{% for list in series %}
 				{% include 'partials/touts/series.html' with { 'series': list } %}
 			{% endfor %}
 		{% else %}
-			No seriess in this category
+			No series in this category.
 		{% endif %}
 	</div>
 {% endblock %}

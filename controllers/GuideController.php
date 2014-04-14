@@ -37,4 +37,8 @@
 				return $this->p404();
 			}
 		}
+
+		public function viewSeriesGuideAction($series, $guideUrl){
+			return $this->viewGuideAction($guideUrl);
+		}
 	}

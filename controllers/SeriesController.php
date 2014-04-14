@@ -12,7 +12,14 @@
 			$guideRepository = $em->getRepository("Guide");
 			foreach ($series as $list) {
 				$guides = $guideRepository->findAllBySeries($list->getId());
+
+				$count = 0;
 				foreach ($guides as $guide) {
+					$count++;
+					// update guide title with index
+					$guide->setTitle($count . ". " . $guide->getTitle());
+
+					// load categories for guides
 					$categories = $guideRepository->findGuideCategories($guide);
 					foreach ($categories as $category){
 						$guide->addCategory($category);
@@ -36,7 +43,14 @@
 			$series = $seriesRepository->findOneBy('url', $url);
 
 			$guides = $guideRepository->findAllBySeries($series->getId());
+
+			$count = 0;
 			foreach ($guides as $guide) {
+				$count++;
+				// update guide title with index
+				$guide->setTitle($count . ". " . $guide->getTitle());
+
+				// load categories for guides
 				$categories = $guideRepository->findGuideCategories($guide);
 				foreach ($categories as $category){
 					$guide->addCategory($category);

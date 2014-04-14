@@ -9,9 +9,9 @@
 	                <p>{{ series.getSummary() }}</p>
 	            </div>
 	            <div class="row">
-            {% for guide in series.guides %}
-            	{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
-	        {% endfor %}
+				{% for guide in series.guides %}
+					{% include 'partials/touts/single-item.html' with { 'series': series, 'guide': guide } %}
+				{% endfor %}
 	            </div>
 		    </div>
 		</div>
