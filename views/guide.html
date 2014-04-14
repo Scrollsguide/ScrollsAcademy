@@ -31,9 +31,14 @@
 	{% if series %}
 		{% set nextGuide = getNextInSeries(series, guide) %}
 		{% if nextGuide %}
-			<div class="row content-well">
-					Next in {{ series.title }}:
-					<a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': nextGuide.url }) }}">{{ nextGuide.title }}</a>
+			<div class="row content-well next-promo">
+                <a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': nextGuide.url }) }}">
+                    <i class="fa fa-arrow-right fa-lg pull-right"></i>
+    				<div class="pull-right">
+                        <strong>Next in {{ series.title }}</strong>
+                        <span>{{ nextGuide.title }}</span>
+                    </div>
+                </a>
 			</div>
 		{% endif %}
 	{% endif %}

@@ -612,6 +612,18 @@ p > i.faction-growth {
     margin: 20px;
 }
 
+.next-promo {
+    margin-bottom: 30px;
+}
+.next-promo strong,
+.next-promo span {
+    display: block;
+    text-align: right;
+}
+.next-promo i {
+    line-height: 50px;
+}
+
 
 /* admin styles */
 .alert {
