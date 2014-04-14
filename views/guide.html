@@ -28,6 +28,16 @@
     	{{ guide.getContent() | raw }}
     </div>
 
+	{% if series %}
+		{% set nextGuide = getNextInSeries(series, guide) %}
+		{% if nextGuide %}
+			<div class="row content-well">
+					Next in {{ series.title }}:
+					<a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': nextGuide.url }) }}">{{ nextGuide.title }}</a>
+			</div>
+		{% endif %}
+	{% endif %}
+
     {% if preview != true %}
         {% include 'partials/social.html' with { 'guide': guide } %}
     {% endif %}

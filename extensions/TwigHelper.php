@@ -22,6 +22,7 @@
 			$twig->addFunction(new Twig_SimpleFunction("imagePath", array($t, "imagePath")));
 			$twig->addFunction(new Twig_SimpleFunction("categoryClass", array($t, "categoryClass")));
 			$twig->addFunction(new Twig_SimpleFunction("getIdFromEmbed", array($t, "getIdFromEmbed")));
+			$twig->addFunction(new Twig_SimpleFunction("getNextInSeries", array($t, "getNextInSeries")));
 			
 			// filters
 			$twig->addFilter(new Twig_SimpleFilter("cut", array($t, "cut")));
@@ -74,6 +75,19 @@
 
 			$ex = explode('"', $parts[1]);
 			return $ex[0];
+		}
+
+		public function getNextInSeries($series, $guide){
+			$seriesGuides = $series->getGuides();
+			// loop to -1 because there's no next after the last
+			for ($i = 0; $i < count($seriesGuides) - 1; $i++){
+				if ($seriesGuides[$i]->getId() === $guide->getId()){
+					// because loop runs to -1 no need to check index out of bounds here
+					return $seriesGuides[$i + 1];
+				}
+			}
+
+			return false;
 		}
 
 		/*

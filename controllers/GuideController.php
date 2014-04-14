@@ -1,15 +1,16 @@
 <?php
+
 	class GuideController extends BaseController {
-	
-		public function viewGuideAction($url){
+
+		public function viewGuideAction($url, Series $series = null) {
 			// set up entity and repository
 			$em = $this->getApp()->get("EntityManager");
 			$guideRepository = $em->getRepository("Guide");
-			
+
 			// look for guide in the repo
-			if (($guide = $guideRepository->findOneBy("url", $url)) !== false){
+			if (($guide = $guideRepository->findOneBy("url", $url)) !== false) {
 				// check visibility
-				if ($guide->getStatus() === GuideStatus::VISIBLE || $guide->getStatus() === GuideStatus::VISIBLE_WITH_URL){
+				if ($guide->getStatus() === GuideStatus::VISIBLE || $guide->getStatus() === GuideStatus::VISIBLE_WITH_URL) {
 					// For now we just get one guide of each level - TODO use the tags from the guide
 					$relatedGuides = array();
 					//get the random guides for the relateds
@@ -18,16 +19,19 @@
 					$relatedGuides[] = $guideRepository->findRandomByCategory("master");
 
 					// remove empty guides
-					$relatedGuides = array_filter($relatedGuides, function($e){ return $e !== false; });
+					$relatedGuides = array_filter($relatedGuides, function ($e) {
+						return $e !== false;
+					});
 
 					$categories = $guideRepository->findGuideCategories($guide);
-					foreach ($categories as $category){
+					foreach ($categories as $category) {
 						$guide->addCategory($category);
 					}
 
 					return $this->render("guide.html", array(
-						"guide" => $guide,
-						"title" => $guide->getTitle(),
+						"guide"         => $guide,
+						"title"         => $guide->getTitle(),
+						"series"        => $series,
 						"relatedGuides" => $relatedGuides
 					));
 				} else { // guide not visible
@@ -38,7 +42,26 @@
 			}
 		}
 
-		public function viewSeriesGuideAction($series, $guideUrl){
-			return $this->viewGuideAction($guideUrl);
+		public function viewSeriesGuideAction($seriesUrl, $guideUrl) {
+			// look up series
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$seriesRepository = $em->getRepository("Series");
+
+			// look for series in the repo
+			if (($series = $seriesRepository->findOneBy("url", $seriesUrl)) !== false) {
+				// load guides for series
+				$guideRepository = $em->getRepository("Guide");
+
+				$guides = $guideRepository->findAllBySeries($series);
+
+				foreach ($guides as $g){
+					$series->addGuide($g);
+				}
+
+				return $this->viewGuideAction($guideUrl, $series);
+			} else {
+				return $this->p404();
+			}
 		}
 	}
