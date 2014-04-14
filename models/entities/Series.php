@@ -12,6 +12,8 @@
 
 		private $summary;
 
+		private $guides = array();
+
 		public function getId() {
 			return (int)$this->id;
 		}
@@ -50,6 +52,14 @@
 
 		public function setImage($image) {
 			$this->image = $image;
+		}
+
+		public function addGuide($guide) {
+			array_push($this->guides, $guide);
+		}
+
+		public function getGuides() {
+			return $this->guides;
 		}
 
 	}

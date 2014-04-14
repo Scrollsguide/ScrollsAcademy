@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="row content-block">
+        <div class="col-md-12 category-hdr">
+            <h4>Academy Series!</h4>
+        </div>
+		{% if series|length %}
+			{% for list in series %}
+				{% include 'partials/touts/series.html' with { 'series': list } %}
+			{% endfor %}
+		{% else %}
+			No seriess in this category
+		{% endif %}
+	</div>
+{% endblock %}
+

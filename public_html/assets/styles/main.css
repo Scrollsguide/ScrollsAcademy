@@ -556,6 +556,62 @@ p > i.faction-growth {
     text-align: center;
 }
 
+/* Series */
+.series-img {
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: .5;
+}
+.series-item .content-item {
+    height: auto;
+}
+.series-item .content-item .content-item {
+    height: 200px;
+}
+.series-item .content-container {
+    position: relative;
+}
+.series-item .content-container p {
+    text-shadow: 0px 0px 4px #000;
+}
+.series-item .content-container,
+.series-item .content-container:hover,
+.series-item .content-container:active {
+    background: none !important;
+}
+.series-item ol {
+    text-align: left;
+    font-size: 16px;
+    overflow: hidden;
+}
+.series-item ol {
+    padding: 0;
+}
+.series-item li {
+    margin: 5px;
+}
+.series-item a {
+    padding: 5px;
+}
+.series-item li:nth-of-type(odd) a {
+    background: rgba(0,0,0,.5);
+}
+.series-item li:nth-of-type(even) a {
+    background: rgba(0,0,0,.8);
+}
+.series-item li a:hover {
+    background: rgba(0,0,0,1);
+}
+.series-item .content-item .type-tag {
+    display: none;
+}
+.series-item.series-container > .content-item > .content-container {
+    margin: 20px;
+}
+
 
 /* admin styles */
 .alert {

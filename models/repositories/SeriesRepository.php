@@ -14,7 +14,8 @@
 		public function persist(Series $series) {
 			$setQuery = "SET title = :title,
 				url = :url,
-				image = :image";
+				image = :image,
+				summary = :summary";
 
 			$isExistingSeries = ($seriesId = $series->getId()) !== 0;
 			if ($isExistingSeries) {
@@ -31,11 +32,11 @@
 			$sth->bindValue(":title", $series->getTitle(), PDO::PARAM_STR);
 			$sth->bindValue(":url", $series->getUrl(), PDO::PARAM_STR);
 			$sth->bindValue(":image", $series->getImage(), PDO::PARAM_STR);
+			$sth->bindValue(":summary", $series->getSummary(), PDO::PARAM_STR);
 			if ($isExistingSeries) {
 				$sth->bindValue(":id", $seriesId, PDO::PARAM_INT);
 			}
 
 			$sth->execute();
 		}
-
 	}

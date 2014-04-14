@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+	<div class="row content-block series-page">
+		<div class="col-md-{{ collapseMedium ?: 12 }} col-sm-{{ collapseClass ?: 12 }} series-item series-container">
+		    <div class="content-item">
+				<div class="series-img" style="background-image: url({{ imagePath(series.image) }})"></div>
+	            <div class="content-container">
+	                <h4>{{ series.getTitle() }}</h4>
+	                <p>{{ series.getSummary() }}</p>
+	            </div>
+	            <div class="row">
+            {% for guide in series.guides %}
+            	{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
+	        {% endfor %}
+	            </div>
+		    </div>
+		</div>
+	</div>
+{% endblock %}
+

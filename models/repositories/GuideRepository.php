@@ -31,6 +31,26 @@
 			return $guides;
 		}
 
+		public function findAllBySeries($seriesId) {
+			$sth = $this->getConnection()->prepare("SELECT A.*
+						FROM guides A, seriesguides B
+						WHERE B.seriesid = :id
+						AND A.id = B.guideid");
+			$sth->bindParam(":id", $seriesId, PDO::PARAM_STR);
+
+			$sth->execute();
+
+			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
+			foreach ($guides as $guide) {
+				$categories = $this->findGuideCategories($guide);
+				foreach ($categories as $category) {
+					$guide->addCategory($category);
+				}
+			}
+
+			return $guides;
+		}
+
 		//this should use a minimal query since it only is looking for one guide
 		public function findRandomByCategory($categoryString) {
 			$all = $this->findAllByCategory($categoryString);
