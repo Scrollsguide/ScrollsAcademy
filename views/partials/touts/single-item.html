@@ -8,7 +8,9 @@
         <div class="content-item" style="background-image: url({{ imagePath(guide.image) }})">
             {% for category in guide.categories %}
                 {% if category.name|lower != excludeCategory|lower %}
-                    {% include 'partials/category-banner.html' with { 'guide': guide, 'category': category } %}
+                    {% if loop.index <= maxCategories|default(2) %}
+                        {% include 'partials/category-banner.html' with { 'guide': guide, 'category': category } %}
+                    {% endif %}
                 {% endif %}
             {% endfor %}
             <div class="content-container">

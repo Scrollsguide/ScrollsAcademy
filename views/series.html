@@ -10,7 +10,7 @@
 	            </div>
 	            <div class="row">
 				{% for guide in series.guides %}
-					{% include 'partials/touts/single-item.html' with { 'series': series, 'guide': guide } %}
+					{% include 'partials/touts/single-item.html' with { 'series': series, 'guide': guide, 'collapseMedium': 12, 'collapseClass': 12 } %}
 				{% endfor %}
 	            </div>
 		    </div>

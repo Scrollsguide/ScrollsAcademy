@@ -3,7 +3,9 @@
     <div class="jumbotron" style="background-image: url({{ imagePath(guide.image) }})">
         {% for category in guide.categories %}
             {% if category.name|lower != excludeCategory|lower %}
-                {% include 'partials/category-banner.html' with { 'guide': guide, 'category': category } %}
+                {% if loop.index <= 2 %}
+                    {% include 'partials/category-banner.html' with { 'guide': guide, 'category': category } %}
+                {% endif %}
             {% endif %}
         {% endfor %}
         <div class="content-container">
