@@ -319,8 +319,14 @@
 				return $this->toLogin();
 			}
 
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+			$allGuides = $guideRepository->findAll();
+
 			return $this->render("admin/edit_series.html", array(
-				"title" => "New series"
+				"title"     => "New series",
+				"allGuides" => $allGuides
 			));
 		}
 
@@ -335,9 +341,16 @@
 
 			// look for series in the repo
 			if (($series = $seriesRepository->findOneBy("url", $url)) !== false) {
+				// load guides for series
+				$guideRepository = $em->getRepository("Guide");
+				$guides = $guideRepository->findAllBySeries($series);
+				$allGuides = $guideRepository->findAll();
+
 				return $this->render("admin/edit_series.html", array(
-					"title"      => "Edit series",
-					"series"      => $series
+					"title"     => "Edit series",
+					"series"    => $series,
+					"guides"    => $guides,
+					"allGuides" => $allGuides
 				));
 			} else { // series not found in the repository
 				$r = new HtmlResponse();
@@ -368,6 +381,15 @@
 			$s->setSummary($r->getParameter("summary"));
 			$s->setURL(URLUtils::makeBlob($title));
 			$s->setImage($r->getParameter("image"));
+
+			// add guides
+			foreach ($r->getParameter("guides") as $guide) {
+				if ($guide != 0) {
+					$s->addGuide($guide);
+				}
+			}
+
+			print_r($r->getParameter("guides"));
 
 			$em = $this->getApp()->get("EntityManager");
 			$seriesRepository = $em->getRepository("Series");

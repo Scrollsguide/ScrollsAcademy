@@ -38,50 +38,60 @@
 					<input type="text" class="form-control" name="summary" value="{% if series %}{{ series.summary }}{% endif %}" />
 				</div>
 			</div>
-
+			<div id="guides">
+				{% if guides %}
+					{% for guide in guides %}
+						<div class="form-group">
+							<label for="summary" class="col-sm-2 control-label">Guide {{ loop.index }}</label>
+							<div class="col-sm-10">
+								<select class="form-control" name="guides[]">
+									<option value="0">-- No guide --</option>
+									{% for g in allGuides %}
+										<option value="{{ g.id }}"{% if guide.id == g.id %}selected="selected"{% endif %}>{{ g.title }}</option>
+									{% endfor %}
+								</select>
+							</div>
+						</div>
+					{% endfor %}
+				{% endif %}
+			</div>
 			<div class="form-group">
 				<div class="col-sm-offset-2 col-sm-10">
 					{% if series %}
 					<input type="hidden" value="{{ series.id }}" name="seriesid" />
 					{% endif %}
 					<button type="submit" class="btn btn-primary"><i class="fa fa-save"></i> Save</button>
+
+					<button class="btn btn-default" data-add-guide>Add Guide</button>
 				</div>
 			</div>
 		</form>
 	</div>
 </div>
 
-<div id="myModal" class="modal fade">
-	<div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-				<h4 class="modal-title">Upload Image</h4>
-			</div>
-			<div class="modal-body">
-	        <span class="form-control btn btn-default btn-file">
-			    Browse <input type="file" name="file">
-			    <input type="hidden" value="" name="image" />
-			</span>
-				<a href="" target="_new" img-thumbnail>
-					<img src="" style="max-height: 30px;" />
-				</a>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-				<button type="button" class="btn btn-primary">Use</button>
-			</div>
-		</div><!-- /.modal-content -->
-	</div><!-- /.modal-dialog -->
-</div><!-- /.modal -->
+<script id="guideTemplate" type="text/template">
+	<div class="form-group">
+		<label for="summary" class="col-sm-2 control-label">Guide</label>
+		<div class="col-sm-10">
+			<select class="form-control" name="guides[]">
+				<option value="0">-- No guide --</option>
+				{% for g in allGuides %}
+					<option value="{{ g.id }}"}>{{ g.title }}</option>
+				{% endfor %}
+			</select>
+		</div>
+	</div>
+</script>
 {% endblock %}
 {% block customcss %}
 <link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/skins/markitup/style.css" />
 <link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/sets/markdown/style.css" />
 {% endblock %}
 {% block customjs %}
-<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/jquery.markitup.js"></script>
-<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/sets/markdown/set.js"></script>
+	<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/jquery.markitup.js"></script>
+	<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/sets/markdown/set.js"></script>
 
-<script src="/assets/js/admin.js"></script>
+	<script src="/assets/js/admin.js"></script>
+
+	<script src="/assets/js/series-editor.js"></script>
 {% endblock %}

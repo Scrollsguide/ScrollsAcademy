@@ -1,17 +1,18 @@
 <?php
+
 	class SeriesController extends BaseController {
-		
-		public function indexAction(){
+
+		public function indexAction() {
 			// set up entity and repository
 			$em = $this->getApp()->get("EntityManager");
 			$seriesRepository = $em->getRepository("Series");
-			
+
 			// look for series in the repo
 			$series = $seriesRepository->findAll();
 
 			$guideRepository = $em->getRepository("Guide");
 			foreach ($series as $list) {
-				$guides = $guideRepository->findAllBySeries($list->getId());
+				$guides = $guideRepository->findAllBySeries($list);
 
 				$count = 0;
 				foreach ($guides as $guide) {
@@ -21,46 +22,50 @@
 
 					// load categories for guides
 					$categories = $guideRepository->findGuideCategories($guide);
-					foreach ($categories as $category){
+					foreach ($categories as $category) {
 						$guide->addCategory($category);
 					}
 					$list->addGuide($guide);
 				}
 			}
-			
+
 			return $this->render("serieslist.html", array(
 				"series" => $series
 			));
 		}
 
-		public function viewSeriesAction($url){
+		public function viewSeriesAction($url) {
 			// set up entity and repository
 			$em = $this->getApp()->get("EntityManager");
 			$seriesRepository = $em->getRepository("Series");
 			$guideRepository = $em->getRepository("Guide");
 
 			// look for series in the repo
-			$series = $seriesRepository->findOneBy('url', $url);
+			if (($series = $seriesRepository->findOneBy('url', $url)) !== false) {
+				// load guides for series
+				$guides = $guideRepository->findAllBySeries($series);
 
-			$guides = $guideRepository->findAllBySeries($series->getId());
+				$count = 0;
+				foreach ($guides as $guide) {
+					$count++;
+					// update guide title with index
+					$guide->setTitle($count . ". " . $guide->getTitle());
 
-			$count = 0;
-			foreach ($guides as $guide) {
-				$count++;
-				// update guide title with index
-				$guide->setTitle($count . ". " . $guide->getTitle());
-
-				// load categories for guides
-				$categories = $guideRepository->findGuideCategories($guide);
-				foreach ($categories as $category){
-					$guide->addCategory($category);
+					// load categories for guides
+					$categories = $guideRepository->findGuideCategories($guide);
+					foreach ($categories as $category) {
+						$guide->addCategory($category);
+					}
+					$series->addGuide($guide);
 				}
-				$series->addGuide($guide);
+
+				return $this->render("series.html", array(
+					"series" => $series
+				));
+			} else {
+				// series not found
+				return $this->p404();
 			}
-			
-			return $this->render("series.html", array(
-				"series" => $series
-			));
 		}
-			
+
 	}

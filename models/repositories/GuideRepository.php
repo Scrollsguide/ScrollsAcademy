@@ -31,12 +31,13 @@
 			return $guides;
 		}
 
-		public function findAllBySeries($seriesId) {
+		public function findAllBySeries(Series $series) {
 			$sth = $this->getConnection()->prepare("SELECT A.*
 						FROM guides A, seriesguides B
 						WHERE B.seriesid = :id
-						AND A.id = B.guideid");
-			$sth->bindParam(":id", $seriesId, PDO::PARAM_INT);
+						AND A.id = B.guideid
+						ORDER BY B.order ASC");
+			$sth->bindValue(":id", $series->getId(), PDO::PARAM_INT);
 
 			$sth->execute();
 
