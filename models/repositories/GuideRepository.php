@@ -63,7 +63,6 @@
 			return $all[array_rand($all)];
 		}
 
-
 		public function findGuideCategories(Guide $guide) {
 			$sth = $this->getConnection()->prepare("SELECT C.name
 						FROM categories C
@@ -95,6 +94,7 @@
 				url = :url,
 				author = :author,
 				image = :image,
+				banner = :banner,
 				`status` = :status,
 				video = :video";
 
@@ -124,6 +124,7 @@
 			$sth->bindValue(":author", $guide->getAuthor(), PDO::PARAM_STR);
 			$sth->bindValue(":url", $guide->getUrl(), PDO::PARAM_STR);
 			$sth->bindValue(":image", $guide->getImage(), PDO::PARAM_STR);
+			$sth->bindValue(":banner", $guide->getBanner(), PDO::PARAM_STR);
 			$sth->bindValue(":status", $guide->getStatus(), PDO::PARAM_INT);
 			$sth->bindValue(":video", $guide->getVideo(), PDO::PARAM_STR);
 

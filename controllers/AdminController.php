@@ -229,13 +229,18 @@
 			} else {
 				// make new guide, so don't set id in guide
 			}
+
+			// load image and banner
+			$images = $r->getParameter("images");
+
 			$g->setTitle($title);
 			$g->setSummary($r->getParameter("summary"));
 			$g->setURL(URLUtils::makeBlob($title));
 			$g->setAuthor($r->getParameter("author"));
 			$g->setMarkdown($content);
 			$g->setStatus($r->getParameter("status"));
-			$g->setImage($r->getParameter("image"));
+			$g->setImage($images[0]);
+			$g->setBanner($images[1]);
 			$g->setVideo($r->getParameter("video"));
 
 			// convert markdown to html
@@ -377,10 +382,14 @@
 				// make new series, so don't set id in series
 			}
 
+			// load image and banner
+			$images = $r->getParameter("images");
+
 			$s->setTitle($title);
 			$s->setSummary($r->getParameter("summary"));
 			$s->setURL(URLUtils::makeBlob($title));
-			$s->setImage($r->getParameter("image"));
+			$s->setImage($images[0]);
+			$s->setBanner($images[1]);
 
 			// add guides
 			foreach ($r->getParameter("guides") as $guide) {
@@ -388,8 +397,6 @@
 					$s->addGuide($guide);
 				}
 			}
-
-			print_r($r->getParameter("guides"));
 
 			$em = $this->getApp()->get("EntityManager");
 			$seriesRepository = $em->getRepository("Series");

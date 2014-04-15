@@ -1,6 +1,6 @@
 <div class="col-md-{{ collapseMedium ?: 12 }} col-sm-{{ collapseClass ?: 12 }} series-item">
     <div class="content-item" style="background-image: url({{ imagePath(series.image) }})">
-        <a href="{{ path('series_guide_list', { 'title': series.getUrl() }) }}" data-instant>
+        <a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
             <div class="content-container">
                 <h4>{{ series.getTitle() }}</h4>
                 <p>{{ series.getSummary() }}</p>

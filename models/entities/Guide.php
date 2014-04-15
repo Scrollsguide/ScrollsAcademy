@@ -20,6 +20,8 @@
 
 		private $image;
 
+		private $banner;
+
 		private $status;
 
 		private $categories = array();
@@ -92,6 +94,14 @@
 
 		public function setImage($image) {
 			$this->image = $image;
+		}
+
+		public function getBanner() {
+			return $this->banner;
+		}
+
+		public function setBanner($banner) {
+			$this->banner = $banner;
 		}
 
 		public function getAuthor() {

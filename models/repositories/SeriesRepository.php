@@ -10,6 +10,22 @@
 			return "series";
 		}
 
+		public function findSeriesByGuide(Guide $guide){
+			$sth = $this->getConnection()->prepare("SELECT S.*
+						FROM series S, seriesguides G
+						WHERE G.guideid = :id
+						AND S.id = G.seriesid
+						ORDER BY S.title ASC");
+
+			$sth->bindValue(":id", $guide->getId(), PDO::PARAM_INT);
+
+			$sth->execute();
+
+			$series = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
+
+			return $series;
+		}
+
 		// saves guide to database
 		public function persist(Series $series) {
 			$setQuery = "SET title = :title,
@@ -38,6 +54,7 @@
 			$sth->bindValue(":title", $series->getTitle(), PDO::PARAM_STR);
 			$sth->bindValue(":url", $series->getUrl(), PDO::PARAM_STR);
 			$sth->bindValue(":image", $series->getImage(), PDO::PARAM_STR);
+			$sth->bindValue(":banner", $series->getBanner(), PDO::PARAM_STR);
 			$sth->bindValue(":summary", $series->getSummary(), PDO::PARAM_STR);
 
 			if ($isExistingSeries) {
