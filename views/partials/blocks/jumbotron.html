@@ -1,6 +1,6 @@
 {% set guide = guides[0] %}
 <a href="{{ path('view_guide', { 'title': guide.url }) }}" data-instant class="content-block">
-    <div class="jumbotron" style="background-image: url({{ imagePath(guide.image) }})">
+    <div class="jumbotron" style="background-image: url({{ imagePath(guide.banner) }})">
         {% for category in guide.categories %}
             {% if category.name|lower != excludeCategory|lower %}
                 {% if loop.index <= 2 %}
