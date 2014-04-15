@@ -11,6 +11,10 @@
 			if (($guide = $guideRepository->findOneBy("url", $url)) !== false) {
 				// check visibility
 				if ($guide->getStatus() === GuideStatus::VISIBLE || $guide->getStatus() === GuideStatus::VISIBLE_WITH_URL) {
+					// load series this guide is part of
+					$seriesRepository = $em->getRepository("Series");
+					$allSeries = $seriesRepository->findSeriesByGuide($guide);
+
 					// For now we just get one guide of each level - TODO use the tags from the guide
 					$relatedGuides = array();
 					//get the random guides for the relateds
@@ -31,6 +35,7 @@
 					return $this->render("guide.html", array(
 						"guide"         => $guide,
 						"title"         => $guide->getTitle(),
+						"allSeries"     => $allSeries,
 						"series"        => $series,
 						"relatedGuides" => $relatedGuides
 					));
@@ -55,7 +60,7 @@
 
 				$guides = $guideRepository->findAllBySeries($series);
 
-				foreach ($guides as $g){
+				foreach ($guides as $g) {
 					$series->addGuide($g);
 				}
 

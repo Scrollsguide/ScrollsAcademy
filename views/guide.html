@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-	<div class="row guide-header {% if guide.getVideo() %}video-header{% endif %}" style="background-image:url({{ imagePath(guide.image) }})">
+	<div class="row guide-header {% if guide.getVideo() %}video-header{% endif %}" style="background-image:url({{ imagePath(guide.banner) }})">
         <div class="col-md-12 header-container">
             {% if guide.getVideo() %}
                 <div class="player-placeholder" data-video-id="{{ getIdFromEmbed(guide.video) }}"></div>
@@ -28,19 +28,30 @@
     	{{ guide.getContent() | raw }}
     </div>
 
-	{% if series %}
-		{% set nextGuide = getNextInSeries(series, guide) %}
-		{% if nextGuide %}
-			<div class="row content-well next-promo">
-                <a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': nextGuide.url }) }}">
-                    <i class="fa fa-arrow-right fa-lg pull-right"></i>
-    				<div class="pull-right">
-                        <strong>Next in {{ series.title }}</strong>
-                        <span>{{ nextGuide.title }}</span>
-                    </div>
-                </a>
+	{% if allSeries %}
+		<div class="row content-well">
+			<div class="col-md-6">
+				Part of the series
+				{% for s in allSeries %}
+					<a href="{{ path('series_guide_list', { 'title': s.url }) }}">{{ s.title }}</a>
+				{% endfor %}
 			</div>
-		{% endif %}
+
+			{% if series %}
+				{% set nextGuide = getNextInSeries(series, guide) %}
+				{% if nextGuide %}
+						<div class="col-md-6 next-promo">
+							<a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': nextGuide.url }) }}">
+								<i class="fa fa-arrow-right fa-lg pull-right"></i>
+								<div class="pull-right">
+									<strong>Next in {{ series.title }}</strong>
+									<span>{{ nextGuide.title }}</span>
+								</div>
+							</a>
+						</div>
+				{% endif %}
+			{% endif %}
+		</div>
 	{% endif %}
 
     {% if preview != true %}
@@ -48,7 +59,7 @@
     {% endif %}
 
     <!-- type 2, three articles -->
-    {% if relatedGuides|length %}
+    {% if relatedGuides %}
     <div class="row content-block more-block">
         <div class="col-md-12 related-hdr">
             <h4>Related Guides</h4>

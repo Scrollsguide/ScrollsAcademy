@@ -15,7 +15,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 	}
 
 	function init() {
-		$('input[name=file]').on('change', function() {
+		$('input[name^="file"]').on('change', function() {
 			prepareUpload($(this), updateForm);
 		});
 	}
@@ -58,7 +58,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 		var $thumb = el.parent().parent().find('[img-thumbnail]');
 		$thumb.attr('href', path);
 		$thumb.find('img').attr('src', path);
-		el.parent().parent().find('[name=image]').val(data.filename);
+		el.parent().parent().find('[name^="images"]').val(data.filename);
 	}
 
 	$(init);
