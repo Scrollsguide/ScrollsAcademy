@@ -10,7 +10,6 @@ h4 {
     letter-spacing: .1em;
     font-size: 2em;
     text-shadow: 0px 0px 1px #000;
-
 }
 h3 {
     color: #3d3d3d;
@@ -524,7 +523,7 @@ p > i.faction-growth {
     margin: 30px 0;
     border-bottom: 1px solid #3d3d3d;
 }
-.category-hdr h4 {
+.category-hdr h4, .related-hdr h4 {
     text-shadow: none;
 }
 
