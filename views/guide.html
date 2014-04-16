@@ -28,31 +28,7 @@
     	{{ guide.getContent() | raw }}
     </div>
 
-	{% if allSeries %}
-		<div class="row content-well">
-			<div class="col-md-6">
-				Part of the series
-				{% for s in allSeries %}
-					<a href="{{ path('series_guide_list', { 'title': s.url }) }}">{{ s.title }}</a>
-				{% endfor %}
-			</div>
-
-			{% if series %}
-				{% set nextGuide = getNextInSeries(series, guide) %}
-				{% if nextGuide %}
-						<div class="col-md-6 next-promo">
-							<a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': nextGuide.url }) }}">
-								<i class="fa fa-arrow-right fa-lg pull-right"></i>
-								<div class="pull-right">
-									<strong>Next in {{ series.title }}</strong>
-									<span>{{ nextGuide.title }}</span>
-								</div>
-							</a>
-						</div>
-				{% endif %}
-			{% endif %}
-		</div>
-	{% endif %}
+	{% include 'partials/series-related.html' with { 'guide': guide, 'allSeries': allSeries } %}
 
     {% if preview != true %}
         {% include 'partials/social.html' with { 'guide': guide } %}

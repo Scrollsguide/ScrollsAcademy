@@ -1,0 +1,20 @@
+{% if series %}
+	{% set url = path('series_guide', { 'title': series.url, 'guideTitle': guide.url }) %}
+{% else %}
+	{% set url = path('view_guide', { 'title': guide.url }) %}
+{% endif %}
+<div class="col-md-{{ collapseMedium ?: 9 }} col-sm-{{ collapseClass ?: 12 }} text-tout">
+    <a href="{{ url }}" data-instant>
+        <div class="content-item">
+            <div>
+                <img src="{{ imagePath(guide.image) }}" class="pull-left" />
+                <h4>{{ guide.getTitle() }}</h4>
+                {{ guide.content|cut('900')|raw}}
+            </div>
+        </div>
+        <div class="fade-out"></div>
+        <div class="continue-btn">
+            Continue Reading <i class="fa fa-arrow-right"></i>
+        </div>
+    </a>
+</div>
