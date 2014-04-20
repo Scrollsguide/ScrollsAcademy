@@ -29,6 +29,16 @@
 		//bind 
 		$('.content-block').on('click', '.video-container', loadVideo);
 		$('.container-fluid').on('click', '.video-header', loadVideo);
+
+		// add jquery external selector
+		$.expr[':'].external = function(obj){
+			return !obj.href.match(/^mailto\:/)
+				&& (obj.hostname != location.hostname)
+				&& !obj.href.match(/^javascript\:/)
+				&& !obj.href.match(/^$/)
+		};
+		// add target blank to external links in primary content
+		$(".primary-content a:external").attr("target", "_blank");
 	}
 
 	$(init);
