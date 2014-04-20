@@ -169,9 +169,11 @@
 			// load the controller
 			// the classloader checks whether the class exists or not
 			$fullControllerName = $route->getControllerName();
-			$this->classloader->loadClass($fullControllerName);
 			$controller = new $fullControllerName($this);
-			
+
+			if (!$controller instanceof Controller){
+				throw new Exception(sprintf("Class '%s' not an instance of Controller.", $controller));
+			}
 			// now check whether the action is available in the controller
 			$fullActionName = $route->getActionname();
 			if (!method_exists($controller, $fullActionName)){
