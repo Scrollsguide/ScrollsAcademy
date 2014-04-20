@@ -27,9 +27,26 @@
 		public function setHeader($content){
 			header($content);
 		}
+
+		public static function emptyResponse(){
+			return new HtmlResponse();
+		}
 		
 	}
-	
+
+	class ResponseContentTypes {
+
+		public static $contentTypes = array(
+			"css" => "text/css",
+			"js" => "application/javascript"
+		);
+
+		public static function getContentType($t){
+			return isset(self::$contentTypes[$t]) ? self::$contentTypes[$t] : $t;
+		}
+
+	}
+
 	class StatusCode {
 		
 		public static $statusCodes = array(
@@ -41,9 +58,9 @@
 		);		
 	
 		public static function getHeaderForStatuscode($statusCode){
-			if (!isset(StatusCode::$statusCodes[$statusCode])){
+			if (!isset(self::$statusCodes[$statusCode])){
 				throw new Exception(sprintf("Header for statuscode '%d' not defined in StatusCode class yet.", $statusCode));
 			}
-			return sprintf("%s %d %s", $_SERVER['SERVER_PROTOCOL'], $statusCode, StatusCode::$statusCodes[$statusCode]);
+			return sprintf("%s %d %s", $_SERVER['SERVER_PROTOCOL'], $statusCode, self::$statusCodes[$statusCode]);
 		}
 	}

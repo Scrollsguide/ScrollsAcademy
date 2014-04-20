@@ -55,6 +55,14 @@
 			},
 			"action": "Resource::getAvatar"
 		},
+		"resource_cache": {
+			"path": "/assets/cache/{filetype}/{filename}.{filetype}",
+			"requirements": {
+				"filetype": "css|js",
+				"filename": "[a-zA-Z0-9-]+"
+			},
+			"action": "Resource::assetCache"
+		},
 		"about": {
 			"path": "/about",
 			"action": "Index::about"
