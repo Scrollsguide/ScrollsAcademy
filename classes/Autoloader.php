@@ -45,10 +45,15 @@
 		}
 		
 		public function loadClass($class){
+			// remove namespace from class
+			if (($slashPos = strrpos($class, '\\')) !== false){
+				$class = substr($class, $slashPos + 1);
+			}
+
 			$found = false;
 			for ($i = 0; $i < count($this->dirs) && !$found; $i++){		
 				$file = sprintf('%s/%s.php', $this->dirs[$i], $class);
-				
+
 				$found = $this->tryRequire($file);
 			}
 			

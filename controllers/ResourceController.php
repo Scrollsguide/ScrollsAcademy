@@ -2,7 +2,6 @@
 
 	use Assetic\Asset\AssetCollection;
 	use Assetic\Asset\FileAsset;
-	use Assetic\Filter\CssMinFilter;
 
 	class ResourceController extends BaseController {
 
