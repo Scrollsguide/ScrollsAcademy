@@ -7,3 +7,13 @@ RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^/?([^.]*)$ index.php [L]
 
 ErrorDocument 404 /404
+
+ExpiresActive On
+<FilesMatch "\.(png|jpg|ico)$">
+	ExpiresDefault "access plus 1 month"
+	Header append Cache-Control "proxy-revalidate"
+</FilesMatch>
+<FilesMatch "\.(js|css)$">
+	ExpiresDefault "access plus 1 day"
+	Header append Cache-Control "proxy-revalidate"
+</FilesMatch>
