@@ -18,6 +18,7 @@
 			),
 
 			'js/vendors.js'   => array(
+				'/js/vendor/jquery-1.11.0.min.js',
 				'/js/vendor/bootstrap/affix.js',
 				'/js/vendor/bootstrap/alert.js',
 				'/js/vendor/bootstrap/dropdown.js',
