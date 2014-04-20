@@ -53,7 +53,7 @@
 
 			$cache = new Cache($this->getApp()->getBaseDir() . "/public_html/assets/cache");
 
-			$this->getApp()->getClassloader()->addDirectory("libs/Assetic/src", true);
+			$this->getApp()->getClassloader()->addDirectory("libs/Assetic/src/Assetic", true);
 
 			$assetCollection = new AssetCollection();
 			// add all resources to collection
@@ -76,7 +76,7 @@
 		}
 
 		private function getFilter($fileType) {
-			/* filters mess with the responsive layout, so don't use any
+			/* filters mess with the responsive layout, so don't use any until we find a fix
 			if ($fileType === "css"){
 				$this->getApp()->getClassloader()->tryRequire($this->getApp()->getBaseDir() . "/libs/min/cssmin.php");
 				return new CssMinFilter();
