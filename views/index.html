@@ -2,7 +2,7 @@
 {% block content %}
 	{% for block in homepage.getBlocks() %}
 		{% if block.layout %}
-			{% include 'partials/blocks/'~block.layout~'.html' with { 'guides': block.guides } %}
+			{% include 'partials/blocks/' ~ block.layout ~ '.html' with { 'guides': block.guides } %}
 		{% endif %}
 	{% endfor %}
 {% endblock %}

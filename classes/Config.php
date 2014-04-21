@@ -1,6 +1,14 @@
 <?php
 	class Config {
-		
+
+		const PDO_HOST = "pdo_host";
+		const PDO_PORT = "pdo_port";
+		const PDO_USER = "pdo_user";
+		const PDO_PASS = "pdo_pass";
+		const PDO_DB = "pdo_db";
+
+		const CDN_DOMAIN = "cdn_domain";
+
 		// array containing all config values
 		private $c = array();
 	

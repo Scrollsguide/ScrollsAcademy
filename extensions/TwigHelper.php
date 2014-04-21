@@ -17,6 +17,9 @@
 			}));
 			$twig->addFunction(new Twig_SimpleFunction("path", array($t, "path")));
 			$twig->addFunction(new Twig_SimpleFunction("fullPath", array($t, "fullPath")));
+
+			$twig->addFunction(new Twig_SimpleFunction("cdn_asset", array($t, "cdnAsset")));
+
 			$twig->addFunction(new Twig_SimpleFunction("currentRoute", array($t, "currentRoute")));
 			$twig->addFunction(new Twig_SimpleFunction("categoryIcon", array($t, "categoryIcon")));
 			$twig->addFunction(new Twig_SimpleFunction("imagePath", array($t, "imagePath")));
@@ -43,9 +46,18 @@
 			return $this->app->getRouter()->generateUrl($routeId, $routeParams);
 		}
 
-		//todo - replace with proper get of domain
+		// TODO: replace with proper get of domain
 		public function fullPath($routeId, $routeParams = array()) {
 			return $this->app->getRequest()->getURL()->getBaseURL() . $this->path($routeId, $routeParams);
+		}
+
+		public function cdnAsset($relativeUrl){
+			$config = $this->app->getConfig();
+			if ($config->exists(Config::CDN_DOMAIN)){
+				return $config->get(Config::CDN_DOMAIN) . $relativeUrl;
+			} else {
+				return $relativeUrl;
+			}
 		}
 
 		public function currentRoute() {
@@ -53,7 +65,7 @@
 		}
 
 		public function imagePath($filename) {
-			return $this->app->getRequest()->getURL()->getBaseURL() . '/assets/images/user-imgs/' . $filename;
+			return $this->cdnAsset('/assets/images/user-imgs/' . $filename);
 		}
 
 		public function cut($str, $length = 30, $toSpace = true, $last = "...") {

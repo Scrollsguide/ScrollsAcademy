@@ -112,9 +112,9 @@
 			$c = $this->getConfig();
 
 			$database = new Database($this);
-			$database->setHost($c->get("pdo_host"), $c->get("pdo_port"));
-			$database->setCredentials($c->get("pdo_user"), $c->get("pdo_pass"));
-			$database->setDatabaseName($c->get("pdo_db"));
+			$database->setHost($c->get(Config::PDO_HOST), $c->get(Config::PDO_PORT));
+			$database->setCredentials($c->get(Config::PDO_USER), $c->get(Config::PDO_PASS));
+			$database->setDatabaseName($c->get(Config::PDO_DB));
 
 			$this->put("database", $database);
 

@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block navbar %}
-{% include "admin/navbar.html" %}
+	{% include "admin/navbar.html" %}
 {% endblock %}
 {% block content %}
 <div class="row content-block">
@@ -84,14 +84,14 @@
 </script>
 {% endblock %}
 {% block customcss %}
-<link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/skins/markitup/style.css" />
-<link rel="stylesheet" type="text/css" href="/assets/js/vendor/markitup/markitup/sets/markdown/style.css" />
+	<link rel="stylesheet" type="text/css" href="{{ cdn_asset('/assets/js/vendor/markitup/markitup/skins/markitup/style.css') }}" />
+	<link rel="stylesheet" type="text/css" href="{{ cdn_asset('/assets/js/vendor/markitup/markitup/sets/markdown/style.css') }}" />
 {% endblock %}
 {% block customjs %}
-	<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/jquery.markitup.js"></script>
-	<script type="text/javascript" src="/assets/js/vendor/markitup/markitup/sets/markdown/set.js"></script>
+	<script type="text/javascript" src="{{ cdn_asset('/assets/js/vendor/markitup/markitup/jquery.markitup.js') }}"></script>
+	<script type="text/javascript" src="{{ cdn_asset('/assets/js/vendor/markitup/markitup/sets/markdown/set.js') }}"></script>
 
-	<script src="/assets/js/admin.js"></script>
+	<script src="{{ cdn_asset('/assets/js/admin.js') }}"></script>
 
-	<script src="/assets/js/series-editor.js"></script>
+	<script src="{{ cdn_asset('/assets/js/series-editor.js') }}"></script>
 {% endblock %}
