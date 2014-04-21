@@ -3,10 +3,10 @@
 		
 		private $app;
 		
-		// default caching rules, cache any page for 5 minutes
+		// default caching rules, cache any page for 10 minutes
 		private $cacheRules = array(
 			"cache" => false,
-			"ttl" => 300
+			"ttl" => 600
 		);
 		
 		public function __construct(App $app){

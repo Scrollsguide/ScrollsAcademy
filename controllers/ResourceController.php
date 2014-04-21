@@ -5,6 +5,8 @@
 
 	class ResourceController extends BaseController {
 
+		const ASSET_CACHE = "/public_html/assets/cache/";
+
 		private $resourceMap = array(
 			'css/main.css'    => array(
 				'/styles/main.css',
@@ -51,7 +53,7 @@
 			// resource is valid, create from all assets
 			$resources = $this->resourceMap[$cachePath];
 
-			$cache = new Cache($this->getApp()->getBaseDir() . "/public_html/assets/cache");
+			$cache = new Cache($this->getApp(), $this->getApp()->getBaseDir() . self::ASSET_CACHE);
 
 			$this->getApp()->getClassloader()->addDirectory("libs/Assetic/src/Assetic", true);
 

@@ -74,6 +74,15 @@
 			"path": "/admin/image/save",
 			"action": "Admin::uploadImage",
 			"method": "POST"
+		},
+		"admin_settings": {
+			"path": "/admin/settings",
+			"action": "Admin::settings"
+		},
+		"admin_clear_cache": {
+			"path": "/admin/cache/clear",
+			"action": "Admin::clearCache",
+			"method": "POST"
 		}
 	}
 }

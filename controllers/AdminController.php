@@ -265,6 +265,7 @@
 			$guideRepository->persist($g);
 
 			// clear rendered guide html page from cache so it's refreshed immediately
+			// TODO: clear cache for this guide in any series
 			$route = $this->getApp()->getRouter()->getRoute("view_guide");
 			$route->set("urlMatch", array($g->getUrl()));
 
@@ -473,6 +474,47 @@
 			}
 
 			return $r;
+		}
+
+		public function settingsAction(){
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			return $this->render("admin/settings.html", array(
+				"title" => "Admin settings"
+			));
+		}
+
+		public function clearCacheAction(){
+			if (!$this->userPerms()) {
+				return $this->toLogin();
+			}
+
+			$cacheType = $this->getApp()->getRequest()->getParameter("cache", "");
+
+			if ($cacheType === "twig"){
+				$this->getApp()->getCache()->removeDir("TwigViews");
+			} else if ($cacheType === "routing"){
+				$this->getApp()->getCache()->removeDir("Routing");
+			} else if ($cacheType === "html"){
+				$this->getApp()->getCache()->removeDir("Pages");
+			} else { // asset cache
+				// set up cache for resources directory
+				$cache = new Cache($this->getApp(), $this->getApp()->getBaseDir() . ResourceController::ASSET_CACHE);
+
+				if ($cacheType === "css"){
+					$cache->removeDir("css");
+				} else if ($cacheType === "js"){
+					$cache->removeDir("js");
+				}
+			}
+
+			$this->getApp()->getSession()->getFlashBag()->add("settings_message", "Cache cleared.");
+
+			$settingsRoute = $this->getApp()->getRouter()->getRoute("admin_settings");
+
+			return new RedirectResponse($settingsRoute->get("path"));
 		}
 
 		private function userPerms() {

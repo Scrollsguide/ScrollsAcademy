@@ -85,7 +85,7 @@
 					$add .= Route::wrapParameter($m);
 				}
 			}
-			
+
 			return md5($r->getId() . $add);
 		}
 		
