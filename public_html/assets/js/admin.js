@@ -59,6 +59,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 		$thumb.attr('href', path);
 		$thumb.find('img').attr('src', path);
 		el.parent().parent().find('[name^="images"]').val(data.filename);
+		el.parent().find("input[name='image']").val(data.filename);
 	}
 
 	$(init);
@@ -118,7 +119,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 			replaceWith: function(markItUp) {
 				$('#myModal').modal({});
 				$('#myModal .btn-primary').unbind().on('click', function() {
-					var src = $('#myModal [name=image]').val();
+					var src = $('#myModal input[name="image"]').val();
 					$.markItUp( 
 						{ replaceWith:'![](/assets/images/user-imgs/'+src+')' }
 					);
