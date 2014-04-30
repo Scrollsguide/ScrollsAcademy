@@ -242,6 +242,7 @@
 			$g->setImage($images[0]);
 			$g->setBanner($images[1]);
 			$g->setVideo($r->getParameter("video"));
+			$g->setDiscussion($r->getParameter("discussion"));
 
 			// convert markdown to html
 			// don't just require the markdown class as it needs more than one

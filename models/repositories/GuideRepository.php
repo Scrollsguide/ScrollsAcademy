@@ -96,7 +96,8 @@
 				image = :image,
 				banner = :banner,
 				`status` = :status,
-				video = :video";
+				video = :video,
+				discussion = :discussion";
 
 			$isExistingGuide = ($guideId = $guide->getId()) !== 0;
 			if ($isExistingGuide) {
@@ -127,6 +128,7 @@
 			$sth->bindValue(":banner", $guide->getBanner(), PDO::PARAM_STR);
 			$sth->bindValue(":status", $guide->getStatus(), PDO::PARAM_INT);
 			$sth->bindValue(":video", $guide->getVideo(), PDO::PARAM_STR);
+			$sth->bindValue(":discussion", $guide->getDiscussion(), PDO::PARAM_STR);
 
 			if ($isExistingGuide){
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);

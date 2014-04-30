@@ -28,6 +28,8 @@
 
 		private $video; //raw embed code (maybe parse it later)
 
+		private $discussion; // url to discussion website
+
 		public function __construct() {
 
 		}
@@ -40,12 +42,12 @@
 			$this->id = $id;
 		}
 
-		public function setUrl($url) {
-			$this->url = $url;
-		}
-
 		public function getUrl() {
 			return $this->url;
+		}
+
+		public function setUrl($url) {
+			$this->url = $url;
 		}
 
 		public function getTitle() {
@@ -128,12 +130,20 @@
 			$this->status = $status;
 		}
 
+		public function getVideo() {
+			return $this->video;
+		}
+
 		public function setVideo($video) {
 			$this->video = $video;
 		}
 
-		public function getVideo() {
-			return $this->video;
+		public function getDiscussion() {
+			return $this->discussion;
+		}
+
+		public function setDiscussion($discussion) {
+			$this->discussion = $discussion;
 		}
 
 	}

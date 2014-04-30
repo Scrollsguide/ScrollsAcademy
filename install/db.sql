@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `guides` (
   `image` varchar(100) NOT NULL,
   `banner` varchar(100) NOT NULL,
   `video` text NOT NULL,
+  `discussion` varchar(256) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '2',
   PRIMARY KEY (`id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
