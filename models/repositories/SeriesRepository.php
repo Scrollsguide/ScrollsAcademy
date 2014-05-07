@@ -31,6 +31,7 @@
 			$setQuery = "SET title = :title,
 				url = :url,
 				image = :image,
+				banner = :banner,
 				summary = :summary";
 
 			$isExistingSeries = ($seriesId = $series->getId()) !== 0;
@@ -68,6 +69,7 @@
 				$seriesId = $this->getConnection()->lastInsertId();
 			}
 
+			// start batch transaction
 			$this->getConnection()->beginTransaction();
 
 			// watch out! Not at all consistent with a regular series request
@@ -83,9 +85,8 @@
 				$sth->bindValue(":order", $index, PDO::PARAM_INT);
 
 				$sth->execute();
-
-				$sth->debugDumpParams();
 			}
+
 			// finish inserting guides
 			$this->getConnection()->commit();
 		}
