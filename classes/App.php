@@ -44,11 +44,12 @@
 
 			$this->session = Session::getInstance();
 
-			$this->request = new Request();
+			$this->request = Request::createFromServer();
 
 			// set up router
 			$this->router = new Router($this);
 			$this->router->addRouteFile($this->baseDir . "/config", "routes.json");
+			$this->router->addRouteFile($this->baseDir . "/config", "api_routes.json");
 			$this->router->addRouteFile($this->baseDir . "/config", "admin_routes.json");
 		}
 
@@ -157,7 +158,7 @@
 
 		private function matchRoute() {
 			// exlude get parameters, pass false
-			$relPath = $this->getRequest()->getURL()->getPath(false);
+			$relPath = $this->getRequest()->getURL()->getPath(true);
 
 			return $this->router->match($relPath);
 		}

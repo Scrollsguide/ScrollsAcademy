@@ -70,8 +70,7 @@
 			$cache->save($cachePath, $assetContent);
 
 			// show file for the first time, next time it will be loaded from cache
-			$r = new HtmlResponse();
-			$r->setHeader("Content-type: " . ResponseContentTypes::getContentType($fileType));
+			$r = new ResourceResponse($fileType);
 			$r->setContent($assetContent);
 
 			return $r;

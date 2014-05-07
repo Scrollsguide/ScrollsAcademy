@@ -1,0 +1,8 @@
+{
+	"routes": {
+		"api_categories": {
+			"path": "/api/categories",
+			"action": "Api::categories"
+		}
+	}
+}
