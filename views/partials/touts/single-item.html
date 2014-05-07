@@ -13,15 +13,18 @@
                     {% endif %}
                 {% endif %}
             {% endfor %}
-            <div class="content-container">
-                <h4>{{ guide.getTitle() }}</h4>
-                <p>{{ guide.summary }}</p>
+        </div>
+     </a>     
+        <div class="content-container">
+        	<div class="byline">
+        		<span class="author">{{ guide.author }}</span>
+        		<span class="divider"> | </span>
+        		<span class="date">{{ guide.date|date("F jS, Y") }}</span>
+        	</div>
+        	<div class="left clear">
+            <h4>{{ guide.getTitle() }}</h4>
+            <p>{{ guide.summary }}</p>
             </div>
         </div>
-        <div class="bottom-info">
-            <span class="author">{{ guide.author }}</span>
-            <span class="divider"> | </span>
-            <span class="date">{{ guide.date|date("F jS, Y") }}</span>
-        </div>
-    </a>
+  
 </div>
