@@ -1,5 +1,6 @@
-{% include 'partials/divider.html' %}
 <div class="row content-block">
+	{% include 'partials/divider.html' %}
+
 	{% if guides[0].video %}
 		{% include 'partials/touts/video-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'vidClass': 'video-big', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% else %}

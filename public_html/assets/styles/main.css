@@ -436,7 +436,7 @@ a.video-container:hover .play-container,
 
 .content-well {
     max-width: 950px;
-    margin: 10px auto;
+    margin: 20px auto;
     font-size: 20px;
     line-height: 1.5em;
 }
@@ -526,6 +526,9 @@ a.video-container:hover .play-container,
     margin: 0 0 30px 0;
 }
 
+.content-well .byline {
+    text-align: right;
+}
 
 .sharing {
     margin: 0 0 30px 0px;
