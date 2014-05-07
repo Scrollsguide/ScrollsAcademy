@@ -22,7 +22,9 @@
         		<span class="date">{{ guide.date|date("F jS, Y") }}</span>
         	</div>
         	<div class="left clear">
-            <h4>{{ guide.getTitle() }}</h4>
+        	<a href="{{ url }}" data-instant>
+           	 <h4>{{ guide.getTitle() }}</h4>
+            </a>
             <p>{{ guide.summary }}</p>
             </div>
         </div>
