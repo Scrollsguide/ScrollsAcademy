@@ -1,8 +1,5 @@
+{% include 'partials/divider.html' %}
 <div class="row content-block">
-<div class="row full-devide-line">
-	<div class="full-line"></div>
-	<div class="devider-header">Video Section Header</div>
-</div>
 
 		{% if guides[0].video %}
 			{% include 'partials/touts/video-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'vidClass': 'video-small', 'collapseMedium': 4, 'maxCategories': 3 } %}

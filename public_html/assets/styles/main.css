@@ -76,16 +76,14 @@ h3 {
 }
 .devider-header{
 	background-color: #222222;
-	padding: 10px 20px;
+	padding: 10px;
 	width: 300px;
 
 	margin-top: -25px;
 	margin-left: 50px;
 	text-align: center;
-	line-height: auto;
 	color: #f8f8f8;
 	font-size: 20px;
-	
 }
 
 .navbar-default button.navbar-toggle,
