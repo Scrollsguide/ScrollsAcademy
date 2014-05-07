@@ -1,12 +1,16 @@
 <div class="row content-block">
+<div class="row full-devide-line">
+	<div class="full-line"></div>
+	<div class="devider-header">Video Section Header</div>
+</div>
 	{% if guides[0].video %}
-		{% include 'partials/touts/video-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
+		{% include 'partials/touts/video-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'vidClass': 'video-big', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% else %}
 		{% include 'partials/touts/single-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% endif %}
 
 	{% if guides[1].video %}
-		{% include 'partials/touts/video-item.html' with { 'guide': guides[1], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
+		{% include 'partials/touts/video-item.html' with { 'guide': guides[1], 'collapseClass': '12', 'vidClass': 'video-big', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% else %}
 		{% include 'partials/touts/single-item.html' with { 'guide': guides[1], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% endif %}
