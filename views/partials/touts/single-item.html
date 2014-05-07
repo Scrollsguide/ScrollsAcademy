@@ -21,11 +21,11 @@
         		<span class="divider"> | </span>
         		<span class="date">{{ guide.date|date("F jS, Y") }}</span>
         	</div>
-        	<div class="left clear">
-        	<a href="{{ url }}" data-instant>
-           	 <h4>{{ guide.getTitle() }}</h4>
-            </a>
-            <p>{{ guide.summary }}</p>
+        	<div>
+				<a href="{{ url }}" data-instant>
+				 <h4>{{ guide.getTitle() }}</h4>
+				</a>
+				<p>{{ guide.summary }}</p>
             </div>
         </div>
   
