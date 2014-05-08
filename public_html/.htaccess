@@ -9,9 +9,7 @@ RewriteRule ^/?(.*)$ index.php [QSA,L]
 ExpiresActive On
 <FilesMatch "\.(png|jpg|ico)$">
 	ExpiresDefault "access plus 1 month"
-	Header append Cache-Control "proxy-revalidate"
 </FilesMatch>
-<FilesMatch "\.(js|css)$">
-	ExpiresDefault "access plus 1 day"
-	Header append Cache-Control "proxy-revalidate"
+<FilesMatch "\.(js|css|html)$">
+	ExpiresDefault "access plus 1 week"
 </FilesMatch>

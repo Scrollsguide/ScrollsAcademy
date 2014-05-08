@@ -20,15 +20,18 @@
 	}
 
 	function init() {
-		// Load the Youtube IFrame Player API code asynchronously.
-		var tag = document.createElement('script');
-		tag.src = 'https://www.youtube.com/player_api';
-		var firstScriptTag = document.getElementsByTagName('script')[0];
-		firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+		// only load youtube API if it's required
+		if ($(".video-container").length || $(".video-header").length){
+			// Load the Youtube IFrame Player API code asynchronously.
+			var tag = document.createElement('script');
+			tag.src = 'https://www.youtube.com/player_api';
+			var firstScriptTag = document.getElementsByTagName('script')[0];
+			firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-		//bind 
-		$('.content-block').on('click', '.video-container', loadVideo);
-		$('.container-fluid').on('click', '.video-header', loadVideo);
+			// bind
+			$('.content-block').on('click', '.video-container', loadVideo);
+			$('.container-fluid').on('click', '.video-header', loadVideo);
+		}
 
 		// add jquery external selector
 		$.expr[':'].external = function(obj){
