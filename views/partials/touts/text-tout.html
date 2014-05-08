@@ -5,18 +5,17 @@
 {% endif %}
 <div class="col-md-{{ collapseMedium ?: 9 }} col-sm-{{ collapseClass ?: 12 }} text-tout">
     
-        <div class="content-item">
-            <div>
-            	<a href="{{ url }}" data-instant>
-                	<img src="{{ imagePath(guide.image) }}" class="pull-left" />
-                	<h4>{{ guide.getTitle() }}</h4>
-                 </a>
-                {{ guide.content|cut('900')|raw}}
-            </div>
+    <div class="content-item">
+        <div>
+        	<a href="{{ url }}" data-instant>
+            	<img src="{{ imagePath(guide.image) }}" class="pull-left" />
+            	<h4>{{ guide.getTitle() }}</h4>
+             </a>
+            <p>{{ guide.content|cut('900')|raw}}</p>
         </div>
-        <div class="fade-out"></div>
-        <div class="continue-btn">
-            Continue Reading <i class="fa fa-arrow-right"></i>
-        </div>
+    </div>
+    
+    <div class="fade-out"></div>
+    <div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
    
 </div>
