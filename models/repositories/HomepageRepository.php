@@ -34,10 +34,15 @@
 
 			// update blocks
 			$this->getConnection()->beginTransaction();
+
 			foreach ($homepage->getBlocks() as $block){
 				$sth = $this->getConnection()->prepare("INSERT INTO homepageblocks
-					SET homepageid = :id, layout = :layout, guideids = :guideids");
+					SET homepageid = :id,
+					header = :header,
+					layout = :layout,
+					guideids = :guideids");
 				$sth->bindValue(":id", $homepageId, PDO::PARAM_INT);
+				$sth->bindValue(":header", $block['header'], PDO::PARAM_STR);
 				$sth->bindValue(":layout", $block['layout'], PDO::PARAM_STR);
 				$sth->bindValue(":guideids", $block['guideids'], PDO::PARAM_STR);
 

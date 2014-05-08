@@ -1,9 +1,9 @@
 <div class="row content-block">
-	{% include 'partials/divider.html' %}
+	{% include 'partials/divider.html' with { 'header': block.header } only %}
 
-	{% include 'partials/touts/single-item.html' with { 'guide': guides[0] } %}
+	{% include 'partials/touts/single-item.html' with { 'guide': block.guides[0] } %}
 
-	{% include 'partials/touts/single-item.html' with { 'guide': guides[1] } %}
+	{% include 'partials/touts/single-item.html' with { 'guide': block.guides[1] } %}
 
-	{% include 'partials/touts/single-item.html' with { 'guide': guides[2], 'collapseClass': '12' } %}
+	{% include 'partials/touts/single-item.html' with { 'guide': block.guides[2], 'collapseClass': '12' } %}
 </div>

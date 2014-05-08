@@ -1,4 +1,6 @@
 <div class="col-md-12 full-devide-line">
 	<div class="full-line"></div>
-	<div class="devider-header">Section Header</div>
+	{% if header %}
+		<div class="devider-header">{{ header }}</div>
+	{% endif %}
 </div>

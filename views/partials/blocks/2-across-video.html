@@ -1,15 +1,15 @@
 <div class="row content-block">
-	{% include 'partials/divider.html' %}
+	{% include 'partials/divider.html' with { 'header': block.header } only %}
 
-	{% if guides[0].video %}
-		{% include 'partials/touts/video-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'vidClass': 'video-big', 'collapseMedium': 6, 'maxCategories': 3 } %}
+	{% if block.guides[0].video %}
+		{% include 'partials/touts/video-item.html' with { 'guide': block.guides[0], 'collapseClass': '12', 'vidClass': 'video-big', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% else %}
-		{% include 'partials/touts/single-item.html' with { 'guide': guides[0], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
+		{% include 'partials/touts/single-item.html' with { 'guide': block.guides[0], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% endif %}
 
-	{% if guides[1].video %}
-		{% include 'partials/touts/video-item.html' with { 'guide': guides[1], 'collapseClass': '12', 'vidClass': 'video-big', 'collapseMedium': 6, 'maxCategories': 3 } %}
+	{% if block.guides[1].video %}
+		{% include 'partials/touts/video-item.html' with { 'guide': block.guides[1], 'collapseClass': '12', 'vidClass': 'video-big', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% else %}
-		{% include 'partials/touts/single-item.html' with { 'guide': guides[1], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
+		{% include 'partials/touts/single-item.html' with { 'guide': block.guides[1], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 3 } %}
 	{% endif %}
 </div>

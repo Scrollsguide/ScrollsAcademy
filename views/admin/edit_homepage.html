@@ -28,13 +28,19 @@
 						  	<option value="3-across" {{ block.layout == '3-across' ? 'selected="selected"' : '' }} data-guides="3">
 						  		Desktop 3 Across
 						  	</option>
-						  	<option value="3-across-video" {{ block.layout == '3-across-video' ? 'selected="selected"' : '' }} data-guides="4">
+						  	<option value="3-across-video" {{ block.layout == '3-across-video' ? 'selected="selected"' : '' }} data-guides="3">
 						  		Desktop 3 Across Video
 						  	</option>
 						  	<option value="small-text" {{ block.layout == 'small-text' ? 'selected="selected"' : '' }} data-guides="2">
 						  		Single Promo + Text tout
 						  	</option>
 						  </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label for="header" class="col-sm-2 control-label">Header</label>
+						<div class="col-sm-10">
+							<input type="text" class="form-control" name="blocks[{{ loop.index0 }}][header]" value="{{ block.header }}" />
 						</div>
 					</div>
 					<div class="guiderows" data-guides="{{ block.guideids }}" data-row-id="{{ loop.index0 }}"></div>
@@ -75,10 +81,19 @@
 			  	<option value="3-across" data-guides="3">
 			  		Desktop 3 Across
 			  	</option>
+				  <option value="3-across-video" data-guides="3">
+					  Desktop 3 Across Video
+				  </option>
 			  	<option value="small-text" data-guides="2">
 			  		Single Promo + Text tout
 			  	</option>
 			  </select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label for="blocks[0][header]" class="col-sm-2 control-label">Header</label>
+			<div class="col-sm-10">
+				<input type="text" class="form-control" name="blocks[0][header]" />
 			</div>
 		</div>
 		<div class="guiderows">
