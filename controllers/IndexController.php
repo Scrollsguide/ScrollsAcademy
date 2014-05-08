@@ -19,14 +19,20 @@
 
 			$guideRepository = $em->getRepository("Guide");
 			foreach ($blocks as $block) {
-				$ids = explode(',', $block['guideids']);
-				foreach ($ids as $id) {
-					if ($guide = $guideRepository->findOneBy('id', $id)) {
-						$categories = $guideRepository->findGuideCategories($guide);
-						foreach ($categories as $category){
-							$guide->addCategory($category);
+				if ($block['layout'] === "recent"){
+					// recent guides, just use the 3-across layout
+					// DONE THROUGH TWIG, IS NICER
+					// $block['layout'] = "3-across";
+
+					// load recent guides
+					$block['guides'] = $guideRepository->findRecentGuides();
+				} else {
+					$ids = explode(',', $block['guideids']);
+					foreach ($ids as $id) {
+						if ($guide = $guideRepository->findOneById($id)) {
+							$guideRepository->findGuideCategories($guide);
+							$block['guides'][] = $guide;
 						}
-						$block['guides'][] = $guide;
 					}
 				}
 

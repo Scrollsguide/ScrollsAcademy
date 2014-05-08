@@ -22,10 +22,7 @@
 
 			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
 			foreach ($guides as $guide) {
-				$categories = $this->findGuideCategories($guide);
-				foreach ($categories as $category) {
-					$guide->addCategory($category);
-				}
+				$this->findGuideCategories($guide);
 			}
 
 			return $guides;
@@ -43,10 +40,22 @@
 
 			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
 			foreach ($guides as $guide) {
-				$categories = $this->findGuideCategories($guide);
-				foreach ($categories as $category) {
-					$guide->addCategory($category);
-				}
+				$this->findGuideCategories($guide);
+			}
+
+			return $guides;
+		}
+
+		public function findRecentGuides($limit = 3){
+			$sth = $this->getConnection()->prepare("SELECT *
+						FROM guides
+						ORDER BY id DESC
+						LIMIT " . $limit);
+			$sth->execute();
+
+			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityName());
+			foreach ($guides as $guide) {
+				$this->findGuideCategories($guide);
 			}
 
 			return $guides;
@@ -73,7 +82,12 @@
 
 			$sth->execute();
 
-			return $sth->fetchAll(PDO::FETCH_ASSOC);
+			$categories = $sth->fetchAll(PDO::FETCH_ASSOC);
+			foreach ($categories as $category){
+				$guide->addCategory($category);
+			}
+
+			return $categories;
 		}
 
 		public function findAllCategories() {
