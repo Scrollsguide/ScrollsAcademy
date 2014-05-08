@@ -81,4 +81,7 @@
 	.container-fluid .row{
 		padding: 0 10px;
 	}
+	.hidden-phone{
+		display: none;
+	}
 }

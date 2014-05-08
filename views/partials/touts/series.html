@@ -1,17 +1,28 @@
 <div class="col-md-{{ collapseMedium ?: 12 }} col-sm-{{ collapseClass ?: 12 }} series-item">
-    <div class="content-item" style="background-image: url({{ imagePath(series.image) }})">
-        <a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
+    <div class="content-item">
+       
             <div class="content-container">
-                <h4>{{ series.getTitle() }}</h4>
-                <p>{{ series.getSummary() }}</p>
+            	
+            	<div class="">
+	            	<a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
+	            		<h4>{{ series.getTitle() }}</h4>
+	            	</a>
+            		<p>{{ series.getSummary() }}</p>
+            	</div>
+            	
+            	<a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
+              	 	<div class="series-front-img" style="background-image: url({{ imagePath(series.image) }});"></div>
+                </a>
             </div>
-        </a>
+       
+        
         <ol>
             {% for guide in series.guides %}
-            <li>
-                <a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': guide.url }) }}">{{ guide.title }}</a>
-            </li>
+            <a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': guide.url }) }}">
+	            <li>{{ guide.title }} <span class="date right hidden-phone">{{ guide.date|date("F jS, Y") }}</span></li>
+            </a>
             {% endfor %}
         </ol>
+        
     </div>
 </div>
