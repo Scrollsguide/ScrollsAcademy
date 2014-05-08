@@ -19,7 +19,7 @@
         <ol>
             {% for guide in series.guides %}
             <a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': guide.url }) }}">
-	            <li>{{ guide.title }} <span class="date right hidden-phone">{{ guide.date|date("F jS, Y") }}</span></li>
+	            <li>{{ guide.title }} <span class="date pull-right hidden-phone">{{ guide.date|date("F jS, Y") }}</span></li>
             </a>
             {% endfor %}
         </ol>

@@ -1,16 +1,13 @@
 {% extends "base.html" %}
+
 {% block content %}
 	<div class="row content-block series-page">
 		<div class="col-md-{{ collapseMedium ?: 12 }} col-sm-{{ collapseClass ?: 12 }} series-item series-container">
 	         <div class="content-container">
 	         	<div class="">
 	             	<h4>{{ series.getTitle() }}</h4>
-	             	<div class="byline">
-	             		<span class="author">{{ guide.author }}</span>
-	             		<span class="divider"> | </span>
-	             		<span class="date">{{ guide.date|date("F jS, Y") }}</span>
-	             	</div>
 	         		<p>{{ series.getSummary() }}</p>
+	         		<img src="" alt="" />
 	         	</div>
 	         </div>
 	         
@@ -21,7 +18,7 @@
 			         	<div class="series-front-img" style="background-image: url({{ imagePath(guide.image) }});"></div>
 			         </div>
 		             <li>{{ guide.title }}
-		             	<span class="date right hidden-phone">{{ guide.date|date("F jS, Y") }}</span>
+		             	<span class="date pull-right hidden-phone">{{ guide.date|date("F jS, Y") }}</span>
 		             </li>
 		         </a>
 		         {% endfor %}
@@ -30,3 +27,16 @@
 	</div>
 {% endblock %}
 
+
+{% block customcss %}
+	<style>
+
+			
+		body{
+		background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+		background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+		background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+		background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+		}
+	</style>
+{% endblock %}
