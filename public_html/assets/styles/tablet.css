@@ -63,8 +63,13 @@
 	.content-well.primary-content img.full {
 		max-width: 100%;
 	}
+	
 }
-
+@media (max-width: 991px) {
+	.text-tout.full-item-text .content-item{
+	    height: auto;
+	}
+}
 @media (max-width: 480px) {
 	.devider-header{
 		margin: 0 auto;

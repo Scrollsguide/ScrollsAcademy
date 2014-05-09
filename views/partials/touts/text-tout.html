@@ -15,12 +15,11 @@
              </div>
              <div id="col-lg-12">
             <p>{{ guide.content|striptags|slice(0, 400)}}...</p>
+            <div class="fade-out"></div>
             </div>
+            <a href="{{ url }}" data-instant>
+            		<div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
+            </a>
         </div>
     </div>
-    
-    
-    <a href="{{ url }}" data-instant>
-    <div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
-   	</a>
 </div>
