@@ -253,7 +253,7 @@ a:hover .bottom-info {
 /*jumbotron-specific content-container*/
 .jumbotron .content-container {
     color: #f8f8f8;
-    background-color: rgba(0, 0, 0, .75);
+    background-color: rgba(0, 0, 0, .6);
     padding: 10px 60px;
 	position: absolute;
 	width: 100%;
@@ -453,7 +453,7 @@ a.video-container:hover .play-container,
     background-size: cover;
     border-top: 3px solid #3d3d3d;
     border-bottom: 3px solid #3d3d3d;
-    min-height: 150px;
+    min-height: 200px;
     position: relative;
 }
 .guide-header h2 {
@@ -463,6 +463,7 @@ a.video-container:hover .play-container,
     font-size: 40px;
     color: #fdfdfd;
 }
+
 .byline {
 	color: #808080;
     float: left;
@@ -675,6 +676,8 @@ p > i.faction-growth {
     min-height: 380px;
     margin: 30px 0;
 }
+
+
 .video-header iframe {
     width: 100%;
     height: 345px;
@@ -759,17 +762,22 @@ p > i.faction-growth {
 .text-tout .content-item {
     border: 0;
     color: #3d3d3d;
+    height: 225px;
+    position: relative;
 }
+
+.text-tout .content-item .col-md-6{
+	min-height: 225px;
+}
+
 .text-tout h4 {
     margin-top: 0;
 }
-
 .text-tout img {
     max-width: 100%;
     margin: 0 0 10px 0;
     
 }
-
 .text-tout img.full-img {
     max-width: 100%;
 }
@@ -783,24 +791,19 @@ p > i.faction-growth {
 a:hover .text-tout .continue-btn {
     background: rgba(0,0,0,1);
 }
-.text-tout .content-item {
-    height: 225px;
-}
 
-.content-block:nth-last-of-type(even) .text-tout .fade-out {
+.content-block .text-tout .fade-out {
     width: 100%;
     height: 100px;
     position: absolute;
-    bottom: 0;
-    left: 0;
-   background: -moz-linear-gradient(top, rgba(248,248,248,0) 0%, rgba(248,248,248,1) 100%); /* FF3.6+ */ /* FF3.6+ */
+    bottom: 0px;
+    left: 0px;
+    background: -moz-linear-gradient(top, rgba(248,248,248,0) 0%, rgba(248,248,248,1) 100%); /* FF3.6+ */ /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(248,248,248,0)), color-stop(100%, rgba(248,248,248,1))); /* Chrome,Safari4+ */
-    
     background: -webkit-linear-gradient(top, rgba(248,248,248,0) 0%, rgba(248,248,248,1) 100%); /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top, rgba(248,248,248,0)) 0%, rgba(248,248,248,1) 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, rgba(248,248,248,0) 0%, rgba(248,248,248,1) 100%); /* IE10+ */
     background: linear-gradient(to bottom, rgba(248,248,248,0) 0%, rgba(248, 248, 248, 1) 100%); /* W3C */
-    
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#f8f8f8',GradientType=0 ); /* IE6-9 */
 }
 
@@ -808,16 +811,14 @@ a:hover .text-tout .continue-btn {
     width: 100%;
     height: 100px;
     position: absolute;
-    bottom: 0;
-    left: 0;
+    bottom: 0px;
+    left: 0px;
 	background: -moz-linear-gradient(top, rgba(235, 235, 235 ,0) 0%, rgba(235, 235, 235, 1) 100%); /* FF3.6+ */ /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(235, 235, 235 ,0)), color-stop(100%, rgba(235, 235, 235, 1))); /* Chrome,Safari4+ */
     background: -webkit-linear-gradient(top, rgba(235, 235, 235 ,0) 0%, rgba(235, 235, 235, 1) 100%); /* Chrome10+,Safari5.1+ */
     background: -o-linear-gradient(top, rgba(235, 235, 235 ,0) 0%, rgba(235, 235, 235, 1) 100%); /* Opera 11.10+ */
     background: -ms-linear-gradient(top, rgba(235, 235, 235 ,0) 0%, rgba(235, 235, 235, 1) 100%); /* IE10+ */
-    
     background: linear-gradient(to bottom, rgba(235, 235, 235 ,0) 0%, rgba(235, 235, 235, 1) 100%); /* W3C */
-    
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#ebebeb',GradientType=0 ); /* IE6-9 */
 }
 
