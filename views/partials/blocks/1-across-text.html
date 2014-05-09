@@ -1,0 +1,5 @@
+<div class="row content-block">
+	{% include 'partials/divider.html' with { 'header': block.header } only %}
+	
+	{% include 'partials/touts/text-tout-big.html' with { 'guide': block.guides[0], 'collapseClass': '12', 'collapseMedium': 12, 'maxCategories': 1 } %}
+</div>
