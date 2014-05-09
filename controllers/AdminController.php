@@ -204,6 +204,11 @@
 
 			$homepageRepository->persist($h);
 
+			// clear rendered index html page from cache so it's refreshed immediately
+			$route = $this->getApp()->getRouter()->getRoute("index");
+			$cacheKey = RouteHelper::getCacheKey($route);
+			$this->getApp()->getCache()->remove("Pages/" . $cacheKey);
+
 			$this->getApp()->getSession()->getFlashBag()->add("homepage_message", "Homepage saved.");
 
 			// redirect to homepage
@@ -274,7 +279,8 @@
 			$this->getApp()->getCache()->remove("Pages/" . $cacheKey);
 
 			// set save message
-			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Guide saved.");
+			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Guide saved. --
+			Some pages are cached, it can take some time before changes are reflected on the frontend --");
 
 			// return to edit guide page
 			$guideRoute = $this->getApp()->getRouter()->generateUrl("admin_edit_guide", array("title" => $g->getUrl()));
