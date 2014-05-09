@@ -240,6 +240,7 @@
 
 			$g->setTitle($title);
 			$g->setSummary($r->getParameter("summary"));
+			$g->setSynopsis($r->getParameter("synopsis"));
 			$g->setURL(URLUtils::makeBlob($title));
 			$g->setAuthor($r->getParameter("author"));
 			$g->setMarkdown($content);

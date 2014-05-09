@@ -103,6 +103,7 @@
 		public function persist(Guide $guide) {
 			$setQuery = "SET title = :title,
 				summary = :summary,
+				synopsis = :synopsis,
 				content = :content,
 				markdown = :markdown,
 				url = :url,
@@ -134,6 +135,7 @@
 
 			$sth->bindValue(":title", $guide->getTitle(), PDO::PARAM_STR);
 			$sth->bindValue(":summary", $guide->getSummary(), PDO::PARAM_STR);
+			$sth->bindValue(":synopsis", $guide->getSynopsis(), PDO::PARAM_STR);
 			$sth->bindValue(":content", $guide->getContent(), PDO::PARAM_STR);
 			$sth->bindValue(":markdown", $guide->getMarkdown(), PDO::PARAM_STR);
 			$sth->bindValue(":author", $guide->getAuthor(), PDO::PARAM_STR);

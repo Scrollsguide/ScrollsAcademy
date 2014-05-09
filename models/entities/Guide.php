@@ -8,6 +8,8 @@
 
 		private $summary;
 
+		private $synopsis;
+
 		private $markdown;
 
 		private $content;
@@ -64,6 +66,14 @@
 
 		public function setSummary($summary) {
 			$this->summary = $summary;
+		}
+
+		public function getSynopsis() {
+			return $this->synopsis;
+		}
+
+		public function setSynopsis($synopsis) {
+			$this->synopsis = $synopsis;
 		}
 
 		public function getDate() {

@@ -50,6 +50,13 @@
 				  <input type="text" class="form-control" name="summary" value="{% if guide %}{{ guide.summary }}{% endif %}" required />
 				</div>
 			  </div>
+				<div class="form-group">
+					<label for="synopsis" class="col-sm-2 control-label">Synopsis</label>
+					<div class="col-sm-10">
+						<small>The synopsis of a guide is used for text touts in homepage blocks if filled out. Not required.</small>
+						<textarea class="form-control" name="synopsis" maxlength="1000">{% if guide %}{{ guide.synopsis }}{% endif %}</textarea>
+					</div>
+				</div>
 			  <div class="form-group">
 				<label for="summary" class="col-sm-2 control-label">Author *</label>
 				<div class="col-sm-10">

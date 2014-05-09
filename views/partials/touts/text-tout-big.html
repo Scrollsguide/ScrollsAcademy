@@ -3,6 +3,11 @@
 {% else %}
 	{% set url = path('view_guide', { 'title': guide.url }) %}
 {% endif %}
+{% if guide.synopsis %}
+	{% set synopsis = guide.synopsis %}
+{% else %}
+	{% set synopsis = guide.content|striptags|slice(0, 400) ~ '...' %}
+{% endif %}
 <div class="col-md-{{ collapseMedium ?: 9 }} col-sm-{{ collapseClass ?: 12 }} text-tout full-item-text">
     
     <div class="content-item">
@@ -16,18 +21,18 @@
 	    <div class="col-md-6">
         	<div class="col-lg-12" style="padding: 0px;">
 	        	<a href="{{ url }}" data-instant>
-	            	<h4>{{ guide.getTitle() }}</h4>
+	            	<h4>{{ guide.title }}</h4>
 	             </a>
              </div>
              
              <div id="col-lg-12">
-            	<p>{{ guide.content|striptags|slice(0, 800)}}...</p>
+            	<p>{{ synopsis }}</p>
             	<div class="fade-out"></div>
             </div>
 	    </div>
     </div>
     
     <a href="{{ url }}" data-instant>
-    <div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
+   		<div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
    	</a>
 </div>
