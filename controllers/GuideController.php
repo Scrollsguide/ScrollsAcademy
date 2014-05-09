@@ -32,9 +32,15 @@
 						$guide->addCategory($category);
 					}
 
+					// make page title, append series name if it's a series guide
+					$title = $guide->getTitle();
+					if ($series !== null){
+						$title .= " - " . $series->getTitle();
+					}
+
 					return $this->render("guide.html", array(
 						"guide"         => $guide,
-						"title"         => $guide->getTitle(),
+						"title"         => $title,
 						"allSeries"     => $allSeries,
 						"series"        => $series,
 						"relatedGuides" => $relatedGuides

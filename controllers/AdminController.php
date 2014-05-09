@@ -419,7 +419,8 @@
 			$this->getApp()->getCache()->remove("Pages/" . $cacheKey);
 
 			// set save message
-			$this->getApp()->getSession()->getFlashBag()->add("series_message", "Series saved.");
+			$this->getApp()->getSession()->getFlashBag()->add("series_message", "Series saved. --
+			Some pages are cached, it can take some time before changes are reflected on the frontend --");
 
 			// return to edit series page
 			$seriesRoute = $this->getApp()->getRouter()->generateUrl("admin_edit_series", array("title" => $s->getUrl()));
