@@ -9,7 +9,8 @@
 			var blockId = $(this).attr("name").match(/blocks\[(\d+)\]/)[1];
 
 			var numOfBlocks = $(this).find(":selected").attr("data-guides");
-			var guideRowsContainer = $(this).parents(".block").find(".guiderows");
+			var blockParent = $(this).parents(".block");
+			var guideRowsContainer = blockParent.find(".guiderows");
 			var guidesInContainer = guideRowsContainer.find(".form-group");
 
 			if (guidesInContainer.length > numOfBlocks){
@@ -22,6 +23,13 @@
 				for (var i = guidesInContainer.length; i < numOfBlocks; i++){
 					guideRowsContainer.append(str);
 				}
+			}
+
+			var hasHeader = $(this).find(":selected").attr("data-header");
+			if (typeof hasHeader !== 'undefined' && hasHeader === "0"){
+				blockParent.find(".headerinput").css("display", "none");
+			} else {
+				blockParent.find(".headerinput").css("display", "block");
 			}
 		});
 

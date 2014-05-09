@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-
 {% block content %}
 	<div class="row content-block series-page">
 		<div class="col-md-{{ collapseMedium ?: 12 }} col-sm-{{ collapseClass ?: 12 }} series-item series-container">
@@ -25,17 +24,13 @@
 		</div>
 	</div>
 {% endblock %}
-
-
 {% block customcss %}
 	<style>
-
-			
 		body{
-		background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
-		background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
-		background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
-		background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+			background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+			background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+			background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
+			background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
 		}
 	</style>
 {% endblock %}

@@ -20,7 +20,7 @@
 		{% for guide in guides %}
 			<div class="col-md-4 col-sm-6">
 				<a href="{{ path('admin_edit_guide', { 'title': guide.url }) }}">
-					<div class="content-item" style="background-image: url({{ imagePath(guide.image) }})">
+					<div class="content-item">
 						<div class="content-container">
 							<h4>{{ guide.title }}</h4>
 							<p>{{ guide.summary }}</p>

@@ -20,7 +20,7 @@
 	{% for serie in series %}
 	<div class="col-md-4 col-sm-6">
 		<a href="{{ path('admin_edit_series', { 'title': serie.url }) }}">
-			<div class="content-item" style="background-image: url({{ imagePath(serie.image) }})">
+			<div class="content-item">
 				<div class="content-container">
 					<h4>{{ serie.title }}</h4>
 				</div>
