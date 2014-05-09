@@ -69,6 +69,10 @@
 		}
 
 		public function getSynopsis() {
+			if ($this->synopsis === ""){
+				// return first 1000 chars from content without html tags
+				return substr(strip_tags($this->getContent()), 0, 1000);
+			}
 			return $this->synopsis;
 		}
 
