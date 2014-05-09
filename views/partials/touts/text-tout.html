@@ -6,7 +6,7 @@
 {% if guide.synopsis %}
 	{% set synopsis = guide.synopsis %}
 {% else %}
-	{% set synopsis = guide.content|striptags|slice(0, 400) ~ '...' %}
+	{% set synopsis = guide.content|striptags|slice(0, 1000) ~ '...' %}
 {% endif %}
 <div class="col-md-{{ collapseMedium ?: 9 }} col-sm-{{ collapseClass ?: 12 }} text-tout full-small-item-text">
     
