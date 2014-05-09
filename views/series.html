@@ -7,14 +7,14 @@
 	             	<h4>{{ series.getTitle() }}</h4>
 	         		<p>{{ series.getSummary() }}</p>
 	         	</div>
+	         	<a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
+	         		 	<div class="series-front-img" style="background-image: url({{ imagePath(series.image) }});"></div>
+	         	</a>
 	         </div>
 	         
 		     <ol>
 		         {% for guide in series.guides %}
 		         <a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': guide.url }) }}">
-			         <div class="content-container" style="padding: 0px 10px;">
-			         	<div class="series-front-img" style="background-image: url({{ imagePath(guide.image) }});"></div>
-			         </div>
 		             <li>{{ guide.title }}
 		             	<span class="date pull-right hidden-phone">{{ guide.date|date("F jS, Y") }}</span>
 		             </li>
@@ -23,14 +23,4 @@
 		     </ol>
 		</div>
 	</div>
-{% endblock %}
-{% block customcss %}
-	<style>
-		body{
-			background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
-			background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
-			background: -ms-linear-gradient(top, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
-			background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 0%, #f8f8f8 20%) center top / 100% 100% no-repeat, url({{ imagePath(series.banner) }}) 0 top / 100% auto no-repeat #f8f8f8 !important;
-		}
-	</style>
 {% endblock %}
