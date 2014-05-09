@@ -7,15 +7,20 @@
     
     <div class="content-item">
         <div>
-        	<a href="{{ url }}" data-instant>
-            	<img src="{{ imagePath(guide.image) }}" class="pull-left" />
-            	<h4>{{ guide.getTitle() }}</h4>
-             </a>
-            <p>{{ guide.content|cut('900')|raw}}</p>
+        	<div class="col-lg-12" style="padding: 0px;">
+	        	<a href="{{ url }}" data-instant>
+	            	<img src="{{ imagePath(guide.image) }}" class="pull-left" />
+	            	<h4>{{ guide.getTitle() }}</h4>
+	             </a>
+             </div>
+             <div id="col-lg-12">
+            <p>{{ guide.content|striptags|slice(0, 400)}}...</p>
+            </div>
         </div>
     </div>
     
-    <div class="fade-out"></div>
+    
+    <a href="{{ url }}" data-instant>
     <div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
-   
+   	</a>
 </div>

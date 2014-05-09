@@ -74,7 +74,7 @@ h3 {
 	border-top: 2px solid #333;
 }
 .full-devide-line{
-	margin: 50px 0px 20px !important;
+	margin: 15px 0px 25px !important;
 }
 .devider-header{
 	background-color: #222222;
@@ -162,6 +162,12 @@ a:hover {
 }
 .content-block > div {
     margin-bottom: 30px; /* give all content equal bottom spacing*/
+}
+.content-block {
+	padding-top: 40px !important;	
+}
+.content-block .jumbotron {
+	margin-top: -40px;	
 }
 
 .jumbotron {
@@ -726,7 +732,6 @@ p > i.faction-growth {
 .text-tout .content-item {
     border: 0;
     color: #3d3d3d;
-    border-bottom: 1px solid #000;
 }
 .text-tout h4 {
     margin-top: 0;

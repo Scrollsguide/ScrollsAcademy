@@ -1,7 +1,7 @@
 <div class="row content-block">
 	{% include 'partials/divider.html' with { 'header': block.header } only %}
 	
-	{% include 'partials/touts/single-item.html' with { 'guide': block.guides[0], 'collapseClass': '12', 'collapseMedium': 4, 'maxCategories': 3 } %}
+	{% include 'partials/touts/text-tout.html' with { 'guide': block.guides[0], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 1 } %}
 
-	{% include 'partials/touts/text-tout.html' with { 'guide': block.guides[1], 'collapseClass': '12', 'collapseMedium': 8, 'maxCategories': 1 } %}
+	{% include 'partials/touts/text-tout.html' with { 'guide': block.guides[1], 'collapseClass': '12', 'collapseMedium': 6, 'maxCategories': 1 } %}
 </div>

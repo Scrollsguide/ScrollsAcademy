@@ -13,6 +13,8 @@
         </div>
    </a>
 	<div class="content-container">
-		<h4>{{ guide.getTitle() }}</h4>
+		<a href="{{ path('view_guide', { 'title': guide.url }) }}">
+			<h4>{{ guide.getTitle() }}</h4>
+		</a>
 	</div>
 </div>
