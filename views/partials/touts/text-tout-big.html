@@ -6,7 +6,7 @@
 {% if guide.synopsis %}
 	{% set synopsis = guide.synopsis %}
 {% else %}
-	{% set synopsis = guide.content|striptags|slice(0, 400) ~ '...' %}
+	{% set synopsis = guide.content|striptags|slice(0, 700) ~ '...' %}
 {% endif %}
 <div class="col-md-{{ collapseMedium ?: 9 }} col-sm-{{ collapseClass ?: 12 }} text-tout full-item-text">
     
@@ -27,9 +27,11 @@
              
              <div id="col-lg-12">
             	<p>{{ synopsis }}</p>
-            	<div class="fade-out"></div>
+            	
             </div>
+            <div class="fade-out"></div>
 	    </div>
+	    
     </div>
     
     <a href="{{ url }}" data-instant>
