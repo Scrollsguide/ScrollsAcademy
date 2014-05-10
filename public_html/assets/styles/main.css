@@ -792,7 +792,7 @@ a:hover .text-tout .continue-btn {
     background: rgba(0,0,0,1);
 }
 
-.content-block .text-tout .fade-out {
+.content-block:nth-last-of-type(even) .text-tout .fade-out {
     width: 100%;
     height: 100px;
     position: absolute;
