@@ -453,15 +453,23 @@ a.video-container:hover .play-container,
     background-size: cover;
     border-top: 3px solid #3d3d3d;
     border-bottom: 3px solid #3d3d3d;
-    min-height: 200px;
+    min-height: 300px;
     position: relative;
 }
 .guide-header h2 {
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	padding: 20px 50px;
+	margin-bottom: 0px;
+	
     font-family: 'PT Sans', sans-serif;
-    line-height: 50px;
     text-shadow: 0px 2px 0px rgba(0, 0, 0, .8);
     font-size: 40px;
     color: #fdfdfd;
+    
+    background-color: rgba(0, 0, 0, .6);
 }
 
 .byline {
