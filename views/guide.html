@@ -44,7 +44,7 @@
 				{% if loop.index == 3 %}
 					{% set collapseClass = 12 %}
 				{% endif %}
-				{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
+				{% include 'partials/touts/single-item.html' with { 'guide': guide, 'collapseClass': collapseClass } %}
 			{% endfor %}
 		</div>
 	{% endif %}

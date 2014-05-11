@@ -281,10 +281,9 @@ a:hover .bottom-info {
 .type-tag {
     color: #fff;
     position: absolute;
-    top: 20px;
+    top: 10px;
     right: 5px;
     padding: 2px 5px;
-
     border-radius: 2px 0 0 2px;
     z-index: 5;
     background: #3d3d3d;
@@ -312,11 +311,11 @@ a:hover .bottom-info {
 }
 
 .type-tag:nth-child(2){
-    top: 50px;
+    top: 40px;
 }
 
 .type-tag:nth-child(3) {
-    top: 80px;
+    top: 70px;
 }
 
 .jumbotron .type-tag:nth-child(1) {
