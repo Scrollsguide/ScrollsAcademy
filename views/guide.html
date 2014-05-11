@@ -1,52 +1,52 @@
 {% extends "base.html" %}
 {% block content %}
-	<div class="row guide-header {% if guide.getVideo() %}video-header{% endif %}" style="background-image:url({{ imagePath(guide.banner) }})">
-        <div class="header-container">
-            {% if guide.getVideo() %}
-                <div class="player-placeholder" data-video-id="{{ getIdFromEmbed(guide.video) }}"></div>
-                <div class="play-container">
-                    <i class="fa fa-play-circle"></i>
-                </div>
-                <div class="content-container">
-                    <h2>{{ guide.title }}</h2>
-                </div>
-            {% else %}
-                <h2>{{ guide.title }}</h2>
-            {% endif %}
-        </div>
-    </div>
-    <div class="row content-well">
-        <div class="byline">
-            <!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
-            <span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
-            <span class="divider"> | </span>
-            <span class="date">{{ guide.date | date("F jS, Y") }}</span>
-        </div>
-    </div>
+	<div class="row guide-header{% if guide.video %} video-header{% endif %}" style="background-image:url({{ imagePath(guide.banner) }})">
+		<div class="header-container">
+			{% if guide.video %}
+				<div class="player-placeholder" data-video-id="{{ getIdFromEmbed(guide.video) }}"></div>
+				<div class="play-container">
+					<i class="fa fa-play-circle"></i>
+				</div>
+				<div class="content-container">
+					<h2>{{ guide.title }}</h2>
+				</div>
+			{% else %}
+				<h2>{{ guide.title }}</h2>
+			{% endif %}
+		</div>
+	</div>
+	<div class="row content-well">
+		<div class="byline">
+			<!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
+			<span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
+			<span class="divider"> | </span>
+			<span class="date">{{ guide.date | date("F jS, Y") }}</span>
+		</div>
+	</div>
 
-    <div class="row content-well primary-content">
-    	{{ guide.content | raw }}
-    </div>
+	<div class="row content-well primary-content">
+		{{ guide.content | raw }}
+	</div>
 
 	{% include 'partials/series-related.html' with { 'guide': guide, 'allSeries': allSeries } %}
 
-    {% if preview != true %}
-        {% include 'partials/social.html' with { 'guide': guide } %}
-    {% endif %}
+	{% if preview != true %}
+		{% include 'partials/social.html' with { 'guide': guide } %}
+	{% endif %}
 
-    <!-- type 2, three articles -->
-    {% if relatedGuides %}
-    <div class="row content-block more-block">
-        <div class="col-md-12 related-hdr">
-            <h4>Related Guides</h4>
-        </div>
+	<!-- type 2, three articles -->
+	{% if relatedGuides %}
+		<div class="row content-block more-block">
+			<div class="col-md-12 related-hdr">
+				<h4>Related Guides</h4>
+			</div>
 			{% for guide in relatedGuides %}
-            {% if loop.index == 3 %}
-                {% set collapseClass = 12 %}
-            {% endif %}
+				{% if loop.index == 3 %}
+					{% set collapseClass = 12 %}
+				{% endif %}
 				{% include 'partials/touts/single-item.html' with { 'guide': guide } %}
-		    {% endfor %}
-	    </div>
+			{% endfor %}
+		</div>
 	{% endif %}
 {% endblock %}
 
