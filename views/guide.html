@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 	<div class="row guide-header {% if guide.getVideo() %}video-header{% endif %}" style="background-image:url({{ imagePath(guide.banner) }})">
-        <div class="col-md-12 header-container">
+        <div class="header-container">
             {% if guide.getVideo() %}
                 <div class="player-placeholder" data-video-id="{{ getIdFromEmbed(guide.video) }}"></div>
                 <div class="play-container">
