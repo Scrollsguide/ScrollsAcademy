@@ -8,24 +8,24 @@
                     <i class="fa fa-play-circle"></i>
                 </div>
                 <div class="content-container">
-                    <h2>{{ guide.getTitle() }}</h2>
+                    <h2>{{ guide.title }}</h2>
                 </div>
             {% else %}
-                <h2>{{ guide.getTitle() }}</h2>    
+                <h2>{{ guide.title }}</h2>
             {% endif %}
         </div>
     </div>
     <div class="row content-well">
         <div class="byline">
             <!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
-            <span class="author">{{ guide.author }}</span>
+            <span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
             <span class="divider"> | </span>
             <span class="date">{{ guide.date | date("F jS, Y") }}</span>
         </div>
     </div>
 
     <div class="row content-well primary-content">
-    	{{ guide.getContent() | raw }}
+    	{{ guide.content | raw }}
     </div>
 
 	{% include 'partials/series-related.html' with { 'guide': guide, 'allSeries': allSeries } %}

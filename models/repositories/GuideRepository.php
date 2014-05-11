@@ -46,6 +46,16 @@
 			return $guides;
 		}
 
+		public function findAllByAuthor($author){
+			$guides = $this->findAllBy("author", $author);
+
+			foreach ($guides as $guide) {
+				$this->findGuideCategories($guide);
+			}
+
+			return $guides;
+		}
+
 		public function findRecentGuides($limit = 3){
 			$sth = $this->getConnection()->prepare("SELECT *
 						FROM guides

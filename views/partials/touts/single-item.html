@@ -17,13 +17,13 @@
      </a>     
 	<div class="content-container">
 		<div class="byline">
-			<span class="author">{{ guide.author }}</span>
+			<span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
 			<span class="divider"> | </span>
 			<span class="date">{{ guide.date|date("F jS, Y") }}</span>
 		</div>
 		<div>
 			<a href="{{ url }}" data-instant>
-			 <h4>{{ guide.getTitle() }}</h4>
+			 <h4>{{ guide.title }}</h4>
 			</a>
 			<p>{{ guide.summary }}</p>
 		</div>

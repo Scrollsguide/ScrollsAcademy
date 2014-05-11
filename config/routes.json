@@ -48,6 +48,13 @@
 			},
 			"action": "Guide::viewSeriesGuide"
 		},
+		"author": {
+			"path": "/author/{author}",
+			"requirements": {
+				"author": "[a-zA-Z0-9_]+"
+			},
+			"action": "Author::viewGuides"
+		},
 		"view_avatar": {
 			"path": "/assets/images/avatar/{user}",
 			"requirements": {

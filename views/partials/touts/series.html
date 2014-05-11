@@ -5,9 +5,9 @@
             	
             	<div class="">
 	            	<a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
-	            		<h4>{{ series.getTitle() }}</h4>
+	            		<h4>{{ series.title }}</h4>
 	            	</a>
-            		<p>{{ series.getSummary() }}</p>
+            		<p>{{ series.summary }}</p>
             	</div>
             	
             	<a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
