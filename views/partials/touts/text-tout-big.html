@@ -3,32 +3,23 @@
 {% else %}
 	{% set url = path('view_guide', { 'title': guide.url }) %}
 {% endif %}
-<div class="col-md-{{ collapseMedium ?: 9 }} col-sm-{{ collapseClass ?: 12 }} text-tout full-item-text">
-    
-    <div class="content-item">
-    
-    	<div>
-		    <a href="{{ url }}" data-instant>
-		    	<img class="full-img" src="{{ imagePath(guide.image) }}" class="pull-left" />
-		     </a>
-	    </div>
+<div class="col-md-6 col-xs-12 text-tout">
+	<div class="content-item">
+		<a href="{{ url }}" data-instant>
+			<img class="full-img pull-left" src="{{ imagePath(guide.image) }}" />
+		</a>
+	</div>
+</div>
+<div class="col-md-6 col-xs-12 text-tout">
+	<a href="{{ url }}" data-instant>
+		<h4>{{ guide.title }}</h4>
+	</a>
 
-	    <div>
-        	<div style="padding: 0px;">
-	        	<a href="{{ url }}" data-instant>
-	            	<h4>{{ guide.title }}</h4>
-	             </a>
-             </div>
-             
-             <div>
-            	<p>{{ guide.synopsis }}</p>
-            </div>
-            <div class="fade-out"></div>
-	    </div>
-	    
-    </div>
-    
-    <a href="{{ url }}" data-instant>
-   		<div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
-   	</a>
+	<p>{{ guide.synopsis }}</p>
+
+	<div class="fade-out"></div>
+
+	<a href="{{ url }}" data-instant>
+		<div class="continue-btn">Continue Reading <i class="fa fa-arrow-right"></i></div>
+	</a>
 </div>
