@@ -158,7 +158,7 @@ a:hover {
 .navbar-default .navbar-nav.base-navbar>li:nth-last-of-type(3):hover a {
 	-moz-box-shadow: inset 0 -3px 0 #30c333;
 	box-shadow: inset 0 -3px 0 #30c333;
-	
+
 	-webkit-transition: all .2s ease-in-out 0s;
 	-moz-transition: all .2s ease-in-out 0s;
 	transition: all .2s ease-in-out 0s;
@@ -166,7 +166,7 @@ a:hover {
 .navbar-default .navbar-nav.base-navbar>li:nth-last-of-type(2):hover a {
 	-moz-box-shadow: inset 0 -3px 0 #0B5FA5;
 	box-shadow: inset 0 -3px 0 #0B5FA5;
-	
+
 	-webkit-transition: all .2s ease-in-out 0s;
 	-moz-transition: all .2s ease-in-out 0s;
 	transition: all .2s ease-in-out 0s;
@@ -174,7 +174,7 @@ a:hover {
 .navbar-default .navbar-nav.base-navbar>li:nth-last-of-type(1):hover a {
 	-moz-box-shadow: inset 0 -3px 0 #502982;
 	box-shadow: inset 0 -3px 0 #502982;
-	
+
 	-webkit-transition: all .2s ease-in-out 0s;
 	-moz-transition: all .2s ease-in-out 0s;
 	transition: all .2s ease-in-out 0s;
@@ -191,7 +191,7 @@ a:hover {
     margin-bottom: 30px; /* give all content equal bottom spacing*/
 }
 .content-block {
-	padding-top: 40px !important;	
+	padding-top: 40px !important;
 }
 
 .content {
@@ -222,7 +222,7 @@ a:hover {
 
 /* A box inside of a jumbotron or a content-item*/
 .content-block .jumbotron {
-	margin-top: -40px;	
+	margin-top: -40px;
 }
 
 .jumbotron {
@@ -282,7 +282,7 @@ a:hover .bottom-info {
     color: #fff;
     position: absolute;
     top: 20px;
-    right: 0;
+    right: 5px;
     padding: 2px 5px;
 
     border-radius: 2px 0 0 2px;
@@ -324,15 +324,17 @@ a:hover .bottom-info {
 }
 
 .jumbotron .type-tag:nth-child(2) {
-    top: 100px;
+    top: 120px;
 }
 
 .jumbotron .type-tag:nth-child(3) {
-    top: 140px;
+    top: 180px;
 }
 
 .jumbotron .type-tag {
-	 padding-right: 10px;
+    padding-right: 10px;
+    line-height: 2;
+    padding-left: 15px;
 }
 a:hover .jumbotron .type-tag {
     /* box-shadow: -5px 5px 8px #000; */
@@ -517,7 +519,7 @@ a.video-container:hover .play-container,
     padding: 0 20px;
 }
 
-.content-well.primary-content img { 
+.content-well.primary-content img {
     width: 100%;
     margin-bottom: 30px;
     display: block;
@@ -729,7 +731,6 @@ p > i.faction-growth {
 	color: #222;
 }
 .series-item li {
-    margin: 0 10px;
 	padding: 5px 20px;
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #fff;
@@ -777,7 +778,7 @@ p > i.faction-growth {
 .text-tout img {
     max-width: 100%;
     margin: 0 0 10px 0;
-    
+
 }
 .text-tout img.full-img {
     max-width: 100%;

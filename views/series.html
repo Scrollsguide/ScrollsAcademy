@@ -2,25 +2,23 @@
 {% block content %}
 	<div class="row content-block series-page">
 		<div class="col-md-{{ collapseMedium ?: 12 }} col-sm-{{ collapseClass ?: 12 }} series-item series-container">
-	         <div class="content-container">
-	         	<div class="">
-	             	<h4>{{ series.getTitle() }}</h4>
-	         		<p>{{ series.getSummary() }}</p>
-	         	</div>
-	         	<a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
-	         		 	<div class="series-front-img" style="background-image: url({{ imagePath(series.image) }});"></div>
-	         	</a>
-	         </div>
-	         
-		     <ol>
-		         {% for guide in series.guides %}
-		         <a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': guide.url }) }}">
-		             <li>{{ guide.title }}
-		             	<span class="date pull-right hidden-phone">{{ guide.date|date("F jS, Y") }}</span>
-		             </li>
-		         </a>
-		         {% endfor %}
-		     </ol>
+			<div class="content-container">
+				<h4>{{ series.title }}</h4>
+				<p>{{ series.summary }}</p>
+				<a href="{{ path('series_guide_list', { 'title': series.url }) }}" data-instant>
+					<div class="series-front-img" style="background-image: url({{ imagePath(series.image) }});"></div>
+				</a>
+			</div>
+
+			<ol>
+				{% for guide in series.guides %}
+					<a href="{{ path('series_guide', { 'title': series.url, 'guideTitle': guide.url }) }}">
+						<li>{{ guide.title }}
+							<span class="date pull-right hidden-phone">{{ guide.date|date("F jS, Y") }}</span>
+						</li>
+					</a>
+				{% endfor %}
+			</ol>
 		</div>
 	</div>
 {% endblock %}
