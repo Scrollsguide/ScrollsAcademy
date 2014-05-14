@@ -6,7 +6,7 @@
 
 		// default caching rules, cache any page for 10 minutes
 		private $cacheRules = array(
-			"cache" => false,
+			"cache" => true,
 			"ttl"   => 600
 		);
 
