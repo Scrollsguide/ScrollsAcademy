@@ -11,7 +11,6 @@
 			$this->setCacheRules(array(
 				"cache" => false
 			));
-
 		}
 
 		public function loginAction() {

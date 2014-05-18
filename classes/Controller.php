@@ -4,10 +4,12 @@
 
 		private $app;
 
-		// default caching rules, cache any page for 10 minutes
+		// default caching rules, cache any page for 10 minutes with html content type
 		private $cacheRules = array(
-			"cache" => true,
-			"ttl"   => 600
+			"cache"       => true,
+			"ttl"         => 600,
+			"contentType" => "html",
+			"statusCode"  => 200
 		);
 
 		public function __construct(App $app) {

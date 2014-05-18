@@ -18,7 +18,7 @@
 			}
 		}
 
-		protected function setContentType($contentType) {
+		public function setContentType($contentType) {
 			$this->contentType = $contentType;
 		}
 

@@ -37,6 +37,14 @@
 			)
 		);
 
+		public function __construct(App $app){
+			parent::__construct($app);
+
+			$this->setCacheRules(array(
+				"cache" => false
+			));
+		}
+
 		public function getAvatarAction($username) {
 			return Response::emptyResponse();
 		}
@@ -65,7 +73,9 @@
 			}
 
 			// get contents of all merged files
-			$assetContent = $assetCollection->dump($this->getFilter($fileType));
+			$assetContent = "/* FROM RESOURCECONTROLLER " . time() . " */";
+			$assetContent.= $assetCollection->dump($this->getFilter($fileType));
+			$assetContent.= "/* FROM RESOURCECONTROLLER " . time() . " */";
 
 			$cache->save($cachePath, $assetContent);
 

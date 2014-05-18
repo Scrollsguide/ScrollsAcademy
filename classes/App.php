@@ -69,6 +69,12 @@
 						// successfully loaded from cache
 						$usedCache = true;
 
+						// create new response to process headers
+						$r = new Response();
+						$r->setStatusCode($this->controller->getCacheRule("statusCode"));
+						$r->setContentType($this->controller->getCacheRule("contentType"));
+						$r->process();
+
 						echo $contentFromCache;
 					}
 				}
