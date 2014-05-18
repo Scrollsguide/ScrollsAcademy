@@ -10,7 +10,17 @@
 
 		public function __construct() {
 			$this->url = new URL();
-			$this->url->setPath($_SERVER['REQUEST_URI']);
+
+			$requestUri = $_SERVER['REQUEST_URI'];
+			$scriptName = $_SERVER['SCRIPT_NAME'];
+
+			// make sure the debugging paths route to the same controllers,
+			// index_dev.php/path === /path
+			if (Debug::started() && substr($requestUri, 0, strlen($scriptName)) === $scriptName){
+				$requestUri = substr($requestUri, strlen($scriptName));
+			}
+
+			$this->url->setPath($requestUri);
 			$this->url->setHost($_SERVER['HTTP_HOST']);
 			$this->url->setHTTPS(!empty($_SERVER['HTTPS']));
 

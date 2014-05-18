@@ -61,7 +61,7 @@
 
 			// check cache here, load controller if cache cannot be used
 			$usedCache = false;
-			$shouldCache = $this->controller->getCacheRule("cache");
+			$shouldCache = !Debug::started() && $this->controller->getCacheRule("cache");
 			if ($shouldCache) {
 				$cacheKey = "Pages/" . RouteHelper::getCacheKey($this->getRoute());
 				if ($this->getCache()->isValid($cacheKey, $this->controller->getCacheRule("ttl"))) {
@@ -263,5 +263,9 @@
 			}
 
 			return $this->optObjects[$obj];
+		}
+
+		public function getDebug(){
+			return Debug::output();
 		}
 	}

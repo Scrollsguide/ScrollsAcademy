@@ -10,7 +10,7 @@
 			return "Guide";
 		}
 
-		public function findAllByCategory($categoryString) {
+		public function findAllByCategory($categoryString, $addCategories = true) {
 			$sth = $this->getConnection()->prepare("SELECT A.*
 						FROM guides A, guidecategories AC, categories C
 						WHERE C.name = :category
@@ -21,8 +21,10 @@
 			$sth->execute();
 
 			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
-			foreach ($guides as $guide) {
-				$this->findGuideCategories($guide);
+			if ($addCategories) {
+				foreach ($guides as $guide) {
+					$this->findGuideCategories($guide);
+				}
 			}
 
 			return $guides;
@@ -39,14 +41,11 @@
 			$sth->execute();
 
 			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityname());
-			foreach ($guides as $guide) {
-				$this->findGuideCategories($guide);
-			}
 
 			return $guides;
 		}
 
-		public function findAllByAuthor($author){
+		public function findAllByAuthor($author) {
 			$guides = $this->findAllBy("author", $author);
 
 			foreach ($guides as $guide) {
@@ -56,7 +55,7 @@
 			return $guides;
 		}
 
-		public function findRecentGuides($limit = 3){
+		public function findRecentGuides($limit = 3) {
 			$sth = $this->getConnection()->prepare("SELECT *
 						FROM guides
 						ORDER BY id DESC
@@ -73,13 +72,16 @@
 
 		//this should use a minimal query since it only is looking for one guide
 		public function findRandomByCategory($categoryString) {
-			$all = $this->findAllByCategory($categoryString);
+			$all = $this->findAllByCategory($categoryString, false);
 
 			if (empty($all)) {
 				return false;
 			}
 
-			return $all[array_rand($all)];
+			$guide = $all[array_rand($all)];
+			$this->findGuideCategories($guide);
+
+			return $guide;
 		}
 
 		public function findGuideCategories(Guide $guide) {
@@ -93,7 +95,7 @@
 			$sth->execute();
 
 			$categories = $sth->fetchAll(PDO::FETCH_ASSOC);
-			foreach ($categories as $category){
+			foreach ($categories as $category) {
 				$guide->addCategory($category);
 			}
 
@@ -156,7 +158,7 @@
 			$sth->bindValue(":video", $guide->getVideo(), PDO::PARAM_STR);
 			$sth->bindValue(":discussion", $guide->getDiscussion(), PDO::PARAM_STR);
 
-			if ($isExistingGuide){
+			if ($isExistingGuide) {
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
 			}
 

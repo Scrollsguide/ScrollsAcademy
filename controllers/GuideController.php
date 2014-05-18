@@ -15,6 +15,11 @@
 					$seriesRepository = $em->getRepository("Series");
 					$allSeries = $seriesRepository->findSeriesByGuide($guide);
 
+					$categories = $guideRepository->findGuideCategories($guide);
+					foreach ($categories as $category) {
+						$guide->addCategory($category);
+					}
+
 					// For now we just get one guide of each level - TODO use the tags from the guide
 					$relatedGuides = array();
 					//get the random guides for the relateds
@@ -26,11 +31,6 @@
 					$relatedGuides = array_filter($relatedGuides, function ($e) {
 						return $e !== false;
 					});
-
-					$categories = $guideRepository->findGuideCategories($guide);
-					foreach ($categories as $category) {
-						$guide->addCategory($category);
-					}
 
 					// make page title, append series name if it's a series guide
 					$title = $guide->getTitle();

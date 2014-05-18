@@ -19,12 +19,6 @@
 					$count++;
 					// update guide title with index
 					$guide->setTitle($count . ". " . $guide->getTitle());
-
-					// load categories for guides
-					$categories = $guideRepository->findGuideCategories($guide);
-					foreach ($categories as $category) {
-						$guide->addCategory($category);
-					}
 					$list->addGuide($guide);
 				}
 			}
@@ -52,11 +46,6 @@
 					// update guide title with index
 					$guide->setTitle($count . ". " . $guide->getTitle());
 
-					// load categories for guides
-					$categories = $guideRepository->findGuideCategories($guide);
-					foreach ($categories as $category) {
-						$guide->addCategory($category);
-					}
 					$series->addGuide($guide);
 				}
 

@@ -130,6 +130,10 @@
 				$routeUrl = $route->get("path");
 			}
 
+			if (Debug::started()) {
+				$routeUrl = "/" . Debug::SCRIPT_NAME . $routeUrl;
+			}
+
 			return $routeUrl;
 		}
 
