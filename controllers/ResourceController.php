@@ -73,9 +73,7 @@
 			}
 
 			// get contents of all merged files
-			$assetContent = "/* FROM RESOURCECONTROLLER " . time() . " */";
-			$assetContent.= $assetCollection->dump($this->getFilter($fileType));
-			$assetContent.= "/* FROM RESOURCECONTROLLER " . time() . " */";
+			$assetContent = $assetCollection->dump($this->getFilter($fileType));
 
 			$cache->save($cachePath, $assetContent);
 
