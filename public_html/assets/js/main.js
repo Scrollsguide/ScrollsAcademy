@@ -2,7 +2,6 @@
 	'use strict';
 
 	function loadVideo() {
-		console.log('ckick')
 		var $container = $(this);
 		$container.addClass('playing');
 
@@ -30,7 +29,7 @@
 
 			// bind
 			$('.content-block').on('click', '.video-container', loadVideo);
-			$('.container-fluid').on('click', '.video-header', loadVideo);
+			$('.container').on('click', '.video-header', loadVideo);
 		}
 
 		// add jquery external selector
