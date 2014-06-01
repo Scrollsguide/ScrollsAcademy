@@ -74,6 +74,10 @@
 			"path": "/about",
 			"action": "Index::about"
 		},
+		"content_submission_guide": {
+			"path": "/content-submission-guide",
+			"action": "Index::contentSubmission"
+		},
 		"404": {
 			"path": "/404",
 			"action": "Index::p404"

@@ -51,9 +51,9 @@
 			return $this->app->getRequest()->getURL()->getBaseURL() . $this->path($routeId, $routeParams);
 		}
 
-		public function cdnAsset($relativeUrl){
+		public function cdnAsset($relativeUrl) {
 			$config = $this->app->getConfig();
-			if ($config->exists(Config::CDN_DOMAIN)){
+			if ($config->exists(Config::CDN_DOMAIN)) {
 				return $config->get(Config::CDN_DOMAIN) . $relativeUrl;
 			} else {
 				return $relativeUrl;
@@ -109,6 +109,7 @@
 		public function categoryIcon($category) {
 			$iconMap = array(
 				'about'        => 'info',
+				'submit'       => 'upload',
 				'beginner'     => 'cogs',
 				'intermediate' => 'star',
 				'master'       => 'trophy',

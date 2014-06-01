@@ -675,10 +675,6 @@ p > i.faction-growth {
     text-shadow: none;
 }
 
-.about-page, .error-page {
-    font-size: 20px;
-}
-
 #instantclick-bar {
 	background-color: #3d3d3d;
 }

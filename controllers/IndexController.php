@@ -53,4 +53,10 @@
 				'title' => 'About'
 			));
 		}
+
+		public function contentSubmissionAction(){
+			return $this->render("submission_guide.html", array(
+				'title' => 'Content submission guide'
+			));
+		}
 	}
