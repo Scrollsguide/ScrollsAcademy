@@ -44,6 +44,8 @@ body {
 }
 a{
 	color: #28aff8;
+	text-decoration: none !important;
+	
 }
 a:hover{
 	color: #0579f3;
@@ -51,6 +53,7 @@ a:hover{
 
 a h4 {
 	color: #222222;
+	text-decoration: none !important;
 }
 a:hover h4 {
 	color: #0579f3;
@@ -179,6 +182,17 @@ a:hover {
 	-moz-transition: all .2s ease-in-out 0s;
 	transition: all .2s ease-in-out 0s;
 }
+
+.navbar-default .navbar-nav.user-navbar>li:hover a {
+	-moz-box-shadow: inset 0 -3px 0 #0579f3;
+	box-shadow: inset 0 -3px 0 #0579f3;
+
+	-webkit-transition: all .2s ease-in-out 0s;
+	-moz-transition: all .2s ease-in-out 0s;
+	transition: all .2s ease-in-out 0s;
+}
+
+
 .dropdown-menu > li > a > div {
     display: inline-block;
     width: 13px;
@@ -341,6 +355,7 @@ a:hover .bottom-info {
     padding-right: 10px;
     line-height: 2;
     padding-left: 15px;
+    margin-right: -5px;
 }
 a:hover .jumbotron .type-tag {
     /* box-shadow: -5px 5px 8px #000; */
@@ -480,23 +495,42 @@ a.video-container:hover .play-container,
     background-color: rgba(0, 0, 0, .6);
 }
 
-.byline {
+.byline, .voteline{
 	color: #808080;
-    float: left;
-    font-size: 12px;
-    line-height: 14px;
-    width: 100%;
+    width: 50%;
     margin: 5px 0;
+    font-size: 16px;
+    line-height: 18px;
 }
-.byline .divider {
+.voteline{
+	float: left;
+}
+.byline{
+	float: right;
+}
+
+.byline .divider, .voteline .divider{
     color: #000 !important;
 	text-shadow: none;
     margin: 0 5px;
 }
-.byline img {
+.byline img,  .voteline img {
     max-height: 40px;
     box-shadow: 0 0 3px #000;
 }
+.voteline .vote a{
+	color: #222222 !important;
+}
+
+.voteline .vote a:hover {
+	color: #0579f3 !important;
+}
+
+.search-bar{
+	margin-top: 3px;
+	
+}
+
 
 .content-well {
     max-width: 950px;

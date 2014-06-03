@@ -52,7 +52,17 @@
 						<li><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}" data-instant>Intermediate</a></li>
 						<li><a href="{{ path('categories', { 'categoryType': 'master' }) }}" data-instant>Master</a></li>
 					  </ul>
+					  
 					  <ul class="nav navbar-nav navbar-right">
+					  	<li>
+					  		<form class="navbar-form navbar-left" role="search">
+					  		  <div class="form-group search-bar">
+					  		    <input type="text" class="form-control input-sm" placeholder="Search">
+					  		  </div>
+					  		  <button type="submit" class="btn btn-primary btn-sm search-bar"><i class="fa fa-search"></i></button>
+					  		</form>
+					  	</li>
+					  
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
 							<ul class="dropdown-menu">
@@ -64,6 +74,7 @@
 								<li><a href="http://www.scrollsguide.com/wiki/index.php/Main_Page" target="_blank"><div><i class="fa fa-{{ categoryIcon('wiki') }}"></i></div> Wiki</a></li>
 							</ul>
 						</li>
+						
 						<li class="dropdown">
 						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
 						  <ul class="dropdown-menu">
@@ -81,6 +92,19 @@
 							<li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('judgement') }}"></i></div> Judgement</a></li>
 							<li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('ui') }}"></i></div> UI</a></li>
 						  </ul>
+						  <li>
+						  	<ul class="nav navbar-nav user-navbar navbar-right">
+						  		<!-- Only show when Logged in! -->
+						  		<li>
+						  			<a href="#" data-instant>Username</a>
+						  		</li>
+						  	
+						  		<!-- Only show when NOT logged in! -->
+						  		<li>
+						  			<a href="#" data-instant>Login</a>
+						  		</li>
+						  	</ul>
+						  </li>
 						</li>
 					  </ul>
 					</div><!--/.nav-collapse -->
