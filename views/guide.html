@@ -16,11 +16,19 @@
 		</div>
 	</div>
 	<div class="row content-well">
+		
 		<div class="byline">
 			<!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
 			<span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
 			<span class="divider"> | </span>
 			<span class="date">{{ guide.date | date("F jS, Y") }}</span>
+		</div>
+		
+		<div class="voteline">
+			<!-- Change the text to whatever u want -->
+			<span class="vote"><a href="#"><i class="fa fa-thumbs-o-up"></i> Helpful</a></span>
+			<span class="divider"> | </span>
+			<span class="vote"><a href="#"><i class="fa fa-thumbs-o-down"></i> Meh</a></span>
 		</div>
 	</div>
 
