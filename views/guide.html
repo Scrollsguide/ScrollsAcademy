@@ -23,17 +23,20 @@
 			<span class="divider"> | </span>
 			<span class="date">{{ guide.date | date("F jS, Y") }}</span>
 		</div>
-		
-		<div class="voteline">
-			<!-- Change the text to whatever u want -->
-			<span class="vote"><a href="#"><i class="fa fa-thumbs-o-up"></i> Helpful</a></span>
-			<span class="divider"> | </span>
-			<span class="vote"><a href="#"><i class="fa fa-thumbs-o-down"></i> Meh</a></span>
-		</div>
+
 	</div>
 
 	<div class="row content-well primary-content">
 		{{ guide.content | raw }}
+	</div>
+
+	<div class="row content-well">
+		<div class="voteline">
+			<!-- Change the text to whatever u want -->
+			<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'up' }) }}"><i class="fa fa-thumbs-o-up"></i> Helpful</a></span>
+			<span class="divider"> | </span>
+			<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'down' }) }}"><i class="fa fa-thumbs-o-down"></i> Meh</a></span>
+		</div>
 	</div>
 
 	{% include 'partials/series-related.html' with { 'guide': guide, 'allSeries': allSeries } %}

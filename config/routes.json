@@ -55,6 +55,14 @@
 			},
 			"action": "Author::viewGuides"
 		},
+		"vote_guide": {
+			"path": "/vote/{guideUrl}/{voteType}",
+			"requirements": {
+				"guideUrl": "[a-z0-9-]+",
+				"voteType": "up|down"
+			},
+			"action": "Vote::vote"
+		},
 		"view_avatar": {
 			"path": "/assets/images/avatar/{user}",
 			"requirements": {

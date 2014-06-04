@@ -6,6 +6,8 @@
 
 		private $requestMethod;
 
+		private $isAjax = false;
+
 		private $params = array();
 
 		public function __construct() {
@@ -25,6 +27,7 @@
 			$this->url->setHTTPS(!empty($_SERVER['HTTPS']));
 
 			$this->requestMethod = $_SERVER['REQUEST_METHOD'];
+			$this->isAjax = isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest';
 		}
 
 		/**
@@ -40,6 +43,10 @@
 
 		public function getFiles() {
 			return $this->params["FILES"];
+		}
+
+		public function isAjax(){
+			return $this->isAjax;
 		}
 
 		public function putParameter($param, $value, $method = "GET") {

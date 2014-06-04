@@ -16,9 +16,7 @@
 		public function loginAction() {
 			if ($this->getApp()->getSession()->getUser()->isLoggedIn()) {
 				// user is already logged in, redirect to homepage
-				$indexRoute = $this->getApp()->getRouter()->getRoute("admin_index");
-
-				return new RedirectResponse($indexRoute->get("path"));
+				return new RedirectResponse($this->getApp()->getRouter()->generateUrl("admin_index"));
 			}
 
 			return $this->render("admin/login.html", array(
