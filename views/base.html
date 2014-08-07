@@ -47,21 +47,35 @@
                       </a>
 					</div>
 					<div class="navbar-collapse collapse">
-					  <ul class="nav navbar-nav base-navbar">
+					  <ul class="nav navbar-nav base-navbar hidden-sm hidden-md">
 						<li><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}" data-instant>Beginner</a></li>
 						<li><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}" data-instant>Intermediate</a></li>
 						<li><a href="{{ path('categories', { 'categoryType': 'master' }) }}" data-instant>Master</a></li>
 					  </ul>
 					  
-					  <ul class="nav navbar-nav navbar-right">
+					  <ul class="nav navbar-nav user-navbar navbar-right">
+					  	<!-- Only show when Logged in! -->
 					  	<li>
-					  		<form class="navbar-form navbar-left" role="search">
-					  		  <div class="form-group search-bar">
-					  		    <input type="text" class="form-control input-sm" placeholder="Search">
-					  		  </div>
-					  		  <button type="submit" class="btn btn-primary btn-sm search-bar"><i class="fa fa-search"></i></button>
-					  		</form>
+					  		<a href="#" data-instant>Username</a>
 					  	</li>
+					  
+					  	<!-- Only show when NOT logged in! -->
+					  	<!--<li>
+					  		<a href="#" data-instant>Login</a>
+					  	</li>-->
+					  	
+					  <li>
+					  	<form class="navbar-form navbar-left col-xs-12" role="search">
+					  	  <div class="form-group search-bar col-xs-10">
+					  	    <input type="text" class="form-control input-sm" placeholder="Search">
+					  	  </div>
+					  	  <button type="submit" class="btn btn-primary btn-sm search-bar col-xs-2" ><i class="fa fa-search"></i></button>
+					  	</form>
+					  </li>
+					  </ul>
+					  
+					  <ul class="nav navbar-nav navbar-right">
+					  	
 					  
 						<li class="dropdown">
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
@@ -92,21 +106,10 @@
 							<li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('judgement') }}"></i></div> Judgement</a></li>
 							<li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('ui') }}"></i></div> UI</a></li>
 						  </ul>
-						  <li>
-						  	<ul class="nav navbar-nav user-navbar navbar-right">
-						  		<!-- Only show when Logged in! -->
-						  		<li>
-						  			<a href="#" data-instant>Username</a>
-						  		</li>
-						  	
-						  		<!-- Only show when NOT logged in! -->
-						  		<li>
-						  			<a href="#" data-instant>Login</a>
-						  		</li>
-						  	</ul>
-						  </li>
 						</li>
 					  </ul>
+					  
+					 
 					</div><!--/.nav-collapse -->
 				  </div>
 				</div>
