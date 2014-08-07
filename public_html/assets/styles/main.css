@@ -522,8 +522,16 @@ a.video-container:hover .play-container,
 	color: #222222 !important;
 }
 
+.voteline .vote a.active{
+	color: #0579f3 !important;
+}
+
 .voteline .vote a:hover {
 	color: #0579f3 !important;
+}
+
+.commentLink{
+	margin-bottom: 40px;
 }
 
 .search-bar{
