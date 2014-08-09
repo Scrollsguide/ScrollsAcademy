@@ -3,141 +3,161 @@
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
 <!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
-    <head>
-        <meta charset="utf-8">
-        <title>{{ title }}</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+	<head>
+		<meta charset="utf-8">
+		<title>{{ title }}</title>
+		<meta name="description" content="">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="shortcut icon" href="/favicon.ico">
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+		<link rel="shortcut icon" href="/favicon.ico">
+		<!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <!-- vendor css -->
+		<!-- vendor css -->
 		<link rel="stylesheet" type="text/css" href="{{ cdn_asset('/assets/cache/css/vendors.css') }}" />
 
-        {% block customcss %}
-        {% endblock %}
+		{% block customcss %}
+		{% endblock %}
 
-        <!-- custom css -->
+		<!-- custom css -->
 		<link rel="stylesheet" type="text/css" href="{{ cdn_asset('/assets/cache/css/main.css') }}" />
 
-        <script src="{{ cdn_asset('/assets/js/vendor/modernizr.js') }}"></script>
+		<script src="{{ cdn_asset('/assets/js/vendor/modernizr.js') }}"></script>
 
-    </head>
-    <body>
-        <!--[if lt IE 10]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+	</head>
+	<body>
+		<!--[if lt IE 10]>
+		<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+		<![endif]-->
 
 
-        <div class="container">
-            <!-- Fixed navbar -->
+		<div class="container">
+			<!-- Fixed navbar -->
 			{% block navbar %}
-				<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-				  <div class="container-fluid">
+			<div class="navbar navbar-default navbar-fixed-top" role="navigation">
+				<div class="container-fluid">
 					<div class="navbar-header">
-					  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-						<span class="sr-only">Toggle navigation</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					  </button>
-					  <a class="navbar-brand" href="{{ path('index') }}" data-instant>
-                        <img src="{{ cdn_asset('/assets/images/logo.png') }}" />Scrolls Academy
-                      </a>
+						<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+							<span class="sr-only">Toggle navigation</span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+						</button>
+						<a class="navbar-brand" href="{{ path('index') }}" data-instant>
+							<img src="{{ cdn_asset('/assets/images/logo.png') }}" />Scrolls Academy
+						</a>
 					</div>
 					<div class="navbar-collapse collapse">
-						<!--
-					  <ul class="nav navbar-nav base-navbar">
-						<li><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}" data-instant>Beginner</a></li>
-						<li><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}" data-instant>Intermediate</a></li>
-						<li><a href="{{ path('categories', { 'categoryType': 'master' }) }}" data-instant>Master</a></li>
-					  </ul>
-					  -->
-					  
-					  <ul class="nav navbar-nav navbar-right">
+						<ul class="nav navbar-nav base-navbar hidden-xs hidden-sm hidden-md">
+							<li><a href="{{ path('categories', { 'categoryType': 'beginner' }) }}" data-instant>Beginner</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}" data-instant>Intermediate</a></li>
+							<li><a href="{{ path('categories', { 'categoryType': 'master' }) }}" data-instant>Master</a></li>
+						</ul>
 
-						<li class="dropdown">
-						  <a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
-						  <ul class="dropdown-menu">
-							<li><a href="{{ path('view_series') }}" data-instant><div><i class="fa fa-{{ categoryIcon('series') }}"></i></div> Series</a></li>
-							<li><a href="{{ path('categories', { 'categoryType': 'video' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('video') }}"></i></div> Video</a></li>
-							<li class="divider"></li>
-							<li class="dropdown-header">Complexity</li>
-							<li><a href="{{ path('levels', { 'level': 'beginner' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('beginner') }}"></i></div> Beginner</a></li>
-							<li><a href="{{ path('levels', { 'level': 'intermediate' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('intermediate') }}"></i></div> Intermediate</a></li>
-							<li><a href="{{ path('levels', { 'level': 'master' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('master') }}"></i></div> Master</a></li>
-							<li class="divider"></li>
-							<li class="dropdown-header">Topic</li>
-							<li><a href="{{ path('categories', { 'categoryType': 'decks' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('decks') }}"></i></div> Decks</a></li>
-							<li><a href="{{ path('categories', { 'categoryType': 'strategy' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('strategy') }}"></i></div> Strategy</a></li>
-							<li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('judgement') }}"></i></div> Judgement</a></li>
-							<li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('ui') }}"></i></div> UI</a></li>
-						  </ul>
+						<ul class="nav navbar-nav user-navbar navbar-right">
+							<!-- Only show when Logged in! -->
+							<li>
+								<a href="#" data-instant>Username</a>
+							</li>
 
-						  <li class="dropdown">
-							  <a href="#" class="dropdown-toggle" data-toggle="dropdown">More <b class="caret"></b></a>
-							  <ul class="dropdown-menu">
-								  <li><a href="{{ path('about') }}" data-instant><div><i class="fa fa-{{ categoryIcon('about') }}"></i></div> SeeMeScrollin</a></li>
-								  <li><a href="{{ path('about') }}" data-instant><div><i class="fa fa-{{ categoryIcon('about') }}"></i></div> Scrolls Academy</a></li>
-								  <li><a href="{{ path('content_submission_guide') }}" data-instant><div><i class="fa fa-{{ categoryIcon('submit') }}"></i></div> Contribute guide</a></li>
-								  <li class="divider"></li>
-								  <li class="dropdown-header">External</li>
-								  <li><a href="http://www.scrollsguide.com/forum" target="_blank"><div><i class="fa fa-{{ categoryIcon('forum') }}"></i></div> Forum</a></li>
-								  <li><a href="http://www.scrollsguide.com/wiki/index.php/Main_Page" target="_blank"><div><i class="fa fa-{{ categoryIcon('wiki') }}"></i></div> Wiki</a></li>
-							  </ul>
-						  </li>
+							<!-- Only show when NOT logged in! -->
+							<!--<li>
+								  <a href="#" data-instant>Login</a>
+							  </li>-->
 
-						</li>
-					  </ul>
+							<li>
+								<form class="navbar-form navbar-left col-xs-12" role="search">
+									<div class="form-group search-bar col-xs-10">
+										<input type="text" class="form-control input-sm" placeholder="Search">
+									</div>
+									<button type="submit" class="btn btn-primary btn-sm search-bar col-xs-2" ><i class="fa fa-search"></i></button>
+								</form>
+							</li>
+						</ul>
+
+						<ul class="nav navbar-nav navbar-right">
+
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">About <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="{{ path('about') }}" data-instant><div><i class="fa fa-{{ categoryIcon('about') }}"></i></div> Scrolls Academy</a></li>
+									<li><a href="{{ path('content_submission_guide') }}" data-instant><div><i class="fa fa-{{ categoryIcon('submit') }}"></i></div> Contribute guide</a></li>
+									<li class="divider"></li>
+									<li class="dropdown-header">External</li>
+									<li><a href="http://www.scrollsguide.com/forum" target="_blank"><div><i class="fa fa-{{ categoryIcon('forum') }}"></i></div> Forum</a></li>
+									<li><a href="http://www.scrollsguide.com/wiki/index.php/Main_Page" target="_blank"><div><i class="fa fa-{{ categoryIcon('wiki') }}"></i></div> Wiki</a></li>
+								</ul>
+							</li>
+
+							<li class="dropdown">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">Categories <b class="caret"></b></a>
+								<ul class="dropdown-menu">
+									<li><a href="{{ path('view_series') }}" data-instant><div><i class="fa fa-{{ categoryIcon('series') }}"></i></div> Series</a></li>
+									<li><a href="{{ path('categories', { 'categoryType': 'video' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('video') }}"></i></div> Video</a></li>
+									<li class="divider"></li>
+									<li class="dropdown-header">Complexity</li>
+									<li><a href="{{ path('levels', { 'level': 'beginner' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('beginner') }}"></i></div> Beginner</a></li>
+									<li><a href="{{ path('levels', { 'level': 'intermediate' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('intermediate') }}"></i></div> Intermediate</a></li>
+									<li><a href="{{ path('levels', { 'level': 'master' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('master') }}"></i></div> Master</a></li>
+									<li class="divider"></li>
+									<li class="dropdown-header">Topic</li>
+									<li><a href="{{ path('categories', { 'categoryType': 'decks' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('decks') }}"></i></div> Decks</a></li>
+									<li><a href="{{ path('categories', { 'categoryType': 'strategy' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('strategy') }}"></i></div> Strategy</a></li>
+									<li><a href="{{ path('categories', { 'categoryType': 'judgement' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('judgement') }}"></i></div> Judgement</a></li>
+									<li><a href="{{ path('categories', { 'categoryType': 'ui' }) }}" data-instant><div><i class="fa fa-{{ categoryIcon('ui') }}"></i></div> UI</a></li>
+								</ul>
+							</li>
+						</ul>
+
+
 					</div><!--/.nav-collapse -->
-				  </div>
 				</div>
+			</div>
 			{% endblock %}
 
-            {% block content %}
-		
+			{% block content %}
+
 			{% endblock %}
 
 
-            <div class="footer">
-                <div class="row">
-                    <hr />
-				   <!-- <div class="col-xs-3">
-				      <ul>
-	      				<li><a href="http://scrollsguide.com" target="_blank">Scrollsguide</a></li>
-	      				
-	      				<li><a href="http://scrolldier.com" target="_blank">Scrolldier</a></li>
-	      				<li><a href="http://scrollstoolbox.com/" target="_blank">ScrollsToolbox</a></li>
-	      				<li><a href="http://theyseemescrollin.com/" target="_blank">They See Me scrollin</a></li>
-	      				<li><a href="http://reddit.com/r/scrolls" target="_blank">/r/scrolls</a></li>
-		      			</ul>
-				    </div>
-				    
-				    <div class="col-xs-3">
-				     <ul>
-				     	<li><a href="http://www.scrollsguide.com/donate">Donate</a></li>
-				     </ul>
-				    </div>
-				    <div class="col-xs-3">
-				     	<ul>
-				     		<li><a href="http://scrolls.com">Scrolls</a></li>
-				     		<li><a href="http://scrollsdev.tumblr.com/" target="_blank">Scrolls Dev Blog</a></li>
-				     	</ul>
-				    </div>-->
-				    
+			<div class="footer">
+				<div class="row">
+					<hr />
+					<!-- <div class="col-xs-3">
+						  <ul>
+							  <li><a href="http://scrollsguide.com" target="_blank">Scrollsguide</a></li>
+
+							  <li><a href="http://scrolldier.com" target="_blank">Scrolldier</a></li>
+							  <li><a href="http://scrollstoolbox.com/" target="_blank">ScrollsToolbox</a></li>
+							  <li><a href="http://theyseemescrollin.com/" target="_blank">They See Me scrollin</a></li>
+							  <li><a href="http://reddit.com/r/scrolls" target="_blank">/r/scrolls</a></li>
+							  </ul>
+						</div>
+
+						<div class="col-xs-3">
+						 <ul>
+							 <li><a href="http://www.scrollsguide.com/donate">Donate</a></li>
+						 </ul>
+						</div>
+						<div class="col-xs-3">
+							 <ul>
+								 <li><a href="http://scrolls.com">Scrolls</a></li>
+								 <li><a href="http://scrollsdev.tumblr.com/" target="_blank">Scrolls Dev Blog</a></li>
+							 </ul>
+						</div>-->
+
 					<div class="col-xs-12 footer-copy"><span>&copy; Scrolls Academy 2014</span>
-					
-					<p class="pull-right">
-						<iframe src="{{ cdn_asset('/assets/html/github-btn.html?user=Scrollsguide&repo=ScrollsAcademy&type=watch&count=true') }}"
-									allowtransparency="true" frameborder="0" scrolling="0" width="78" height="20"></iframe></p>
-					
-					</div>
-					
-                </div>
-            </div>
 
-        </div>
+						<p class="pull-right">
+							<iframe src="{{ cdn_asset('/assets/html/github-btn.html?user=Scrollsguide&repo=ScrollsAcademy&type=watch&count=true') }}"
+									allowtransparency="true" frameborder="0" scrolling="0" width="78" height="20"></iframe></p>
+
+					</div>
+
+				</div>
+			</div>
+
+		</div>
 
 		{{ app.debug|raw }}
 
@@ -150,7 +170,7 @@
 
 		<script src="{{ cdn_asset('/assets/cache/js/vendors.js') }}" data-no-instant></script>
 
-        <script src="{{ cdn_asset('/assets/js/main.js') }}"></script>
+		<script src="{{ cdn_asset('/assets/js/main.js') }}"></script>
 		<!--
 		<script src="{{ cdn_asset('/assets/js/vendor/instantclick.min.js') }}"></script>
 		<script data-no-instant>
@@ -165,8 +185,8 @@
 		</script>
 		-->
 
-        {% block customjs %}
+		{% block customjs %}
 
-        {% endblock %}
-</body>
+		{% endblock %}
+	</body>
 </html>

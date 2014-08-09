@@ -1,63 +1,73 @@
 {% extends "base.html" %}
 {% block content %}
-	<div class="row guide-header{% if guide.video %} video-header{% endif %}" style="background-image:url({{ imagePath(guide.banner) }})">
-		<div class="header-container">
-			{% if guide.video %}
-				<div class="player-placeholder" data-video-id="{{ getIdFromEmbed(guide.video) }}"></div>
-				<div class="play-container">
-					<i class="fa fa-play-circle"></i>
-				</div>
-				<div class="content-container">
-					<h2>{{ guide.title }}</h2>
-				</div>
-			{% else %}
-				<h2>{{ guide.title }}</h2>
-			{% endif %}
-		</div>
-	</div>
-	<div class="row content-well">
-		
-		<div class="byline">
-			<!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
-			<span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
-			<span class="divider"> | </span>
-			<span class="date">{{ guide.date | date("F jS, Y") }}</span>
-		</div>
-
-	</div>
-
-	<div class="row content-well primary-content">
-		{{ guide.content | raw }}
-	</div>
-
-	<div class="row content-well">
-		<div class="voteline">
-			<!-- Change the text to whatever u want -->
-			<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'up' }) }}"><i class="fa fa-thumbs-o-up"></i> Helpful</a></span>
-			<span class="divider"> | </span>
-			<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'down' }) }}"><i class="fa fa-thumbs-o-down"></i> Meh</a></span>
-		</div>
-	</div>
-
-	{% include 'partials/series-related.html' with { 'guide': guide, 'allSeries': allSeries } %}
-
-	{% if preview != true %}
-		{% include 'partials/social.html' with { 'guide': guide } %}
-	{% endif %}
-
-	<!-- type 2, three articles -->
-	{% if relatedGuides %}
-		<div class="row content-block more-block">
-			<div class="col-md-12 related-hdr">
-				<h4>Related Guides</h4>
+<div class="row guide-header{% if guide.video %} video-header{% endif %}" style="background-image:url({{ imagePath(guide.banner) }})">
+	<div class="header-container">
+		{% if guide.video %}
+			<div class="player-placeholder" data-video-id="{{ getIdFromEmbed(guide.video) }}"></div>
+			<div class="play-container">
+				<i class="fa fa-play-circle"></i>
 			</div>
-			{% for guide in relatedGuides %}
-				{% if loop.index == 3 %}
-					{% set collapseClass = 12 %}
-				{% endif %}
-				{% include 'partials/touts/single-item.html' with { 'guide': guide, 'collapseClass': collapseClass } %}
-			{% endfor %}
+			<div class="content-container">
+				<h2>{{ guide.title }}</h2>
+			</div>
+		{% else %}
+			<h2>{{ guide.title }}</h2>
+		{% endif %}
+	</div>
+</div>
+<div class="row content-well" id="vote-info">
+
+	<div class="voteline pull-left">
+		<!-- Change the text to whatever u want -->
+		<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'up' }) }}"><i class="fa fa-thumbs-o-up"></i> Helpful</a></span>
+		<span class="divider"> | </span>
+		<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'down' }) }}"><i class="fa fa-thumbs-o-down"></i> Meh</a></span>
+		<span class="divider"> | </span>
+
+
+		<!-- Favorite Article, Show on of the below -->
+		<span class="vote"><a href="#"><i class="fa fa-star"></i> Favorite</a></span>
+		<!-- Already Favorited style, just add a .active class to the a-->
+		<!--<span class="vote"><a href="#" class="active"><i class="fa fa-star"></i> Favorite</a></span>-->
+	</div>
+
+	<div class="byline pull-right">
+		<!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
+		<span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
+		<span class="divider"> | </span>
+		<span class="date">{{ guide.date | date("F jS, Y") }}</span>
+	</div>
+</div>
+
+<div class="row content-well primary-content">
+	{{ guide.content | raw }}
+</div>
+
+{% if guide.discussion %}
+	<div class="col-lg-12 text-center commentLink">
+		<h2><a href="{{ guide.discussion }}">Write a comment</a></h2>
+	</div>
+{% endif %}
+
+{% include 'partials/series-related.html' with { 'guide': guide, 'allSeries': allSeries } %}
+
+{% if preview != true %}
+	{% include 'partials/social.html' with { 'guide': guide } %}
+{% endif %}
+
+<!-- type 2, three articles -->
+{% if relatedGuides %}
+	<div class="row content-block more-block">
+		<div class="col-md-12 related-hdr">
+			<h4>Related Guides</h4>
 		</div>
+		{% for guide in relatedGuides %}
+			{% if loop.index == 3 %}
+				{% set collapseClass = 12 %}
+			{% endif %}
+			{% include 'partials/touts/single-item.html' with { 'guide': guide, 'collapseClass': collapseClass } %}
+		{% endfor %}
+	</div>
+
 	{% endif %}
 {% endblock %}
-
