@@ -21,5 +21,7 @@
 		 * @return true if user exists and password is correct, false otherwise
 		 */
 		public abstract function authenticate($username, $password);
+		
+		public abstract function getAccessLevel(User $user);
 
 	}

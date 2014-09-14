@@ -30,8 +30,12 @@
 					return new RedirectResponse($this->getApp()->getRouter()->generateUrl("view_guide", array("title" => $guideUrl)));
 				}
 			} else { // guide not found
-				return $this->p404();
-
+				if ($this->getApp()->getRequest()->isAjax()){
+					// empty json response
+					return new JsonResponse();
+				} else {
+					return $this->p404();
+				}
 			}
 		}
 	}

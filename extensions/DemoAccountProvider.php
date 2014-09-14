@@ -8,4 +8,7 @@
 			return $username === "admin" && $password === "admin";
 		}
 
+		public function getAccessLevel(User $u){
+			return AccessLevel::user();
+		}
 	}

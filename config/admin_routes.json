@@ -4,19 +4,6 @@
 			"path": "/admin",
 			"action": "Admin::index"
 		},
-		"admin_login": {
-			"path": "/admin/login",
-			"action": "Admin::login"
-		},
-		"admin_login_post": {
-			"path": "/admin/login",
-			"action": "Admin::doLogin",
-			"method": "POST"
-		},
-		"admin_logout": {
-			"path": "/admin/logout",
-			"action": "Admin::doLogout"
-		},
 		"admin_new_guide": {
 			"path": "/admin/guide/new",
 			"action": "Admin::newGuide"

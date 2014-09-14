@@ -56,16 +56,14 @@
 						<ul class="nav navbar-nav user-navbar navbar-right">
 							<!-- Only show when Logged in! -->
 							<li>
-								<a href="#" data-instant>Username</a>
+								{% if app.session.user.isloggedin %}
+									<a href="{{ path('logout') }}" data-instant>{{ app.session.user.username }}</a>
+								{% else %}
+									<a href="{{ path('login') }}" data-instant>Login</a>									
+								{% endif %}
 							</li>
-
-							<!-- Only show when NOT logged in! -->
-							<!--<li>
-								  <a href="#" data-instant>Login</a>
-							  </li>-->
-
 							<li>
-								<form class="navbar-form navbar-left col-xs-12" role="search">
+								<form class="navbar-form navbar-left col-xs-12 hidden" role="search">
 									<div class="form-group search-bar col-xs-10">
 										<input type="text" class="form-control input-sm" placeholder="Search">
 									</div>

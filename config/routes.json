@@ -63,6 +63,19 @@
 			},
 			"action": "Vote::vote"
 		},
+		"login": {
+			"path": "/login",
+			"action": "User::login"
+		},
+		"login_post": {
+			"path": "/login",
+			"action": "User::doLogin",
+			"method": "POST"
+		},
+		"logout": {
+			"path": "/logout",
+			"action": "User::doLogout"
+		},
 		"view_avatar": {
 			"path": "/assets/images/avatar/{user}",
 			"requirements": {

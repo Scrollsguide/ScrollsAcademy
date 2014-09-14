@@ -2,14 +2,14 @@
 
 	class User {
 
-		private $accessLevel = AccessLevel::NONE;
+		private $accessLevel;
 
 		private $username;
 
 		private $isLoggedIn = false;
 
 		public function __construct() {
-
+			$this->setAccessLevel(AccessLevel::guest());
 		}
 
 		public function login(AccountProvider $ap, $username, $password) {
@@ -17,36 +17,38 @@
 				$this->username = $username;
 				$this->isLoggedIn = true;
 
+				$this->setAccessLevel($ap->getAccessLevel($this));
+				
 				return true;
 			} else {
 				return false;
 			}
 		}
 
-		public
-		function logout() {
+		public function logout() {
 			$this->username = "";
 			$this->isLoggedIn = false;
+			$this->setAccessLevel(AccessLevel::guest());
 		}
 
-		public
-		function isLoggedIn() {
+		public function isLoggedIn() {
 			return $this->isLoggedIn;
 		}
 
-		public
-		function getUsername() {
+		public function getUsername() {
 			return $this->username;
 		}
 
-		public
-		function checkAccessLevel($level) {
+		public function setAccessLevel($level){
+			$this->accessLevel = $level;
+		}
+		
+		public function checkAccessLevel($level) {
 			return ($this->accessLevel & $level) === $level;
 		}
 
 		// saves all user data in session
-		public
-		function save() {
+		public function save() {
 			$_SESSION['user'] = serialize($this);
 		}
 
@@ -54,8 +56,7 @@
 		 * @param $sessionVars
 		 * @return User
 		 */
-		public
-		static function createFromSession($sessionVars) {
+		public static function createFromSession($sessionVars) {
 			if (!isset($_SESSION['user'])) {
 				// create new user
 				$u = new User();
@@ -82,7 +83,19 @@
 	class AccessLevel {
 
 		const NONE = 1;
-		const VIEW = 2;
+		const USER = 2;
 		const ADMIN = 4;
+		
+		public static function guest(){
+			return AccessLevel::NONE;
+		}
+		
+		public static function user(){
+			return AccessLevel::guest() | AccessLevel::USER;
+		}
+		
+		public static function admin(){
+			return AccessLevel::user() | AccessLevel::ADMIN;
+		}
 
 	}

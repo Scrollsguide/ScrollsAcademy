@@ -51,6 +51,8 @@
 			$this->router->addRouteFile($this->baseDir . "/config", "routes.json");
 			$this->router->addRouteFile($this->baseDir . "/config", "api_routes.json");
 			$this->router->addRouteFile($this->baseDir . "/config", "admin_routes.json");
+			
+			$this->setupDatabase();
 		}
 
 		public function run() {
@@ -82,7 +84,6 @@
 
 			// no hit on the cache, execute request through the controller
 			if (!$usedCache) {
-				$this->setupDatabase();
 				$this->setupTemplateEngine();
 
 				// returns instance of Response class

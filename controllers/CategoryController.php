@@ -2,12 +2,17 @@
 	class CategoryController extends BaseController {
 		
 		public function viewCategoryTypeAction($category){
-			// set up entity and repository
-			$em = $this->getApp()->get("EntityManager");
-			$guideRepository = $em->getRepository("Guide");
-			
-			// look for guides in the repo
-			$guides = $guideRepository->findAllByCategory($category);
+			$cacheKey = "category_index_" . $category;
+			if (($guides = $this->getCache()->get($cacheKey)) === null){
+				// set up entity and repository
+				$em = $this->getApp()->get("EntityManager");
+				$guideRepository = $em->getRepository("Guide");
+				
+				// look for guides in the repo
+				$guides = $guideRepository->findAllByCategory($category);
+				
+				$this->getCache()->set($cacheKey, $guides, 600);
+			}
 			
 			return $this->render("guidelist.html", array(
 				"guides" => $guides,

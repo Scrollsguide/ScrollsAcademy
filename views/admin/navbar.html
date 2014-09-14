@@ -23,7 +23,7 @@
 	  	<li><a href="{{ path('index') }}" target="_blank">Frontend</a></li>
 		{% if app.session.user.isloggedin %}
 		 <!-- no data instant, would log user out on mousedown, even if user moves mouse away afterwards -->
-		 <li><a href="{{ path('admin_logout') }}">Logout ({{ app.session.user.username }})</a></li> 
+		 <li><a href="{{ path('logout') }}">Logout ({{ app.session.user.username }})</a></li> 
 		{% endif %}
 	  </ul>
 	</div><!--/.nav-collapse -->

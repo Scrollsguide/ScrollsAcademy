@@ -1,7 +1,23 @@
 <?php
 
 	class BaseController extends Controller {
-
+	
+		private $cache;
+	
+		public function __construct(App $app) {
+			parent::__construct($app);
+			
+			$this->setCacheRules(array(
+				"cache" => false
+			));
+			
+			$this->cache = new CacheNew($app, "MySQL");
+		}
+		
+		protected function getCache(){
+			return $this->cache;
+		}
+		
 		protected function render($templatePath, array $parameters = array(), $statusCode = 200) {
 			// add default parameters for every page
 			$parameters['title'] = $this->getPageTitle($parameters);
@@ -15,7 +31,13 @@
 
 			return $response;
 		}
+		
+		// redirects to admin login page
+		protected function toLogin() {
+			$loginRoute = $this->getApp()->getRouter()->getRoute("login");
 
+			return new RedirectResponse($loginRoute->get("path"));
+		}
 
 		public function p404(){
 			// set up entity and repository
