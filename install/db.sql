@@ -1,6 +1,13 @@
 CREATE DATABASE IF NOT EXISTS `academy` DEFAULT CHARACTER SET latin1 COLLATE latin1_swedish_ci;
 USE `academy`;
 
+CREATE TABLE IF NOT EXISTS `caching` (
+  `key` varchar(32) NOT NULL,
+  `object` longblob NOT NULL,
+  `expires` int(10) NOT NULL,
+  PRIMARY KEY (`key`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
 CREATE TABLE IF NOT EXISTS `categories` (
   `id` int(2) NOT NULL AUTO_INCREMENT,
   `name` varchar(30) NOT NULL,
@@ -39,6 +46,7 @@ CREATE TABLE IF NOT EXISTS `guides` (
   `video` text NOT NULL,
   `discussion` varchar(256) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '2',
+  `votes` int(6) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
@@ -49,7 +57,7 @@ CREATE TABLE IF NOT EXISTS `homepageblocks` (
   `layout` varchar(45) DEFAULT NULL,
   `header` varchar(15) NOT NULL,
   PRIMARY KEY (`id`),
-  KEY `homepageid` (`homepageid`)
+  KEY `homepageblocks_ibfk_1` (`homepageid`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 CREATE TABLE IF NOT EXISTS `homepages` (
@@ -80,12 +88,12 @@ CREATE TABLE IF NOT EXISTS `seriesguides` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `guidecategories`
-ADD CONSTRAINT `guidecategories_ibfk_2` FOREIGN KEY (`categoryid`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `guidecategories_ibfk_1` FOREIGN KEY (`guideid`) REFERENCES `guides` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `guidecategories_ibfk_1` FOREIGN KEY (`guideid`) REFERENCES `guides` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `guidecategories_ibfk_2` FOREIGN KEY (`categoryid`) REFERENCES `categories` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `homepageblocks`
-ADD CONSTRAINT `homepageblocks_ibfk_1` FOREIGN KEY (`homepageid`) REFERENCES `homepages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `homepageblocks_ibfk_1` FOREIGN KEY (`homepageid`) REFERENCES `homepages` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE `seriesguides`
-ADD CONSTRAINT `seriesguides_ibfk_2` FOREIGN KEY (`guideid`) REFERENCES `guides` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-ADD CONSTRAINT `seriesguides_ibfk_1` FOREIGN KEY (`seriesid`) REFERENCES `series` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `seriesguides_ibfk_1` FOREIGN KEY (`seriesid`) REFERENCES `series` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `seriesguides_ibfk_2` FOREIGN KEY (`guideid`) REFERENCES `guides` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;

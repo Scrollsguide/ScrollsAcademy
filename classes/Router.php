@@ -59,7 +59,7 @@
 			} else {
 				// cache is not valid anymore, compile routes again
 				if (!is_file($routePath)) {
-					throw new Exception(sprintf("Route file '%s%' not found.", $routePath));
+					throw new Exception(sprintf("Route file '%s' not found.", $routePath));
 				}
 
 				// RouteCompiler adds routes as they are parsed using Router::addRoute
