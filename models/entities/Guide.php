@@ -81,7 +81,7 @@
 		}
 
 		public function getDate() {
-			return $this->date;
+			return (int)$this->date;
 		}
 
 		public function setDate($date) {

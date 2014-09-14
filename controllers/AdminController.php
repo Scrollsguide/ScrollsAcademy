@@ -178,7 +178,7 @@
 			$g->setTitle($title);
 			$g->setSummary($r->getParameter("summary"));
 			$g->setSynopsis($r->getParameter("synopsis"));
-			$g->setURL(URLUtils::makeBlob($title));
+			$g->setUrl(URLUtils::makeBlob($title));
 			$g->setAuthor($r->getParameter("author"));
 			$g->setMarkdown($content);
 			$g->setStatus($r->getParameter("status"));
