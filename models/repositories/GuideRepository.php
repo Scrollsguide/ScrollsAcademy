@@ -58,8 +58,10 @@
 		public function findRecentGuides($limit = 3) {
 			$sth = $this->getConnection()->prepare("SELECT *
 						FROM guides
+						WHERE `status` = :status
 						ORDER BY id DESC
 						LIMIT " . $limit);
+			$sth->bindValue(":status", GuideStatus::VISIBLE, PDO::PARAM_INT);
 			$sth->execute();
 
 			$guides = $sth->fetchAll(PDO::FETCH_CLASS, $this->getEntityName());
@@ -182,6 +184,10 @@
 			}
 			// finish inserting categories
 			$this->getConnection()->commit();
+		}
+		
+		public function filterByStatus(&$guides, $status){
+			$guides = array_filter($guides, array(new GuideFilter(array('getStatus' => $status)), 'compare'));
 		}
 
 	}

@@ -11,6 +11,8 @@
 				// look for guides in the repo
 				$guides = $guideRepository->findAllByCategory($category);
 				
+				$guideRepository->filterByStatus($guides, GuideStatus::VISIBLE);
+				
 				$this->getCache()->set($cacheKey, $guides, 600);
 			}
 			
