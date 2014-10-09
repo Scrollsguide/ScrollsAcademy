@@ -201,7 +201,7 @@
 			$r = $this->getApp()->getRequest();
 
 			$title = $r->getParameter("title");
-			$content = $r->getParameter("content");
+			$content = strip_tags($r->getParameter("content"), "<br>");
 
 			$g = new Guide();
 			if ($guideId !== 0) {
@@ -267,7 +267,7 @@
 		public function precompileGuideAction() {
 			$g = new Guide();
 
-			$guideMarkdown = $this->getApp()->getRequest()->getParameter("guide");
+			$guideMarkdown = strip_tags($this->getApp()->getRequest()->getParameter("guide"), "<br>");
 
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
 
