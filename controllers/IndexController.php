@@ -1,8 +1,9 @@
 <?php
+
 	class IndexController extends BaseController {
-		
-		public function indexAction(){
-			if (($homepage = $this->getCache()->get("homepage")) === null){
+
+		public function indexAction() {
+			if (($homepage = $this->getCache()->get("homepage")) === null) {
 				// set up entity and repository
 				$em = $this->getApp()->get("EntityManager");
 				$homepageRepository = $em->getRepository("Homepage");
@@ -13,6 +14,7 @@
 				if (!$homepage) {
 					$r = new HtmlResponse();
 					$r->setContent("Default Homepage not found");
+
 					return $r;
 				}
 
@@ -20,7 +22,7 @@
 
 				$guideRepository = $em->getRepository("Guide");
 				foreach ($blocks as $block) {
-					if ($block['layout'] === "recent"){
+					if ($block['layout'] === "recent") {
 						// recent guides, just use the 3-across layout
 						// DONE THROUGH TWIG, IS NICER
 						// $block['layout'] = "3-across";
@@ -39,7 +41,7 @@
 
 					$homepage->addBlock($block);
 				}
-				
+
 				// save to cache
 				$this->getCache()->set("homepage", $homepage, 600);
 			}
@@ -48,20 +50,14 @@
 				"homepage" => $homepage
 			));
 		}
-		
-		public function p404Action(){
+
+		public function p404Action() {
 			return $this->p404();
 		}
 
 		public function aboutAction() {
 			return $this->render("about.html", array(
 				'title' => 'About'
-			));
-		}
-
-		public function contentSubmissionAction(){
-			return $this->render("submission_guide.html", array(
-				'title' => 'Content submission guide'
 			));
 		}
 	}

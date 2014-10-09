@@ -229,10 +229,6 @@
 
 			$g->setTitle($title);
 			$g->setSummary($r->getParameter("summary"));
-
-			$url = GuideHelper::makeURL($g, $guideRepository);
-
-			$g->setUrl($url);
 			$g->setMarkdown($content);
 
 			if ($review) {
@@ -243,6 +239,8 @@
 				$g->setDiscussion("");
 				$g->setReviewed(0);
 
+				$url = GuideHelper::makeURL($g, $guideRepository);
+
 				// clear images, shouldn't be in there anyway
 				$images = array("", "");
 			} else {
@@ -252,7 +250,12 @@
 				$g->setVideo($r->getParameter("video"));
 				$g->setDiscussion($r->getParameter("discussion"));
 				$g->setReviewed(1);
+
+				if (($url = $r->getParameter("guideurl")) === ""){
+					$url = GuideHelper::makeURL($g, $guideRepository);
+				}
 			}
+			$g->setUrl($url);
 			$g->setImage($images[0]);
 			$g->setBanner($images[1]);
 
