@@ -1,7 +1,7 @@
 <?php
 
 	class UserController extends BaseController {
-	
+
 		public function __construct(App $app) {
 			parent::__construct($app);
 			// don't cache the user pages
@@ -11,11 +11,14 @@
 		}
 
 		public function loginAction() {
+			$r = $this->getApp()->getRequest();
+
 			return $this->render("login.html", array(
-				"title" => "User login"
+				"title"    => "User login",
+				"redirect" => $r->getParameter("to")
 			));
 		}
-		
+
 		// contains POST login information
 		public function doLoginAction() {
 			$r = $this->getApp()->getRequest();
@@ -45,9 +48,15 @@
 				return $this->toLogin();
 			}
 
-			$loginRoute = $this->getApp()->getRouter()->getRoute("index");
+			$redirect = $r->getParameter("redirect");
 
-			return new RedirectResponse($loginRoute->get("path"));
+			if (empty($redirect)){
+				$loginRoute = $this->getApp()->getRouter()->getRoute("index");
+				$path = $loginRoute->get("path");
+			} else {
+				$path = $redirect;
+			}
+			return new RedirectResponse($path);
 		}
 
 		public function doLogoutAction() {

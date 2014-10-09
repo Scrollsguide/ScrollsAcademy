@@ -73,8 +73,12 @@
 			"action": "Guide::doSave"
 		},
 		"login": {
-			"path": "/login",
-			"action": "User::login"
+			"path": "/login{to}",
+			"action": "User::login",
+			"requirements": {
+				"to": "\\?to=(.*?)"
+			},
+			"optional": ["to"]
 		},
 		"login_post": {
 			"path": "/login",

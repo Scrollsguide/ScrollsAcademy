@@ -6,7 +6,7 @@
 
 		private $username;
 		private $password;
-		private $database;
+		private $databaseName;
 		private $host;
 		private $port;
 

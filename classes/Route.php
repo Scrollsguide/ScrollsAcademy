@@ -70,6 +70,20 @@
 			return $this->id;
 		}
 
+		public function isOptional($param){
+			if (!$this->hasKey("optional")){
+				return false;
+			}
+
+			foreach ($this->get("optional") as $optional){
+				if ($optional === $param){
+					return true;
+				}
+			}
+
+			return false;
+		}
+
 		public static function wrapParameter($str) {
 			return "{" . $str . "}";
 		}

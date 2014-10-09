@@ -59,7 +59,7 @@
 								{% if app.session.user.isloggedin %}
 									<a href="{{ path('logout') }}" data-instant>{{ app.session.user.username }}</a>
 								{% else %}
-									<a href="{{ path('login') }}" data-instant>Login</a>									
+									<a href="{{ path('login') }}" data-instant>Login</a>
 								{% endif %}
 							</li>
 							<li>

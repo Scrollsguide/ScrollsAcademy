@@ -15,6 +15,7 @@
 			foreach ($this->routes as $key => $route) {
 				if (preg_match($route['match'], $relUrl, $match)) {
 					// route matches, check for additional parameters
+
 					if ($route['method'] === $requestMethod) {
 						$r = new Route($key, $route);
 
@@ -43,7 +44,7 @@
 				}
 			}
 
-			return false;
+			return null;
 		}
 
 		public function addRouteFile($basePath, $filename) {
@@ -101,8 +102,6 @@
 		 * routeParams is optional
 		 */
 		public function generateUrl($routeId, $routeParams = array()) {
-			$routeUrl = ""; // return value
-
 			if ($routeId === null) {
 				throw new Exception("'Path' needs at least one argument.");
 			}
@@ -110,7 +109,7 @@
 			// get route
 			$route = $this->getRoute($routeId);
 
-			if ($route === false) { // route does not exist
+			if ($route === null) { // route does not exist
 				throw new Exception(sprintf("No route for path '%s'.", $routeId));
 			}
 
@@ -119,8 +118,14 @@
 
 				// check whether all parameters are present
 				foreach ($requiredParameters as $rqParam) {
-					if (!isset($routeParams[$rqParam])) {
-						throw new Exception(sprintf("Parameter '%s' not set for route '%s'.", $rqParam, $routeId));
+					if ($route->isOptional($rqParam)){
+						if (!isset($routeParams[$rqParam])){
+							$routeParams[$rqParam] = "";
+						}
+					} else {
+						if (!isset($routeParams[$rqParam])) {
+							throw new Exception(sprintf("Parameter '%s' not set for route '%s'.", $rqParam, $routeId));
+						}
 					}
 				}
 
@@ -191,7 +196,6 @@
 				$total .= "array(";
 
 				$i = 0;
-				$len = count($item);
 				foreach ($item as $key => $value) {
 					if ($i > 0) { // first item doesn't need leading comma
 						$total .= ",";
@@ -224,6 +228,7 @@
 
 			$route['paramMap'] = array();
 			if (preg_match_all("#{([a-z0-9]+)}#i", $route['path'], $matches, PREG_SET_ORDER)) {
+				// route has parameters
 				$matchWith = $route['path'];
 
 				foreach ($matches as $m) {
@@ -233,10 +238,22 @@
 
 					if ($hasRequirements && isset($route['requirements'][$paramName])) {
 						$requirement = $route['requirements'][$paramName];
-					} else {
+					} else { // default match
 						$requirement = "[a-zA-Z0-9-]*?";
 					}
-					$matchWith = str_replace(Route::wrapParameter($paramName), "(" . $requirement . ")", $matchWith);
+
+					// check whether route is optional
+					$optional = false;
+					foreach ($route['optional'] as $opt){
+						$optional |= $opt === $paramName;
+					}
+
+					$requirement = "(" . $requirement . ")";
+					if ($optional){
+						$requirement = $requirement . "?";
+					}
+
+					$matchWith = str_replace(Route::wrapParameter($paramName), $requirement, $matchWith);
 				}
 
 				$route['match'] = $this->wrapRegexDelimiter($matchWith);
@@ -261,24 +278,6 @@
 				throw new Exception(sprintf("No action defined for route '%s'.", $id));
 			}
 			// passed all simple checks
-		}
-
-		/**
-		 * Maps parameters to their positions in the url
-		 * so we can later pass them as arguments to controllers
-		 */
-		private function mapParameters(&$route) {
-			$route['paramMap'] = array();
-			if (preg_match_all("#{([a-z0-9]+)}#i", $route['path'], $matches, PREG_SET_ORDER)) {
-				$paramCount = 0;
-
-				print_r($matches);
-				foreach ($matches as $m) {
-					$paramName = $m[1];
-
-					$route['paramMap'][] = $paramName;
-				}
-			}
 		}
 
 		private function wrapRegexDelimiter($str) {

@@ -15,7 +15,7 @@
 
 		public function viewByReviewStatus($reviewStatus) {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array('to' => 'admin_index'));
 			}
 
 			// set up entity and repository
@@ -33,7 +33,7 @@
 
 		public function newGuideAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array('to' => 'admin_new_guide'));
 			}
 
 			$em = $this->getApp()->get("EntityManager");
@@ -49,7 +49,12 @@
 
 		public function editGuideAction($url) {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'admin_edit_guide',
+					'parameters' => array(
+						'title' => $url
+					)
+				));
 			}
 
 			// set up entity and repository
@@ -85,7 +90,12 @@
 
 		public function editHomepageAction($id) {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'admin_edit_homepage',
+					'parameters' => array(
+						'id' => $id
+					)
+				));
 			}
 			// set up entity and repository
 			$em = $this->getApp()->get("EntityManager");
@@ -123,7 +133,9 @@
 
 		public function doHomepageSaveAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to' => 'admin_index'
+				));
 			}
 
 			$r = $this->getApp()->getRequest();
@@ -164,7 +176,9 @@
 
 		public function doSaveAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to' => 'admin_index'
+				));
 			}
 
 			$r = $this->getApp()->getRequest();
@@ -259,6 +273,9 @@
 				}
 			}
 
+			// add level (beginner/intermediate/master
+			// $g->addCategory($r->getParameter("level"));
+
 			$guideRepository->persist($g);
 
 			return $g;
@@ -284,7 +301,9 @@
 
 		public function seriesAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to' => 'admin_series'
+				));
 			}
 
 			// set up entity and repository
@@ -302,7 +321,9 @@
 
 		public function newSeriesAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to' => 'admin_new_series'
+				));
 			}
 
 			// set up entity and repository
@@ -318,7 +339,12 @@
 
 		public function editSeriesAction($url) {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'admin_edit_series',
+					'parameters' => array(
+						'title' => $url
+					)
+				));
 			}
 
 			// set up entity and repository
@@ -348,7 +374,9 @@
 
 		public function doSaveSeriesAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'admin_series'
+				));
 			}
 
 			$r = $this->getApp()->getRequest();
@@ -459,7 +487,9 @@
 
 		public function settingsAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'admin_settings'
+				));
 			}
 
 			return $this->render("admin/settings.html", array(
@@ -469,7 +499,9 @@
 
 		public function clearCacheAction() {
 			if (!$this->userPerms()) {
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'admin_settings'
+				));
 			}
 
 			$cacheType = $this->getApp()->getRequest()->getParameter("cache", "");

@@ -79,7 +79,9 @@
 		public function submitAction() {
 			if (!$this->getApp()->getSession()->getUser()->checkAccessLevel(AccessLevel::USER)){
 				$this->getApp()->getSession()->getFlashBag()->add("login_message", "Please login to submit a guide.");
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'submit_guide'
+				));
 			}
 
 			$em = $this->getApp()->get("EntityManager");
@@ -96,7 +98,9 @@
 		public function doSaveAction(){
 			if (!$this->getApp()->getSession()->getUser()->checkAccessLevel(AccessLevel::USER)){
 				$this->getApp()->getSession()->getFlashBag()->add("login_message", "Please login to submit a guide.");
-				return $this->toLogin();
+				return $this->toLogin(array(
+					'to'         => 'submit_guide'
+				));
 			}
 
 			$admin = new AdminController($this->getApp());
