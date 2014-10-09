@@ -50,6 +50,8 @@
 		public function findAllByAuthor($author) {
 			$guides = $this->findAllBy("author", $author);
 
+			$this->filterByStatus($guides, GuideStatus::VISIBLE);
+
 			foreach ($guides as $guide) {
 				$this->findGuideCategories($guide);
 			}
