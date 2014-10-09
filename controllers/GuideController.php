@@ -8,7 +8,7 @@
 			$guideRepository = $em->getRepository("Guide");
 
 			// look for guide in the repo
-			if (($guide = $guideRepository->findOneBy("url", $url)) !== false) {
+			if (($guide = $guideRepository->findOneBy("url", $url)) !== null) {
 				// check visibility
 				if ($guide->getStatus() === GuideStatus::VISIBLE || $guide->getStatus() === GuideStatus::VISIBLE_WITH_URL) {
 					// load series this guide is part of
@@ -29,12 +29,12 @@
 
 					// remove empty guides
 					$relatedGuides = array_filter($relatedGuides, function ($e) {
-						return $e !== false;
+						return $e !== null;
 					});
 
 					// make page title, append series name if it's a series guide
 					$title = $guide->getTitle();
-					if ($series !== null){
+					if ($series !== null) {
 						$title .= " - " . $series->getTitle();
 					}
 
@@ -60,7 +60,7 @@
 			$seriesRepository = $em->getRepository("Series");
 
 			// look for series in the repo
-			if (($series = $seriesRepository->findOneBy("url", $seriesUrl)) !== false) {
+			if (($series = $seriesRepository->findOneBy("url", $seriesUrl)) !== null) {
 				// load guides for series
 				$guideRepository = $em->getRepository("Guide");
 
@@ -74,5 +74,40 @@
 			} else {
 				return $this->p404();
 			}
+		}
+
+		public function submitAction() {
+			if (!$this->getApp()->getSession()->getUser()->checkAccessLevel(AccessLevel::USER)){
+				$this->getApp()->getSession()->getFlashBag()->add("login_message", "Please login to submit a guide.");
+				return $this->toLogin();
+			}
+
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+
+			$allCategories = $guideRepository->findAllCategories();
+
+			return $this->render("submit.html", array(
+				"title" => "Submit a guide",
+				"categories" => $allCategories
+			));
+		}
+
+		public function doSaveAction(){
+			if (!$this->getApp()->getSession()->getUser()->checkAccessLevel(AccessLevel::USER)){
+				$this->getApp()->getSession()->getFlashBag()->add("login_message", "Please login to submit a guide.");
+				return $this->toLogin();
+			}
+
+			$admin = new AdminController($this->getApp());
+
+			$guide = $admin->saveAction(0, true);
+
+			$this->getApp()->getSession()->getFlashBag()->add("guide_message", "Your guide has been submitted for review.");
+
+			// return to edit guide page
+			$guideRoute = $this->getApp()->getRouter()->generateUrl("view_guide", array("title" => $guide->getUrl()));
+
+			return new RedirectResponse($guideRoute);
 		}
 	}

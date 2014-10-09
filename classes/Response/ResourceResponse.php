@@ -4,7 +4,7 @@
 
 		private $content;
 
-		public function __construct($contentType){
+		public function __construct($contentType) {
 			parent::__construct();
 
 			$this->setContentType($contentType);

@@ -15,7 +15,7 @@
 			$em = $this->getApp()->get("EntityManager");
 			$guideRepository = $em->getRepository("Guide");
 
-			if (($guide = $guideRepository->findOneBy("url", $guideUrl)) !== false) {
+			if (($guide = $guideRepository->findOneBy("url", $guideUrl)) !== null) {
 				$voteRepository = $em->getRepository("Vote");
 
 				

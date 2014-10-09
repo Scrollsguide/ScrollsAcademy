@@ -18,7 +18,7 @@
 
 			// make sure the debugging paths route to the same controllers,
 			// index_dev.php/path === /path
-			if (Debug::started() && substr($requestUri, 0, strlen($scriptName)) === $scriptName){
+			if (Debug::started() && substr($requestUri, 0, strlen($scriptName)) === $scriptName) {
 				$requestUri = substr($requestUri, strlen($scriptName));
 			}
 
@@ -45,7 +45,7 @@
 			return $this->params["FILES"];
 		}
 
-		public function isAjax(){
+		public function isAjax() {
 			return $this->isAjax;
 		}
 
@@ -58,11 +58,11 @@
 		}
 
 		public function getParameter($param, $default = "", $method = null) {
-			if ($method === null){
+			if ($method === null) {
 				$method = $this->getRequestMethod();
 			}
 
-			if (!isset($this->params[$method]) || !isset($this->params[$method][$param])){
+			if (!isset($this->params[$method]) || !isset($this->params[$method][$param])) {
 				return $default;
 			}
 

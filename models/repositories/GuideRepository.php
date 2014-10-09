@@ -15,8 +15,10 @@
 						FROM guides A, guidecategories AC, categories C
 						WHERE C.name = :category
 						AND AC.categoryid = C.id
-						AND AC.guideid = A.id");
+						AND AC.guideid = A.id
+						AND A.status = :status");
 			$sth->bindParam(":category", $categoryString, PDO::PARAM_STR);
+			$sth->bindValue(":status", GuideStatus::VISIBLE, PDO::PARAM_INT);
 
 			$sth->execute();
 
@@ -58,7 +60,7 @@
 		public function findRecentGuides($limit = 3) {
 			$sth = $this->getConnection()->prepare("SELECT *
 						FROM guides
-						WHERE `status` = :status
+						WHERE status = :status
 						ORDER BY id DESC
 						LIMIT " . $limit);
 			$sth->bindValue(":status", GuideStatus::VISIBLE, PDO::PARAM_INT);
@@ -124,7 +126,8 @@
 				author = :author,
 				image = :image,
 				banner = :banner,
-				`status` = :status,
+				status = :status,
+				reviewed = :reviewed,
 				video = :video,
 				discussion = :discussion";
 
@@ -157,6 +160,7 @@
 			$sth->bindValue(":image", $guide->getImage(), PDO::PARAM_STR);
 			$sth->bindValue(":banner", $guide->getBanner(), PDO::PARAM_STR);
 			$sth->bindValue(":status", $guide->getStatus(), PDO::PARAM_INT);
+			$sth->bindValue(":reviewed", $guide->getReviewed(), PDO::PARAM_INT);
 			$sth->bindValue(":video", $guide->getVideo(), PDO::PARAM_STR);
 			$sth->bindValue(":discussion", $guide->getDiscussion(), PDO::PARAM_STR);
 

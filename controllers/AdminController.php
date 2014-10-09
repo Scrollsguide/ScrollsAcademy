@@ -6,6 +6,14 @@
 		const USERIMAGEDIRECTORY = '/public_html/assets/images/user-imgs/';
 
 		public function indexAction() {
+			return $this->viewByReviewStatus(1);
+		}
+
+		public function viewReviewsAction() {
+			return $this->viewByReviewStatus(0);
+		}
+
+		public function viewByReviewStatus($reviewStatus) {
 			if (!$this->userPerms()) {
 				return $this->toLogin();
 			}
@@ -15,7 +23,7 @@
 			$guideRepository = $em->getRepository("Guide");
 
 			// look for guides in the repo
-			$guides = $guideRepository->findAll();
+			$guides = $guideRepository->findAllBy("reviewed", $reviewStatus);
 
 			return $this->render("admin/index.html", array(
 				"title"  => "Academy admin",
@@ -49,7 +57,7 @@
 			$guideRepository = $em->getRepository("Guide");
 
 			// look for guide in the repo
-			if (($guide = $guideRepository->findOneBy("url", $url)) !== false) {
+			if (($guide = $guideRepository->findOneBy("url", $url)) !== null) {
 				// map guide categories to categories
 				$guideCategories = $guideRepository->findGuideCategories($guide);
 				$allCategories = $guideRepository->findAllCategories();
@@ -83,7 +91,7 @@
 			$em = $this->getApp()->get("EntityManager");
 			$homepageRepository = $em->getRepository("Homepage");
 
-			if (($homepage = $homepageRepository->findOneBy("id", $id)) !== false) {
+			if (($homepage = $homepageRepository->findOneBy("id", $id)) !== null) {
 				$blocks = $homepageRepository->findHomepageBlocks($homepage);
 
 				foreach ($blocks as $block) {
@@ -160,53 +168,9 @@
 			}
 
 			$r = $this->getApp()->getRequest();
+			$guideId = $r->getParameter("guideid", 0);
 
-			$title = $r->getParameter("title");
-			$content = $r->getParameter("content");
-
-			$g = new Guide();
-			if (($guideId = $r->getParameter("guideid", 0)) !== 0) {
-				// edit guide
-				$g->setId($guideId);
-			} else {
-				// make new guide, so don't set id in guide
-			}
-
-			// load image and banner
-			$images = $r->getParameter("images");
-
-			$g->setTitle($title);
-			$g->setSummary($r->getParameter("summary"));
-			$g->setSynopsis($r->getParameter("synopsis"));
-			$g->setUrl(URLUtils::makeBlob($title));
-			$g->setAuthor($r->getParameter("author"));
-			$g->setMarkdown($content);
-			$g->setStatus($r->getParameter("status"));
-			$g->setImage($images[0]);
-			$g->setBanner($images[1]);
-			$g->setVideo($r->getParameter("video"));
-			$g->setDiscussion($r->getParameter("discussion"));
-
-			// convert markdown to html
-			// don't just require the markdown class as it needs more than one
-			// file to run properly, so add entire directory
-			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
-
-			$htmlFromMarkdown = MarkdownExtra::defaultTransform($content);
-			$g->setContent($htmlFromMarkdown);
-
-			$em = $this->getApp()->get("EntityManager");
-			$guideRepository = $em->getRepository("Guide");
-			// load categories and check whether they're toggled or not
-			$categories = $guideRepository->findAllCategories();
-
-			foreach ($categories as $category) {
-				if ($r->getParameter("category_" . $category['id'], 0) === "on") {
-					$g->addCategory($category['id']);
-				}
-			}
-
-			$guideRepository->persist($g);
+			$g = $this->saveAction($guideId);
 
 			// clear rendered guide html page from cache so it's refreshed immediately
 			// TODO: clear cache for this guide in any series
@@ -226,13 +190,84 @@
 			return new RedirectResponse($guideRoute);
 		}
 
-		public function precompileGuideAction() {
-			if (!$this->userPerms()) {
-				return $this->toLogin();
+		/**
+		 * @param $guideId
+		 * @param bool $review Is guide submitted for review?
+		 * @return Guide
+		 */
+		public function saveAction($guideId, $review = false) {
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+			$r = $this->getApp()->getRequest();
+
+			$title = $r->getParameter("title");
+			$content = $r->getParameter("content");
+
+			$g = new Guide();
+			if ($guideId !== 0) {
+				$g->setId($guideId);
+			} else {
+				// new guide, don't set id
 			}
+
+			// load image and banner
+			$images = $r->getParameter("images");
+
+			$g->setTitle($title);
+			$g->setSummary($r->getParameter("summary"));
+
+			$url = GuideHelper::makeURL($g, $guideRepository);
+
+			$g->setUrl($url);
+			$g->setMarkdown($content);
+
+			if ($review) {
+				$g->setAuthor($this->getApp()->getSession()->getUser()->getUsername());
+				$g->setStatus(GuideStatus::VISIBLE_WITH_URL);
+				$g->setSynopsis("");
+				$g->setVideo("");
+				$g->setDiscussion("");
+				$g->setReviewed(0);
+
+				// clear images, shouldn't be in there anyway
+				$images = array("", "");
+			} else {
+				$g->setAuthor($r->getParameter("author"));
+				$g->setStatus($r->getParameter("status"));
+				$g->setSynopsis($r->getParameter("synopsis"));
+				$g->setVideo($r->getParameter("video"));
+				$g->setDiscussion($r->getParameter("discussion"));
+				$g->setReviewed(1);
+			}
+			$g->setImage($images[0]);
+			$g->setBanner($images[1]);
+
+			// convert markdown to html
+			// don't just require the markdown class as it needs more than one
+			// file to run properly, so add entire directory
+			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
+
+			$htmlFromMarkdown = MarkdownExtra::defaultTransform($content);
+			$g->setContent($htmlFromMarkdown);
+
+			// load categories and check whether they're toggled or not
+			$categories = $guideRepository->findAllCategories();
+
+			foreach ($categories as $category) {
+				if ($r->getParameter("category_" . $category['id'], 0) === "on") {
+					$g->addCategory($category['id']);
+				}
+			}
+
+			$guideRepository->persist($g);
+
+			return $g;
+		}
+
+		public function precompileGuideAction() {
 			$g = new Guide();
 
-			$guideMarkdown = $r = $this->getApp()->getRequest()->getParameter("guide");
+			$guideMarkdown = $this->getApp()->getRequest()->getParameter("guide");
 
 			$this->getApp()->getClassloader()->addDirectory("libs/Markdown");
 
@@ -291,7 +326,7 @@
 			$seriesRepository = $em->getRepository("Series");
 
 			// look for series in the repo
-			if (($series = $seriesRepository->findOneBy("url", $url)) !== false) {
+			if (($series = $seriesRepository->findOneBy("url", $url)) !== null) {
 				// load guides for series
 				$guideRepository = $em->getRepository("Guide");
 				$guides = $guideRepository->findAllBySeries($series);
@@ -422,7 +457,7 @@
 			return $r;
 		}
 
-		public function settingsAction(){
+		public function settingsAction() {
 			if (!$this->userPerms()) {
 				return $this->toLogin();
 			}
@@ -432,26 +467,26 @@
 			));
 		}
 
-		public function clearCacheAction(){
+		public function clearCacheAction() {
 			if (!$this->userPerms()) {
 				return $this->toLogin();
 			}
 
 			$cacheType = $this->getApp()->getRequest()->getParameter("cache", "");
 
-			if ($cacheType === "twig"){
+			if ($cacheType === "twig") {
 				$this->getApp()->getCache()->removeDir("TwigViews");
-			} else if ($cacheType === "routing"){
+			} else if ($cacheType === "routing") {
 				$this->getApp()->getCache()->removeDir("Routing");
-			} else if ($cacheType === "html"){
+			} else if ($cacheType === "html") {
 				$this->getApp()->getCache()->removeDir("Pages");
 			} else { // asset cache
 				// set up cache for resources directory
 				$cache = new Cache($this->getApp(), $this->getApp()->getBaseDir() . ResourceController::ASSET_CACHE);
 
-				if ($cacheType === "css"){
+				if ($cacheType === "css") {
 					$cache->removeDir("css");
-				} else if ($cacheType === "js"){
+				} else if ($cacheType === "js") {
 					$cache->removeDir("js");
 				}
 			}
@@ -464,8 +499,8 @@
 		}
 
 		private function userPerms() {
-			$u = $this->getApp()->getSession()->getUser();			
-			
+			$u = $this->getApp()->getSession()->getUser();
+
 			return $u->checkAccessLevel(AccessLevel::ADMIN);
 		}
 	}

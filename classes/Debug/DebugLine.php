@@ -1,7 +1,8 @@
 <?php
+
 	abstract class DebugLine {
 
-		public function __construct(){
+		public function __construct() {
 
 		}
 

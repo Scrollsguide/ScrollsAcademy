@@ -32,6 +32,8 @@
 
 		private $discussion; // url to discussion website
 
+		private $reviewed; // is guide reviewed or not
+
 		public function __construct() {
 
 		}
@@ -69,10 +71,11 @@
 		}
 
 		public function getSynopsis() {
-			if ($this->synopsis === ""){
+			if ($this->synopsis === "") {
 				// return first 1000 chars from content without html tags
 				return substr(strip_tags($this->getContent()), 0, 400);
 			}
+
 			return $this->synopsis;
 		}
 
@@ -160,32 +163,12 @@
 			$this->discussion = $discussion;
 		}
 
-	}
-
-	class GuideStatus {
-
-		const HIDDEN = 0; // never visible
-		const VISIBLE_WITH_URL = 1; // only visible with correct url
-		const VISIBLE = 2; // visible always and everywhere
-
-	}
-	
-	class GuideFilter {
-	
-		private $options;
-		
-		public function __construct($options = array()){
-			$this->options = $options;
+		public function getReviewed() {
+			return (int)$this->reviewed;
 		}
-		
-		public function compare(Guide $guide){
-			$match = true;
-			
-			foreach ($this->options as $method => $value){
-				$match = $match && $guide->$method() === $value;
-			}
-			
-			return $match;
+
+		public function setReviewed($reviewed) {
+			$this->reviewed = $reviewed;
 		}
-	
+
 	}

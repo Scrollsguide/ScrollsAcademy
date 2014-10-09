@@ -63,6 +63,15 @@
 			},
 			"action": "Vote::vote"
 		},
+		"submit_guide": {
+			"path": "/submit",
+			"action": "Guide::submit"
+		},
+		"save_guide": {
+			"path": "/submit/save",
+			"method": "POST",
+			"action": "Guide::doSave"
+		},
 		"login": {
 			"path": "/login",
 			"action": "User::login"

@@ -17,33 +17,36 @@
 </div>
 <div class="row content-well" id="vote-info">
 
-	<div class="voteline pull-left hidden">
-		<!-- Change the text to whatever u want -->
-		<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'up' }) }}"><i class="fa fa-thumbs-o-up"></i> Helpful</a></span>
-		<span class="divider"> | </span>
-		<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'down' }) }}"><i class="fa fa-thumbs-o-down"></i> Meh</a></span>
-		<span class="divider"> | </span>
+	{% if not preview %}
+		<div class="voteline pull-left hidden">
+			<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'up' }) }}"><i class="fa fa-thumbs-o-up"></i> Helpful</a></span>
+			<span class="divider"> | </span>
+			<span class="vote"><a href="{{ path('vote_guide', { 'guideUrl': guide.url, 'voteType': 'down' }) }}"><i class="fa fa-thumbs-o-down"></i> Meh</a></span>
+			<span class="divider"> | </span>
 
 
-		<!-- Favorite Article, Show on of the below -->
-		<span class="vote"><a href="#"><i class="fa fa-star"></i> Favorite</a></span>
-		<!-- Already Favorited style, just add a .active class to the a-->
-		<!--<span class="vote"><a href="#" class="active"><i class="fa fa-star"></i> Favorite</a></span>-->
-	</div>
+			<span class="vote"><a href="#"><i class="fa fa-star"></i> Favorite</a></span>
+			<!-- Already Favorited style, just add a .active class to the a-->
+		</div>
 
-	<div class="byline pull-right">
-		<!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
-		<span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
-		<span class="divider"> | </span>
-		<span class="date">{{ guide.date | date("F jS, Y") }}</span>
-	</div>
+		<div class="byline pull-right">
+			<!-- <img src="{{ cdn_asset('/assets/images/avatars/' ~ guide.author ~ '.png') }}" /> -->
+			<span class="author"><a href="{{ path('author', { 'author': guide.author }) }}">{{ guide.author }}</a></span>
+			<span class="divider"> | </span>
+			<span class="date">{{ guide.date | date("F jS, Y") }}</span>
+		</div>
+	{% endif %}
 </div>
+
+{% for flash in app.session.flashbag.get('guide_message') %}
+	<div class="alert alert-success">{{ flash }}</div>
+{% endfor %}
 
 <div class="row content-well primary-content">
 	{{ guide.content | raw }}
 </div>
 
-{% if guide.discussion %}
+{% if guide.discussion and not preview %}
 	<div class="col-lg-12 text-center commentLink">
 		<h2><a href="{{ guide.discussion }}">Write a comment</a></h2>
 	</div>
@@ -51,7 +54,7 @@
 
 {% include 'partials/series-related.html' with { 'guide': guide, 'allSeries': allSeries } %}
 
-{% if preview != true %}
+{% if not preview %}
 	{% include 'partials/social.html' with { 'guide': guide } %}
 {% endif %}
 

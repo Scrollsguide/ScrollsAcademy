@@ -8,7 +8,7 @@
 			$guideRepository = $em->getRepository("Guide");
 
 			// look for guide in the repo
-			if (($guides = $guideRepository->findAllByAuthor($author)) !== false) {
+			if (($guides = $guideRepository->findAllByAuthor($author)) !== null) {
 				return $this->render("guidelist.html", array(
 					"guides" => $guides,
 					"category" => "Guides by " . $author,

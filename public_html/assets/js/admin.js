@@ -70,7 +70,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 
 	var MarkdownSettings = {
 		nameSpace: 'markdown', // Useful to prevent multi-instances CSS conflict
-		previewParserPath: '/admin/guide/precompile',
+		previewParserPath: '/index_dev.php/admin/guide/precompile',
 		previewParserVar: 'guide',
 		previewInWindow: 'width=800, height=600, resizable=yes, scrollbars=yes',
 		onShiftEnter: {

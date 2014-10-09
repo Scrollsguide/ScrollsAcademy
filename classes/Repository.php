@@ -70,7 +70,7 @@
 			$singleItemList = $this->findAllBy($column, $value, array("count" => 1));
 
 			// make sure just one item is returned
-			return isset($singleItemList[0]) ? $singleItemList[0] : false;
+			return isset($singleItemList[0]) ? $singleItemList[0] : null;
 		}
 
 		/***************************************

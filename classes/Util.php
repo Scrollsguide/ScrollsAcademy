@@ -1,7 +1,8 @@
 <?php
+
 	class Util {
-		
-		public static function array_empty_merge(){
+
+		public static function array_empty_merge() {
 			$numArrays = func_num_args();
 			$arrs = func_get_args();
 

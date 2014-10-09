@@ -4,11 +4,11 @@
 
 		private $app;
 
-		public function __construct(App $app){
+		public function __construct(App $app) {
 			$this->app = $app;
 		}
 
-		protected function getApp(){
+		protected function getApp() {
 			return $this->app;
 		}
 
@@ -21,7 +21,9 @@
 		 * @return true if user exists and password is correct, false otherwise
 		 */
 		public abstract function authenticate($username, $password);
-		
+
 		public abstract function getAccessLevel(User $user);
+
+		public abstract function callback(User $user);
 
 	}

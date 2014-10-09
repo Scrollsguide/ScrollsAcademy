@@ -43,7 +43,7 @@
 				$guideRepository = $em->getRepository("Guide");
 
 				// look for series in the repo
-				if (($series = $seriesRepository->findOneBy('url', $url)) === false) {
+				if (($series = $seriesRepository->findOneBy('url', $url)) === null) {
 					return $this->p404();
 				}
 				

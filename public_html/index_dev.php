@@ -1,5 +1,5 @@
 <?php
-	error_reporting(0);
+	error_reporting(E_ALL);
 	$root = dirname(__DIR__);
 
 	require_once $root . "/classes/Autoloader.php";

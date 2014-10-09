@@ -1,6 +1,7 @@
 <?php
+
 	class HtmlResponse extends Response implements ContentResponse {
-		
+
 		private $content = "";
 
 		public function __construct() {
@@ -9,12 +10,12 @@
 			$this->setContentType("html");
 		}
 
-		public function setContent($content){
+		public function setContent($content) {
 			$this->content = $content;
 		}
-		
-		public function getContent(){
+
+		public function getContent() {
 			return $this->content;
 		}
-		
+
 	}

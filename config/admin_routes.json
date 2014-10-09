@@ -25,6 +25,10 @@
 			"action": "Admin::doSave",
 			"method": "POST"
 		},
+		"admin_open_reviews": {
+			"path": "/admin/reviews",
+			"action": "Admin::viewReviews"
+		},
 		"admin_edit_homepage": {
 			"path": "/admin/homepage/edit/{id}",
 			"requirements": {
