@@ -402,7 +402,7 @@
 		}
 
 		public function uploadImageAction() {
-			if (!$this->userPerms()) {
+			if (!$this->getApp()->getSession()->getUser()->checkAccessLevel(AccessLevel::USER)) {
 				return $this->toLogin();
 			}
 
