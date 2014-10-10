@@ -9,6 +9,10 @@
 				<h4><i class="fa fa-cogs"></i> All Guides</h4>
 			</div>
 			<div class="col-xs-6" style="margin-top: 45px;">
+				<div class="btn-group">
+					<a href="{{ path('admin_index') }}" class="btn btn-default">All guides</a>
+					<a href="{{ path('admin_open_reviews') }}" class="btn btn-default">Review queue</a>
+				</div>
 				<a href="{{ path('admin_new_guide') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add guide</a>
 			</div>
 		</div>
@@ -17,22 +21,26 @@
 			<div class="alert alert-success">{{ flash }}</div>
 		{% endfor %}
 
-		{% for guide in guides %}
-			<div class="col-md-4 col-sm-6">
-				<a href="{{ path('admin_edit_guide', { 'title': guide.url }) }}">
-					<div class="content-item">
-						<div class="content-container">
-							<h4>{{ guide.title }}</h4>
-							<p>{{ guide.summary }}</p>
+		{% if guides|length %}
+			{% for guide in guides %}
+				<div class="col-md-4 col-sm-6">
+					<a href="{{ path('admin_edit_guide', { 'title': guide.url }) }}">
+						<div class="content-item">
+							<div class="content-container">
+								<h4>{{ guide.title }}</h4>
+								<p>{{ guide.summary }}</p>
+							</div>
 						</div>
-					</div>
-					<div class="bottom-info">
-						<span class="author">{{ guide.author }}</span>
-						<span class="divider"> | </span>
-						<span class="date">{{ guide.date|date("F jS, Y") }}</span>
-					</div>
-				</a>
-			</div>
-		{% endfor %}
+						<div class="bottom-info">
+							<span class="author">{{ guide.author }}</span>
+							<span class="divider"> | </span>
+							<span class="date">{{ guide.date|date("F jS, Y") }}</span>
+						</div>
+					</a>
+				</div>
+			{% endfor %}
+		{% else %}
+			No guides.
+		{% endif %}
 	</div>
 {% endblock %}
