@@ -12,6 +12,7 @@
 
 		/**
 		 * @param $entity
+		 * @param PDO $database
 		 * @return Repository
 		 * @throws Exception
 		 */
@@ -20,7 +21,7 @@
 				// use default database if none is provided
 				$database = $this->app->get("database");
 			}
-			if (!isset($repos[$entity])) {
+			if (!isset($this->repos[$entity])) {
 				$repoName = $entity . "Repository";
 
 				$repo = new $repoName($database);
@@ -29,10 +30,10 @@
 					throw new Exception(sprintf("'%s' is not an instance of Repository.", $repoName));
 				}
 
-				$repos[$entity] = $repo;
+				$this->repos[$entity] = $repo;
 			}
 
-			return $repos[$entity];
+			return $this->repos[$entity];
 		}
 
 	}
