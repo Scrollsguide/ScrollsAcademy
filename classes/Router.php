@@ -118,8 +118,8 @@
 
 				// check whether all parameters are present
 				foreach ($requiredParameters as $rqParam) {
-					if ($route->isOptional($rqParam)){
-						if (!isset($routeParams[$rqParam])){
+					if ($route->isOptional($rqParam)) {
+						if (!isset($routeParams[$rqParam])) {
 							$routeParams[$rqParam] = "";
 						}
 					} else {
@@ -244,12 +244,14 @@
 
 					// check whether route is optional
 					$optional = false;
-					foreach ($route['optional'] as $opt){
-						$optional |= $opt === $paramName;
+					if (isset($route['optional'])) {
+						foreach ($route['optional'] as $opt) {
+							$optional |= $opt === $paramName;
+						}
 					}
 
 					$requirement = "(" . $requirement . ")";
-					if ($optional){
+					if ($optional) {
 						$requirement = $requirement . "?";
 					}
 
