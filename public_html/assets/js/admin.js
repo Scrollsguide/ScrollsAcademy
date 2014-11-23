@@ -63,10 +63,8 @@ if (typeof window.RedactorPlugins === 'undefined') {
 	}
 
 	$(init);
-}());
 
-/* The guide editor */
-(function($) {
+	/* The guide editor */
 
 	var MarkdownSettings = {
 		nameSpace: 'markdown', // Useful to prevent multi-instances CSS conflict
@@ -191,7 +189,13 @@ if (typeof window.RedactorPlugins === 'undefined') {
 			return '\n' + heading + '\n';
 		}
 	}
-	$(document).ready(function() {
-		$('#markdown').markItUp(MarkdownSettings);
-	});
+	
+	$('#markdown').markItUp(MarkdownSettings);
+	
+	function keepalive(){		
+		console.log("Keeping session alive...");
+		$.post("/keepalive", { t: new Date().getTime() });
+	}
+	
+	window.setInterval(keepalive, 180000);
 }(jQuery));

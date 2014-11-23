@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `guides` (
   `video` text NOT NULL,
   `discussion` varchar(256) NOT NULL,
   `status` int(1) NOT NULL DEFAULT '2',
-  `votes` int(6) NOT NULL DEFAULT '0',
+  `reviewed` int(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 

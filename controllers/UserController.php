@@ -65,4 +65,13 @@
 
 			return $this->toLogin();
 		}
+		
+		public function keepaliveAction(){
+			$t = $this->getApp()->getRequest()->getParameter("t", time());
+			
+			$response = new JsonResponse();
+			$response->setContent(array("t" => $t));
+			
+			return $response;
+		}
 	}

@@ -111,6 +111,11 @@
 		"404": {
 			"path": "/404",
 			"action": "Index::p404"
+		},
+		"keepalive": {
+			"path": "/keepalive",
+			"method": "POST",
+			"action": "User::keepalive"
 		}
 	}
 }

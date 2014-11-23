@@ -180,9 +180,9 @@
 			// watch out! Not at all consistent with a regular guide request
 			// since getCategories() returns a list of ids here, not strings
 			$this->getConnection()->beginTransaction();
+			$sth = $this->getConnection()->prepare("INSERT INTO guidecategories
+				SET guideid = :id, categoryid = :catid");
 			foreach ($guide->getCategories() as $category) {
-				$sth = $this->getConnection()->prepare("INSERT INTO guidecategories
-					SET guideid = :id, categoryid = :catid");
 				$sth->bindValue(":id", $guideId, PDO::PARAM_INT);
 				$sth->bindValue(":catid", $category, PDO::PARAM_INT);
 
