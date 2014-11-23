@@ -197,5 +197,5 @@ if (typeof window.RedactorPlugins === 'undefined') {
 		$.post("/keepalive", { t: new Date().getTime() });
 	}
 	
-	window.setInterval(keepalive, 180000);
+	window.setInterval(keepalive, 600000);
 }(jQuery));
