@@ -15,6 +15,13 @@
 			},
 			"action": "Admin::editGuide"
 		},
+		"admin_delete_guide": {
+			"path": "/admin/delete/{id}",
+			"requirements": {
+				"id": "[0-9]+"
+			},
+			"action": "Admin::deleteGuide"
+		},
 		"admin_precompile_guide": {
 			"path": "/admin/guide/precompile",
 			"action": "Admin::precompileGuide",

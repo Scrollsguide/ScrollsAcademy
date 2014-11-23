@@ -192,8 +192,8 @@
 			$this->getConnection()->commit();
 		}
 		
-		public function filterByStatus(&$guides, $status){
-			$guides = array_filter($guides, array(new GuideFilter(array('getStatus' => $status)), 'compare'));
+		public function filterByStatus(&$guides, $status, $reverse = false){
+			$guides = array_filter($guides, array(new GuideFilter(array('getStatus' => $status), $reverse), 'compare'));
 		}
 
 	}

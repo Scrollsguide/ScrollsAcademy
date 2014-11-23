@@ -16,9 +16,6 @@
 					$allSeries = $seriesRepository->findSeriesByGuide($guide);
 
 					$categories = $guideRepository->findGuideCategories($guide);
-					foreach ($categories as $category) {
-						$guide->addCategory($category);
-					}
 
 					// For now we just get one guide of each level - TODO use the tags from the guide
 					$relatedGuides = array();

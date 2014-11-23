@@ -24,6 +24,8 @@
 
 			// look for guides in the repo
 			$guides = $guideRepository->findAllBy("reviewed", $reviewStatus);
+			
+			$guideRepository->filterByStatus($guides, GuideStatus::DELETED, true);
 
 			return $this->render("admin/index.html", array(
 				"title"  => "Academy admin",
@@ -86,6 +88,36 @@
 			}
 
 			return $r;
+		}
+		
+		public function deleteGuideAction($id){
+			if (!$this->userPerms()) {
+				return $this->toLogin(array('to' => 'admin_index'));
+			}
+			
+			// TODO: Also remove guide from homepage/series
+
+			// set up entity and repository
+			$em = $this->getApp()->get("EntityManager");
+			$guideRepository = $em->getRepository("Guide");
+
+			// look for guide in the repo
+			if (($guide = $guideRepository->findOneById($id)) !== null){
+				// add categories to guide
+				$guideRepository->findGuideCategories($guide);
+				
+				$guide->setStatus(GuideStatus::DELETED);
+				
+				$guideRepository->persist($guide);
+				
+				$this->getApp()->getSession()->getFlashBag()->add("homepage_message", "Guide deleted.");
+				
+				$indexRoute = $this->getApp()->getRouter()->generateUrl("admin_index");
+				return new RedirectResponse($indexRoute);
+			} else {
+				$r = new HtmlResponse();
+				$r->setContent("Guide not found");
+			}
 		}
 
 		public function editHomepageAction($id) {
