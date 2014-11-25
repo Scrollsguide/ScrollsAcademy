@@ -41,7 +41,7 @@ if (typeof window.RedactorPlugins === 'undefined') {
 					callback(el, data);
 				} else {
 					// Handle errors here
-					alert('error uploading image, see console for details');
+					alert('Error uploading image: ' + data.error);
 					console.log(data, textStatus, jqXHR);
 				}
 			},

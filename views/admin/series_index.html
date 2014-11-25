@@ -1,32 +1,32 @@
 {% extends "base.html" %}
 {% block navbar %}
-{% include "admin/navbar.html" %}
+	{% include "admin/navbar.html" %}
 {% endblock %}
 {% block content %}
-<div class="row content-block">
-	<div class="row">
-		<div class="col-xs-6 category-hdr">
-			<h4><i class="fa fa-cogs"></i> All Series</h4>
-		</div>
-		<div class="col-xs-6" style="margin-top: 45px;">
-			<a href="{{ path('admin_new_series') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add series</a>
-		</div>
-	</div>
-
-	{% for flash in app.session.flashbag.get('series_message') %}
-	<div class="alert alert-success">{{ flash }}</div>
-	{% endfor %}
-
-	{% for serie in series %}
-	<div class="col-md-4 col-sm-6">
-		<a href="{{ path('admin_edit_series', { 'title': serie.url }) }}">
-			<div class="content-item">
-				<div class="content-container">
-					<h4>{{ serie.title }}</h4>
-				</div>
+	<div class="row content-block">
+		<div class="row">
+			<div class="col-xs-6 category-hdr">
+				<h4><i class="fa fa-cogs"></i> All Series</h4>
 			</div>
-		</a>
+			<div class="col-xs-6" style="margin-top: 45px;">
+				<a href="{{ path('admin_new_series') }}" class="btn btn-primary pull-right"><i class="fa fa-plus"></i> Add series</a>
+			</div>
+		</div>
+
+		{% for flash in app.session.flashbag.get('series_message') %}
+		<div class="alert alert-success">{{ flash }}</div>
+		{% endfor %}
+
+		{% for serie in series %}
+		<div class="col-md-4 col-sm-6">
+			<a href="{{ path('admin_edit_series', { 'title': serie.url }) }}">
+				<div class="content-item">
+					<div class="content-container">
+						<h4>{{ serie.title }}</h4>
+					</div>
+				</div>
+			</a>
+		</div>
+		{% endfor %}
 	</div>
-	{% endfor %}
-</div>
 {% endblock %}
