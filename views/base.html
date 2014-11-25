@@ -52,6 +52,10 @@
 							<li><a href="{{ path('categories', { 'categoryType': 'intermediate' }) }}" data-instant>Intermediate</a></li>
 							<li><a href="{{ path('categories', { 'categoryType': 'master' }) }}" data-instant>Master</a></li>
 						</ul>
+						
+						<ul class="nav navbar-nav base-navbar hidden-xs hidden-sm hidden-md">
+							<li><a href="{{ path('view_guide', { title: 'submitting-an-article-for-the-scrolls-academy' }) }}" data-instant><i class="fa fa-{{ categoryIcon('submit') }}"></i> Contribution Guide</a></li>
+						</ul>
 
 						<ul class="nav navbar-nav user-navbar navbar-right">
 							<!-- Only show when Logged in! -->
